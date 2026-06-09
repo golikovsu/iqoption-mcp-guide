@@ -164,13 +164,16 @@
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
   document.body.appendChild(toTop);
 
+  const siteHeader = $('.site-header');
   let ticking = false;
   const onScroll = () => {
     const h = document.documentElement;
+    const y = h.scrollTop || document.body.scrollTop;
     const max = h.scrollHeight - h.clientHeight;
-    const pct = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
+    const pct = max > 0 ? y / max : 0;
     progress.style.transform = `scaleX(${pct})`;
-    toTop.classList.toggle('show', (h.scrollTop || document.body.scrollTop) > 600);
+    toTop.classList.toggle('show', y > 600);
+    if (siteHeader) siteHeader.classList.toggle('nav-scrolled', y > 24);
     ticking = false;
   };
   window.addEventListener('scroll', () => {
