@@ -1086,6 +1086,15 @@
   .logo { margin-right: auto; }              /* keep logo left, cluster the rest right */
 
   .lang-switch { position: relative; flex-shrink: 0; }
+  .lang-flag {
+    width: 20px;
+    height: 15px;
+    border-radius: 3px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+  }
+  .lang-name { display: inline-flex; align-items: center; gap: 10px; }
   .lang-toggle {
     display: inline-flex;
     align-items: center;

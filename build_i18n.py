@@ -131,9 +131,15 @@ def esc(s):
     return html.escape(s, quote=False)
 
 
+# Flag (ISO country) per language. pt→Brazil, es→Spain, en→UK (adjust if desired).
+FLAG = {"en": "gb", "ar": "sa", "th": "th", "pt": "br", "es": "es", "tl": "ph", "id": "id"}
+
+
 def lang_switch_html(cur_path, cur_dir):
-    """Relative links from the current page to each language home."""
-    up = "../" if cur_path else "./"
+    """Relative links from the current page to each language home, with flag icons."""
+    def flag(code):
+        return (f'<img class="lang-flag" src="assets/img/flags/{FLAG[code]}.png" '
+                f'alt="" width="20" height="15">')
     items = []
     for code, _d, name, hl, path in LANGS:
         if cur_path:                      # current page is one dir deep
@@ -141,12 +147,13 @@ def lang_switch_html(cur_path, cur_dir):
         else:                             # current page is site root
             href = path if path else "./"
         cur = ' aria-current="true"' if path == cur_path else ""
-        items.append(f'<li><a href="{href}" hreflang="{hl}" lang="{code}"{cur}>{name}</a></li>')
-    cur_name = next(n for c, _d, n, _h, p in LANGS if p == cur_path)
+        items.append(f'<li><a href="{href}" hreflang="{hl}" lang="{code}"{cur}>'
+                     f'<span class="lang-name">{flag(code)}{name}</span></a></li>')
+    cur_code, cur_name = next((c, n) for c, _d, n, _h, p in LANGS if p == cur_path)
     return (
         '<div class="lang-switch">'
         f'<button class="lang-toggle" type="button" aria-expanded="false" aria-controls="lang-menu" aria-label="Language">'
-        f'<span aria-hidden="true">🌐</span> <span class="lang-current">{cur_name}</span>'
+        f'{flag(cur_code)}<span class="lang-current">{cur_name}</span>'
         '<span class="lang-caret" aria-hidden="true">▾</span></button>'
         f'<ul class="lang-menu" id="lang-menu" hidden>{"".join(items)}</ul>'
         '</div>'
