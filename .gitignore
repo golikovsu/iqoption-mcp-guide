@@ -10,3 +10,4 @@ Thumbs.db
 # Logs / deps (none required for this static site)
 *.log
 node_modules/
+i18n/_en_prev.json

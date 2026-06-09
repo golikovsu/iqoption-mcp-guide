@@ -1173,3 +1173,49 @@
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
+
+  /* ════════════════════════════════════════════════════════════════════
+     ICONS (Lucide sprite) · nav CTA · trust strip
+     ════════════════════════════════════════════════════════════════════ */
+  .ic {
+    width: 1em; height: 1em;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .cap-ic .ic, .safety-ic .ic { width: 22px; height: 22px; }
+  .perm-head-ic .ic, .info-ic .ic, .pb-test-ic .ic { width: 18px; height: 18px; }
+  .nav-cta .ic, .trust-chip .ic { width: 16px; height: 16px; }
+  .copy-btn .ic { width: 14px; height: 14px; }
+
+  /* Nav "Create token" CTA — label on desktop, icon-only on small screens */
+  .nav-cta { white-space: nowrap; }
+  .nav-cta .ic { display: none; }
+  @media (max-width: 520px) {
+    .nav-cta .qeds-button__label { display: none; }
+    .nav-cta .ic { display: inline-block; }
+  }
+
+  /* Trust strip under the hero CTAs */
+  .trust-strip {
+    margin: 30px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+  .trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-soft);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+  }
+  .trust-strip .trust-chip:nth-child(1) .ic { color: var(--success-bright); }
+  .trust-strip .trust-chip:nth-child(2) .ic { color: var(--accent); }
+  .trust-strip .trust-chip:nth-child(3) .ic { color: var(--cyan); }

@@ -84,9 +84,15 @@ def segments_of(el):
 
 def extract():
     raw = SRC.read_text(encoding="utf-8")
-    head_part, body_inner = re.split(r"<body>", raw, 1)
+    _, body_inner = re.split(r"<body>", raw, 1)
     body_inner = body_inner.rsplit("</body>", 1)[0]
+    # <head> source of truth is template.html (clean, pre-substitution head) so re-running
+    # extract never bakes the generated hreflang/dir/JSON-LD back in. Fall back to index on first run.
+    head_src = TPL.read_text(encoding="utf-8") if TPL.exists() else raw
+    head_part = re.split(r"<body>", head_src, 1)[0]
     soup = BeautifulSoup(body_inner, "html.parser")
+    for sw in soup.select(".lang-switch"):   # drop generated switcher; re-inserted via ⟦LANG_SWITCH⟧
+        sw.decompose()
 
     targets = [n for n in soup.descendants
                if isinstance(n, NavigableString) and not isinstance(n, Comment)
@@ -308,6 +314,33 @@ def remap():
     print(f"remapped from template: faq {len(faq)} | howto {len(howto)}")
 
 
+def migrate():
+    """After an extract() that shifted positional keys, re-key each locale's translations
+    by matching English source text (preserving existing translations). Requires a snapshot
+    of the pre-extract English strings at i18n/_en_prev.json. Prints the new (untranslated)
+    strings to fill into i18n/<lang>.json."""
+    prev = json.loads((I18N / "_en_prev.json").read_text(encoding="utf-8"))["strings"]
+    new_en = json.loads((I18N / "en.json").read_text(encoding="utf-8"))["strings"]
+    prev_texts = set(prev.values())
+    for code, _d, _n, _hl, _p in LANGS:
+        if code == "en":
+            continue
+        path = I18N / f"{code}.json"
+        loc = json.loads(path.read_text(encoding="utf-8"))
+        old = loc.get("strings", {})
+        text2trans = {}
+        for k, t in old.items():
+            en_t = prev.get(k)
+            if en_t is not None and en_t not in text2trans:
+                text2trans[en_t] = t
+        loc["strings"] = {nk: text2trans[en_t] for nk, en_t in new_en.items() if en_t in text2trans}
+        path.write_text(json.dumps(loc, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"{code}: rekeyed {len(loc['strings'])}/{len(new_en)}")
+    missing = [(nk, en_t) for nk, en_t in new_en.items() if en_t not in prev_texts]
+    print(f"\nNEW strings needing translation ({len(missing)}):")
+    print(json.dumps({nk: t for nk, t in missing}, ensure_ascii=False, indent=2))
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "extract"
-    {"extract": extract, "generate": generate, "remap": remap}[mode]()
+    {"extract": extract, "generate": generate, "remap": remap, "migrate": migrate}[mode]()
