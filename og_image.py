@@ -1,83 +1,125 @@
 #!/usr/bin/env python3
-"""Generate a 1200x630 Open Graph / Twitter social card (assets/img/og.png).
-Run once; re-run if the headline/brand changes."""
+"""Generate the 1200x630 Open Graph / social card (assets/img/og.png).
+Design intelligence (UI/UX Pro Max): Dark Mode (OLED) — deep midnight, high contrast,
+minimal glow, Inter, cinematic/premium. Rendered at 2x then downscaled for crisp type."""
+import os, urllib.request
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-W, H = 1200, 630
-BG = (12, 19, 38)        # --bg-app #0C1326
-ORANGE = (255, 138, 0)
-GOLD = (255, 209, 102)
-WHITE = (244, 248, 250)
-MUTE = (150, 165, 176)
+S = 2                                   # supersample factor (render @2x, downscale)
+W, H = 1200 * S, 630 * S
+BG_TOP, BG_BOT = (10, 15, 30), (12, 19, 38)
+ORANGE, GOLD = (255, 138, 0), (255, 209, 102)
+GREEN, CYAN = (0, 230, 139), (94, 218, 255)
+WHITE, MUTE, FAINT = (244, 248, 250), (150, 165, 176), (110, 124, 138)
 
-img = Image.new("RGB", (W, H), BG)
+INTER = "/tmp/Inter.ttf"
+if not os.path.exists(INTER):
+    urllib.request.urlretrieve(
+        "https://github.com/google/fonts/raw/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf", INTER)
 
-# --- ambient glows (match the hero) ---
+def f(size, weight="Regular"):
+    ft = ImageFont.truetype(INTER, size * S)
+    try: ft.set_variation_by_name(weight)
+    except Exception: pass
+    return ft
+
+def lerp(a, b, t): return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
+
+# ── background: vertical gradient + soft radial glows ───────────────────
+img = Image.new("RGB", (W, H))
+px = img.load()
+for y in range(H):
+    c = lerp(BG_TOP, BG_BOT, y / H)
+    for x in range(W):
+        px[x, y] = c
+
 glow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
 gd = ImageDraw.Draw(glow)
-gd.ellipse([-260, -320, 560, 360], fill=(255, 138, 0, 90))      # orange top-left
-gd.ellipse([820, 360, 1400, 900], fill=(0, 179, 112, 70))       # green bottom-right
-glow = glow.filter(ImageFilter.GaussianBlur(150))
-img.paste(Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB"), (0, 0))
-
-# --- subtle grid ---
-grid = ImageDraw.Draw(img)
-for x in range(0, W, 60):
-    grid.line([(x, 0), (x, H)], fill=(255, 255, 255, 6), width=1)
-for y in range(0, H, 60):
-    grid.line([(0, y), (W, y)], fill=(255, 255, 255, 6), width=1)
-
+gd.ellipse([-340*S, -380*S, 560*S, 320*S], fill=(255, 138, 0, 78))     # orange, top-left
+gd.ellipse([820*S, 380*S, 1380*S, 900*S], fill=(255, 176, 0, 30))      # warm, bottom-right
+gd.ellipse([520*S, -160*S, 1100*S, 240*S], fill=(94, 218, 255, 14))    # faint cyan, top
+glow = glow.filter(ImageFilter.GaussianBlur(150 * S))
+img = Image.alpha_composite(img.convert("RGBA"), glow).convert("RGB")
 d = ImageDraw.Draw(img)
 
-def font(size, bold=True):
-    for p in ([
-        "/System/Library/Fonts/Supplemental/Arial Bold.ttf" if bold else "/System/Library/Fonts/Supplemental/Arial.ttf",
-        "/Library/Fonts/Arial Bold.ttf" if bold else "/Library/Fonts/Arial.ttf",
-        "/System/Library/Fonts/HelveticaNeue.ttc",
-    ]):
-        try:
-            return ImageFont.truetype(p, size)
-        except Exception:
-            continue
-    return ImageFont.load_default()
+PAD = 76 * S
 
-PAD = 80
+def text(xy, s, font, fill):
+    d.text(xy, s, font=font, fill=fill)
 
-# logo
+def grad_word(xy, s, font, c1, c2, glow_color=None):
+    """Draw text with a left→right gradient and an optional soft glow behind it."""
+    w = int(d.textlength(s, font=font))
+    asc, desc = font.getmetrics(); h = asc + desc
+    if glow_color:
+        gl = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        ImageDraw.Draw(gl).text(xy, s, font=font, fill=glow_color + (200,))
+        gl = gl.filter(ImageFilter.GaussianBlur(14 * S))
+        img.paste(Image.alpha_composite(img.convert("RGBA"), gl).convert("RGB"), (0, 0))
+        d2 = ImageDraw.Draw(img)
+    else:
+        d2 = d
+    row = Image.new("RGB", (max(1, w), 1))
+    for x in range(w):
+        row.putpixel((x, 0), lerp(c1, c2, x / max(1, w - 1)))
+    grad = row.resize((max(1, w), h))
+    mask = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(mask).text(xy, s, font=font, fill=255)
+    img.paste(grad.crop((0, 0, w, h)), (xy[0], xy[1]), mask.crop((xy[0], xy[1], xy[0] + w, xy[1] + h)))
+    return w
+
+def pill(x, y, label, dot):
+    fnt = f(20, "SemiBold")
+    tw = d.textlength(label, font=fnt)
+    pw = int(tw + 58 * S); ph = 50 * S
+    d.rounded_rectangle([x, y, x + pw, y + ph], radius=ph // 2,
+                        fill=(255, 255, 255, 0), outline=(46, 61, 92), width=max(1, S))
+    d.ellipse([x + 20*S, y + ph//2 - 6*S, x + 32*S, y + ph//2 + 6*S], fill=dot)
+    d.text((x + 40*S, y + ph//2 - (fnt.getmetrics()[0]+fnt.getmetrics()[1])//2), label, font=fnt, fill=(213, 221, 226))
+    return pw
+
+# ── header: logo + wordmark + LIVE pill ─────────────────────────────────
 try:
-    logo = Image.open("assets/img/logo.png").convert("RGBA")
-    logo.thumbnail((104, 104))
-    img.paste(logo, (PAD, PAD), logo)
+    logo = Image.open(os.path.join(os.path.dirname(__file__), "assets/img/logo.png")).convert("RGBA")
+    logo = logo.resize((92 * S, 92 * S))
+    img.paste(logo, (PAD, 60 * S), logo)
 except Exception:
     pass
+text((PAD + 116*S, 70*S), "IQ OPTION", f(28, "Bold"), WHITE)
+wlen = d.textlength("IQ OPTION", font=f(28, "Bold"))
+text((PAD + 116*S + int(wlen) + 14*S, 73*S), "· AI INTEGRATIONS", f(24, "Medium"), MUTE)
+text((PAD + 116*S, 112*S), "Model Context Protocol", f(22, "Regular"), FAINT)
+# LIVE pill (top-right)
+lp = f(20, "Bold"); lw = d.textlength("LIVE", font=lp)
+lx = W - PAD - int(lw) - 62*S
+d.rounded_rectangle([lx, 70*S, W - PAD, 70*S + 46*S], radius=23*S, outline=(255,138,0,120), width=max(1,S))
+d.ellipse([lx + 22*S, 70*S + 17*S, lx + 34*S, 70*S + 29*S], fill=ORANGE)
+d.text((lx + 42*S, 70*S + 23*S - (lp.getmetrics()[0]+lp.getmetrics()[1])//2), "LIVE", font=lp, fill=ORANGE)
 
-# eyebrow
-eb = font(26)
-d.text((PAD + 124, PAD + 14), "IQ OPTION · AI INTEGRATIONS", font=eb, fill=ORANGE)
-d.text((PAD + 124, PAD + 52), "Model Context Protocol", font=font(24, False), fill=MUTE)
-
-# headline (two lines; accent the brand)
-h1 = font(78)
-d.text((PAD, 250), "Connect any AI assistant", font=h1, fill=WHITE)
-y2 = 348
+# ── headline ────────────────────────────────────────────────────────────
+hf = f(82, "ExtraBold")
+text((PAD, 196*S), "Connect any AI assistant", hf, WHITE)
+y2 = 300 * S
 pre = "to your "
-d.text((PAD, y2), pre, font=h1, fill=WHITE)
-w_pre = d.textlength(pre, font=h1)
-d.text((PAD + w_pre, y2), "IQ Option", font=h1, fill=ORANGE)
+text((PAD, y2), pre, hf, WHITE)
+grad_word((PAD + int(d.textlength(pre, font=hf)), y2), "IQ Option", hf, ORANGE, GOLD, glow_color=ORANGE)
 
-# subtitle
-d.text((PAD, 470), "One token · 4 markets · 13 AI assistants · no code, 3 steps",
-       font=font(30, False), fill=(213, 221, 226))
+# ── subtitle ────────────────────────────────────────────────────────────
+text((PAD, 430*S), "One token · four markets · 13 AI assistants — no code, in 3 steps",
+     f(29, "Medium"), (200, 211, 219))
 
-# domain pill
-dom = font(28)
-dtext = "iqoptionmcp.com"
-dw = d.textlength(dtext, font=dom)
-d.rounded_rectangle([PAD, 540, PAD + dw + 44, 590], radius=25, fill=(26, 37, 69))
-d.text((PAD + 22, 550), dtext, font=dom, fill=GOLD)
+# ── market chips ────────────────────────────────────────────────────────
+cx = PAD; cy = 498 * S
+for label, dot in [("Digital Options", ORANGE), ("Margin CFD", GREEN), ("Margin Crypto", CYAN), ("Margin Forex", GOLD)]:
+    cx += pill(cx, cy, label, dot) + 14 * S
 
-# bottom accent bar
-d.rectangle([0, H - 8, W, H], fill=ORANGE)
+# ── domain (bottom) + hairline ──────────────────────────────────────────
+d.line([PAD, 566*S, W - PAD, 566*S], fill=(34, 47, 71), width=max(1, S))
+df = f(26, "SemiBold")
+d.ellipse([PAD, 588*S, PAD + 13*S, 601*S], fill=ORANGE)
+text((PAD + 26*S, 583*S), "iqoptionmcp.com", df, GOLD)
 
-img.save("assets/img/og.png", "PNG", optimize=True)
+# downscale for crisp anti-aliased type
+img = img.resize((1200, 630), Image.LANCZOS)
+img.save(os.path.join(os.path.dirname(__file__), "assets/img/og.png"), "PNG", optimize=True)
 print("wrote assets/img/og.png", img.size)
