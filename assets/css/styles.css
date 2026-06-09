@@ -1284,8 +1284,8 @@
      AI CONVERSATION MOCK (shows the product)
      ════════════════════════════════════════════════════════════════════ */
   .chat-mock {
-    max-width: 560px;
-    margin: 4px auto 52px;
+    width: 100%;
+    margin: 40px 0 52px;        /* full-width, left-aligned with the section content */
     background: var(--bg-surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
@@ -1316,8 +1316,8 @@
     background: var(--success-bright);
     box-shadow: 0 0 0 3px rgba(0,230,139,0.16);
   }
-  .chat-body { display: flex; flex-direction: column; gap: 12px; padding: 18px; }
-  .chat-msg { max-width: 86%; }
+  .chat-body { display: flex; flex-direction: column; gap: 12px; padding: 20px 24px; }
+  .chat-msg { max-width: min(480px, 86%); }   /* stay chat-sized inside the full-width frame */
   .chat-msg p {
     margin: 0;
     padding: 11px 15px;
