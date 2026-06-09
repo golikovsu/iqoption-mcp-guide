@@ -272,9 +272,9 @@
     margin-bottom: 8px;
   }
   .cap-card p {
-    font-size: 14.5px;
+    font-size: 15px;
     color: var(--text-soft);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   /* ============ SERVERS GRID ============ */
@@ -397,8 +397,8 @@
   }
   .step p {
     color: var(--text-soft);
-    font-size: 14.5px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.65;
   }
   .step ol {
     margin: 14px 0 0;
@@ -470,12 +470,13 @@
     border-color: var(--border-strong);
   }
   .pt.active {
-    background: linear-gradient(135deg, rgba(255,138,0,0.18) 0%, rgba(255,176,0,0.1) 100%);
-    color: var(--accent);
-    border-color: rgba(255,138,0,0.45);
-    box-shadow: 0 6px 20px -8px rgba(255,138,0,0.45);
+    background: linear-gradient(135deg, #FF8A00 0%, #FFB000 100%);
+    color: #0C1326;
+    border-color: transparent;
+    box-shadow: 0 8px 22px -8px rgba(255,138,0,0.6);
   }
   .pt-ic { width: 16px; height: 16px; flex-shrink: 0; }
+  /* Difficulty badge: neutral → amber scale (green removed; it read as "safe") */
   .pt-diff {
     margin-left: 6px;
     font-size: 9px;
@@ -484,10 +485,12 @@
     text-transform: uppercase;
     padding: 2px 6px;
     border-radius: 4px;
-    background: rgba(0,179,112,0.15);
-    color: var(--success-bright);
+    background: rgba(255,255,255,0.08);
+    color: var(--text-soft);
   }
-  .pt-diff.med { background: rgba(255,176,0,0.15); color: var(--warning); }
+  .pt-diff.med { background: rgba(255,176,0,0.16); color: var(--warning); }
+  /* Badges legible on the solid-orange active tab */
+  .pt.active .pt-diff { background: rgba(12,19,38,0.18); color: #0C1326; }
 
   .picker-body {
     padding: 36px 40px 40px;
@@ -649,9 +652,9 @@
     margin-bottom: 6px;
   }
   .safety-card p {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--text-soft);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   /* ============ PROMPTS ============ */
@@ -679,10 +682,10 @@
     list-style: none;
   }
   .prompt-cat li {
-    padding: 8px 0;
+    padding: 10px 0;
     color: var(--text-base);
-    font-size: 13.5px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.55;
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
   .prompt-cat li:last-child { border-bottom: 0; }
@@ -764,9 +767,9 @@
   .foot-disclaimer {
     max-width: 720px;
     margin: 0 auto 20px;
-    font-size: 12px;
-    color: var(--text-mute);
-    line-height: 1.65;
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.7;
   }
   .foot-bottom {
     color: #8C99A3;            /* WCAG AA 5.59:1 on --bg-surface */
@@ -1161,3 +1164,12 @@
   }
   /* Comfortable touch target for the primary repeated action (server-URL copy) */
   .srv-card .copy-btn { min-height: 44px; }
+
+  /* ════════════════════════════════════════════════════════════════════
+     SECTION RHYTHM — distinct band so sections read apart while scrolling
+     ════════════════════════════════════════════════════════════════════ */
+  section#safety {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
