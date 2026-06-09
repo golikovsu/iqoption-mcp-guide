@@ -1087,18 +1087,19 @@
 
   .lang-switch { position: relative; flex-shrink: 0; }
   .lang-flag {
-    width: 20px;
-    height: 15px;
+    width: 22px;
+    height: 16px;
     border-radius: 3px;
     object-fit: cover;
+    display: block;            /* block + flex-center = no baseline tilt */
     flex-shrink: 0;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.10);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.12);
   }
-  .lang-name { display: inline-flex; align-items: center; gap: 10px; }
+  .lang-name { display: inline-flex; align-items: center; gap: 13px; line-height: 1; }
   .lang-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
+    gap: 11px;
     padding: 8px 12px;
     background: rgba(255,255,255,0.04);
     border: 1px solid var(--border);

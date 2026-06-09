@@ -139,7 +139,7 @@ def lang_switch_html(cur_path, cur_dir):
     """Relative links from the current page to each language home, with flag icons."""
     def flag(code):
         return (f'<img class="lang-flag" src="assets/img/flags/{FLAG[code]}.png" '
-                f'alt="" width="20" height="15">')
+                f'alt="" width="22" height="16">')
     items = []
     for code, _d, name, hl, path in LANGS:
         if cur_path:                      # current page is one dir deep
