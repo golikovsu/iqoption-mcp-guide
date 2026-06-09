@@ -35,4 +35,17 @@
     /* Focus ring — high-contrast cyan, distinct from the orange accent */
     --ring: #5EDAFF;
     --ring-shadow: 0 0 0 3px rgba(94, 218, 255, 0.35);
+
+    /* ── Motion · "Smooth & elegant" personality ──────────────────────
+       Custom curves: the browser defaults are too weak to feel intentional. */
+    --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);    /* easeOutQuint — graceful settle */
+    --ease-out-soft: cubic-bezier(0.33, 1, 0.68, 1);    /* easeOutCubic — gentle hovers   */
+    --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);    /* easeInOutCubic — on-screen move */
+    --ease-spring:   cubic-bezier(0.34, 1.4, 0.5, 1);   /* subtle overshoot — success pops */
+
+    --dur-press: 150ms;   /* button press feedback        */
+    --dur-fast:  200ms;   /* hover / colour               */
+    --dur-base:  260ms;   /* dropdowns, tabs, accordions  */
+    --dur-slow:  480ms;   /* scroll reveals               */
+    --dur-hero:  640ms;   /* hero entrance steps          */
   }

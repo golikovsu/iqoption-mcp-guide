@@ -1078,7 +1078,7 @@
     html { scroll-behavior: auto; }
     .hero-bg::before, .hero-bg::after { animation: none; }
     .badge-dot { animation: none; box-shadow: none; }
-    .reveal { opacity: 1; transform: none; }
+    .reveal { opacity: 1; transform: none; filter: none; }
     .scroll-progress { display: none; }
   }
 
@@ -1360,3 +1360,171 @@
     color: var(--text-mute);
   }
   .picker-tabs .pt-group:first-child { margin-top: 0; }
+
+  /* ════════════════════════════════════════════════════════════════════
+     MOTION LAYER · "Smooth & elegant" — Emil Kowalski framework
+     Curves + durations: tokens.css (--ease-*, --dur-*).
+     Animates only transform / opacity / filter. Touch- and RM-aware.
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* ── Scroll reveal: blur-up driven by an animation (not a transition),
+       so each element's own transition — e.g. the card hover-lift — stays
+       free and snappy. 'backwards' holds the hidden state through any
+       stagger delay; no 'forwards', so nothing lingers to block :hover. ── */
+  .reveal { opacity: 0; }
+  .reveal.in {
+    opacity: 1;
+    animation: revealUp var(--dur-slow) var(--ease-out) backwards;
+  }
+  @keyframes revealUp {
+    from { opacity: 0; transform: translateY(16px); filter: blur(6px); }
+  }
+  /* Richer stagger when a whole grid enters together */
+  .cap-grid .cap-card:nth-child(2).in, .steps .step:nth-child(2).in { animation-delay: 70ms; }
+  .cap-grid .cap-card:nth-child(3).in, .steps .step:nth-child(3).in { animation-delay: 140ms; }
+
+  /* ── Press feedback: every pressable control answers the touch ─────── */
+  .qeds-button {
+    transition: transform var(--dur-press) var(--ease-out), opacity 150ms ease, color 100ms ease;
+  }
+  .qeds-button:not(:disabled):not([data-loading]):active { transform: scale(0.97); }
+
+  .copy-btn {
+    transition: transform   var(--dur-press) var(--ease-out),
+                background   var(--dur-fast)  var(--ease-out-soft),
+                border-color var(--dur-fast)  var(--ease-out-soft),
+                color        var(--dur-fast)  var(--ease-out-soft);
+  }
+  .copy-btn:active { transform: scale(0.96); }
+  .copy-btn.copied { animation: pop var(--dur-base) var(--ease-spring); }
+
+  .pt {
+    transition: transform   var(--dur-press) var(--ease-out),
+                background   0.18s var(--ease-out-soft),
+                border-color 0.18s var(--ease-out-soft),
+                color        0.18s var(--ease-out-soft),
+                box-shadow   0.18s var(--ease-out-soft);
+  }
+  .pt:active { transform: scale(0.97); }
+
+  .nav-toggle:active,
+  .to-top:active,
+  .lang-toggle:active        { transform: scale(0.94); }
+  .lang-menu a:active        { transform: scale(0.98); }
+  details.faq-item summary:active { transform: scale(0.992); }
+
+  @keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.09); } 100% { transform: scale(1); } }
+
+  /* Cards: soften the lift; never let it stick on touch ─────────────── */
+  .cap-card {
+    transition: transform var(--dur-fast) var(--ease-out-soft), border-color var(--dur-fast) var(--ease-out-soft);
+  }
+  @media (hover: none) { .cap-card:hover { transform: none; } }
+
+  /* ── Origin-aware dropdowns: scale from the trigger, not the centre ── */
+  .lang-menu {
+    transform-origin: top right;
+    animation: menuIn var(--dur-base) var(--ease-out);
+  }
+  @keyframes menuIn {
+    from { opacity: 0; transform: scale(0.96) translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .lang-caret { transition: transform var(--dur-base) var(--ease-out); }
+  @media (max-width: 880px) {
+    .nav-links { transform-origin: top right; }
+    .nav-open .nav-links { animation: menuIn var(--dur-base) var(--ease-out); }
+  }
+
+  /* ── Tab panel: gentle blur-slide on switch ───────────────────────── */
+  .pb-tab.active { animation: tabIn var(--dur-base) var(--ease-out); }
+  @keyframes tabIn {
+    from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+    to   { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* ── FAQ: reveal the answer instead of a hard jump ────────────────── */
+  details.faq-item summary::after { transition: transform var(--dur-base) var(--ease-out); }
+  details.faq-item[open] > *:not(summary) { animation: faqOpen var(--dur-base) var(--ease-out); }
+  @keyframes faqOpen {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* ── Toast: fade + rise together ──────────────────────────────────── */
+  .toast {
+    opacity: 0;
+    transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out);
+  }
+  .toast.show { opacity: 1; }
+
+  /* ── Back-to-top: token curve + soft press ────────────────────────── */
+  .to-top {
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out),
+                background 0.18s var(--ease-out-soft), color 0.18s var(--ease-out-soft), border-color 0.18s var(--ease-out-soft);
+  }
+
+  /* ── Hero entrance choreography (first paint) ─────────────────────── */
+  .hero-shell .nav { animation: navIn var(--dur-hero) var(--ease-out) both; }
+  @keyframes navIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+
+  .hero .badge,
+  .hero .hero-title,
+  .hero .hero-sub,
+  .hero .hero-cta,
+  .hero .trust-strip { animation: heroIn var(--dur-hero) var(--ease-out) both; }
+  .hero .badge       { animation-delay: 80ms; }
+  .hero .hero-title  { animation-delay: 160ms; }
+  .hero .hero-sub    { animation-delay: 260ms; }
+  .hero .hero-cta    { animation-delay: 360ms; }
+  .hero .trust-strip { animation-delay: 450ms; }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+    to   { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* ── AI conversation mock: the chat "builds" itself ───────────────── */
+  .chat-mock.chat-armed .chat-msg {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+    transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+  }
+  .chat-mock.chat-armed .chat-msg.show { opacity: 1; transform: none; }
+  .chat-typing { align-self: flex-start; max-width: min(480px, 86%); }
+  .chat-typing .bubble {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 13px 15px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 14px; border-bottom-left-radius: 4px;
+  }
+  .chat-typing i {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text-mute);
+    animation: typingBlink 1.2s var(--ease-in-out) infinite;
+  }
+  .chat-typing i:nth-child(2) { animation-delay: 0.18s; }
+  .chat-typing i:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes typingBlink {
+    0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+    30%           { opacity: 1;    transform: translateY(-3px); }
+  }
+  [dir="rtl"] .chat-typing { align-self: flex-end; }
+  [dir="rtl"] .chat-typing .bubble { border-bottom-left-radius: 14px; border-bottom-right-radius: 4px; }
+
+  /* ── Reduced motion: keep meaning, drop movement ──────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal.in,
+    .hero-shell .nav,
+    .hero .badge, .hero .hero-title, .hero .hero-sub, .hero .hero-cta, .hero .trust-strip,
+    .pb-tab.active, details.faq-item[open] > *:not(summary),
+    .lang-menu, .nav-open .nav-links {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    .chat-mock.chat-armed .chat-msg { opacity: 1 !important; transform: none !important; }
+    .chat-typing { display: none !important; }
+    .copy-btn.copied { animation: none !important; }
+  }

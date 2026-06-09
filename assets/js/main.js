@@ -210,4 +210,70 @@
     document.addEventListener('click', e => { if (!nav.contains(e.target)) closeNav(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
   }
+
+  /* ── AI conversation mock: the chat "builds" itself on scroll-in ────── *
+   * Progressive enhancement — without JS (or with reduced-motion) every    *
+   * message is visible from the start. We only arm the sequence when we    *
+   * can actually play it. Messages stay in the a11y tree throughout.       */
+  const chat = $('.chat-mock');
+  if (chat && !reduceMotion && 'IntersectionObserver' in window) {
+    const body = $('.chat-body', chat);
+    const msgs = $$('.chat-msg', chat);
+    if (body && msgs.length) {
+      chat.classList.add('chat-armed');
+      const makeTyping = () => {
+        const t = document.createElement('div');
+        t.className = 'chat-typing';
+        t.setAttribute('aria-hidden', 'true');
+        t.innerHTML = '<span class="bubble"><i></i><i></i><i></i></span>';
+        return t;
+      };
+      const play = () => {
+        let delay = 260;
+        msgs.forEach(msg => {
+          if (msg.classList.contains('ai')) {
+            setTimeout(() => {
+              const typing = makeTyping();
+              body.insertBefore(typing, msg);
+              setTimeout(() => { typing.remove(); msg.classList.add('show'); }, 760);
+            }, delay);
+            delay += 760 + 360;
+          } else {
+            setTimeout(() => msg.classList.add('show'), delay);
+            delay += 520;
+          }
+        });
+      };
+      const cio = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { play(); cio.disconnect(); } });
+      }, { threshold: 0.35 });
+      cio.observe(chat);
+    }
+  }
+
+  /* ── Hero stat count-up (numbers tick from 0 when they scroll in) ────── */
+  const statsBlock = $('.hero-stats');
+  if (statsBlock && !reduceMotion && 'IntersectionObserver' in window) {
+    const nums = $$('.hstat-num', statsBlock);
+    const parse = txt => {
+      const m = txt.match(/^(\D*)(\d+)(.*)$/);          // prefix · integer · suffix
+      return m ? { pre: m[1], val: +m[2], suf: m[3] } : null;
+    };
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    const countUp = el => {
+      const p = parse(el.textContent.trim());
+      if (!p) return;
+      const dur = 1000, t0 = performance.now();
+      const tick = now => {
+        const t = Math.min(1, (now - t0) / dur);
+        el.textContent = p.pre + Math.round(easeOutCubic(t) * p.val) + p.suf;
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const sio = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { nums.forEach(countUp); sio.disconnect(); } });
+    }, { threshold: 0.5 });
+    sio.observe(statsBlock);
+  }
 })();
