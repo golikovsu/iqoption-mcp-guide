@@ -1,0 +1,2860 @@
+/*! ============================================================================
+ *  QEDS — Quadcode Enterprise Design System
+ *
+ *  Version : v1.2-pilot (Button + TextField + Select)
+ *  Theme   : Dark (Basic)
+ *  Source  : github.com/gnezdilovdenis/qeds
+ *
+ *  All values transcribed verbatim from native Swift styles
+ *  (QedsButtonStyleBasicDark, QedsTextFieldStyleBasicDark, QedsSelectStyleBasicDark).
+ *  Do not edit values here — re-export from the native source.
+ *  ============================================================================ */
+
+/* ----- Page reset & base typography ---------------------------------------- */
+
+:root {
+  color-scheme: dark;
+  --qeds-bg-page:      color(display-p3 0.04582 0.06971 0.14346);
+  --qeds-bg-surface:   color(display-p3 0.07489 0.10617 0.20396);
+  --qeds-text-primary: color(display-p3 0.95718 0.9757  0.99754);
+  --qeds-text-muted:   color(display-p3 0.66108 0.71925 0.8759);
+  --qeds-stroke-faint: color(display-p3 0.15634 0.19844 0.32722);
+}
+
+html, body {
+  background: var(--qeds-bg-page);
+  color: var(--qeds-text-primary);
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================================
+   .qeds-button
+   ----
+   Web mirror of:  ButtonComponent (SwiftUI)  /  QedsButton (Compose, planned)
+   API attributes:
+     data-context     general | accent                    (default: general)
+     data-prominence  primary | secondary | tertiary
+                       | quaternary | quinary             (default: primary)
+     data-size        lg | md | sm                        (default: lg)
+     data-loading                                          (presence = loading)
+     disabled                                              (native)
+
+   Slots:
+     .qeds-button__start-icon, .qeds-button__end-icon, .qeds-button__label
+   ============================================================================ */
+
+.qeds-button {
+  /* Reset */
+  appearance: none;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+
+  /* Layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  isolation: isolate;
+  user-select: none;
+
+  /* Type */
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+
+  /* Sizing — driven by [data-size] */
+  height: var(--qeds-btn-h, 48px);
+  min-height: var(--qeds-btn-h, 48px);
+  padding-inline: var(--qeds-btn-px, 20px);
+  font-size: var(--qeds-btn-fs, 18px);
+  line-height: var(--qeds-btn-lh, 25px);
+  border-radius: var(--qeds-btn-r, 12px);
+
+  /* Surface — driven by [data-context][data-prominence] */
+  background: var(--qeds-btn-bg, transparent);
+  color: var(--qeds-btn-fg, currentColor);
+  border: var(--qeds-btn-stroke-w, 0) solid var(--qeds-btn-stroke-c, transparent);
+
+  transition: opacity 150ms ease, color 100ms ease;
+}
+
+/* Interactive overlay (mirrors Swift's wrapper.backgroundColorState) */
+.qeds-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  transition: background-color 100ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.qeds-button > * { position: relative; z-index: 1; }
+
+.qeds-button:not(:disabled):not([data-loading]):hover::before {
+  background: var(--qeds-btn-overlay-hover, transparent);
+}
+.qeds-button:not(:disabled):not([data-loading]):active::before {
+  background: var(--qeds-btn-overlay-active, transparent);
+}
+
+.qeds-button:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+}
+
+/* Disabled — root opacity 0.4 (matches Swift) */
+.qeds-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* Loading — content opacity 0, spinner overlaid */
+.qeds-button[data-loading] {
+  cursor: not-allowed;
+}
+.qeds-button[data-loading] > * {
+  opacity: 0;
+}
+.qeds-button[data-loading]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--qeds-btn-icon, 24px);
+  height: var(--qeds-btn-icon, 24px);
+  border: 2px solid transparent;
+  border-top-color: var(--qeds-btn-fg);
+  border-right-color: var(--qeds-btn-fg);
+  border-radius: 50%;
+  animation: qeds-btn-spin 700ms linear infinite;
+  z-index: 2;
+}
+@keyframes qeds-btn-spin { to { transform: rotate(360deg); } }
+
+/* Icon slots */
+.qeds-button__start-icon,
+.qeds-button__end-icon {
+  display: inline-flex;
+  width: var(--qeds-btn-icon, 24px);
+  height: var(--qeds-btn-icon, 24px);
+  flex: 0 0 auto;
+}
+.qeds-button__start-icon svg,
+.qeds-button__end-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* ----- Sizes --------------------------------------------------------------- */
+.qeds-button                    { --qeds-btn-h: 48px; --qeds-btn-px: 20px; --qeds-btn-fs: 18px; --qeds-btn-lh: 25px; --qeds-btn-r: 12px; --qeds-btn-icon: 24px; }
+.qeds-button[data-size="lg"]    { --qeds-btn-h: 48px; --qeds-btn-px: 20px; --qeds-btn-fs: 18px; --qeds-btn-lh: 25px; --qeds-btn-r: 12px; --qeds-btn-icon: 24px; }
+.qeds-button[data-size="md"]    { --qeds-btn-h: 40px; --qeds-btn-px: 16px; --qeds-btn-fs: 16px; --qeds-btn-lh: 22px; --qeds-btn-r: 12px; --qeds-btn-icon: 20px; }
+.qeds-button[data-size="sm"]    { --qeds-btn-h: 32px; --qeds-btn-px: 12px; --qeds-btn-fs: 14px; --qeds-btn-lh: 20px; --qeds-btn-r:  8px; --qeds-btn-icon: 16px; }
+
+/* ----- Variants: context × prominence -------------------------------------- *
+   Colors are direct transcriptions of QedsButtonStyleBasicDark.
+ * -------------------------------------------------------------------------- */
+
+/* general · primary */
+.qeds-button[data-context="general"][data-prominence="primary"],
+.qeds-button:not([data-context]):not([data-prominence]) {
+  --qeds-btn-bg: color(display-p3 0.39324 0.44504 0.5876);
+  --qeds-btn-fg: color(display-p3 0.95718 0.9757 0.99754);
+  --qeds-btn-overlay-hover:  color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+  --qeds-btn-overlay-active: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* general · secondary */
+.qeds-button[data-context="general"][data-prominence="secondary"] {
+  --qeds-btn-bg: color(display-p3 0.15634 0.19844 0.32722);
+  --qeds-btn-fg: color(display-p3 0.95718 0.9757 0.99754);
+  --qeds-btn-overlay-hover:  color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+  --qeds-btn-overlay-active: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* general · tertiary (outlined) */
+.qeds-button[data-context="general"][data-prominence="tertiary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.95718 0.9757 0.99754);
+  --qeds-btn-stroke-c: color(display-p3 0.39324 0.44504 0.5876);
+  --qeds-btn-stroke-w: 1.2px;
+  --qeds-btn-overlay-hover:  color(display-p3 0.12818 0.16719 0.29243);
+  --qeds-btn-overlay-active: color(display-p3 0.15634 0.19844 0.32722);
+}
+
+/* general · quaternary (ghost) */
+.qeds-button[data-context="general"][data-prominence="quaternary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-button[data-context="general"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):hover,
+.qeds-button[data-context="general"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* general · quinary (text-only link) */
+.qeds-button[data-context="general"][data-prominence="quinary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.66108 0.71925 0.8759);
+  --qeds-btn-h: auto;
+  --qeds-btn-px: 0;
+  min-height: 0;
+}
+.qeds-button[data-context="general"][data-prominence="quinary"]:not(:disabled):hover,
+.qeds-button[data-context="general"][data-prominence="quinary"]:not(:disabled):active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* accent · primary (the canonical orange CTA) */
+.qeds-button[data-context="accent"][data-prominence="primary"] {
+  --qeds-btn-bg: color(display-p3 0.90185 0.45292 0.20083);
+  --qeds-btn-fg: color(display-p3 0.95718 0.9757 0.99754);
+  --qeds-btn-overlay-hover:  color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+  --qeds-btn-overlay-active: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* accent · secondary (dark amber) */
+.qeds-button[data-context="accent"][data-prominence="secondary"] {
+  --qeds-btn-bg: color(display-p3 0.3309 0.16093 0.06976);
+  --qeds-btn-fg: color(display-p3 0.97747 0.86777 0.80168);
+  --qeds-btn-overlay-hover:  color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+  --qeds-btn-overlay-active: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* accent · tertiary (outlined orange) */
+.qeds-button[data-context="accent"][data-prominence="tertiary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.94717 0.6409 0.4663);
+  --qeds-btn-stroke-c: color(display-p3 0.90185 0.45292 0.20083);
+  --qeds-btn-stroke-w: 1.2px;
+  --qeds-btn-overlay-hover:  color(display-p3 0.27535 0.12463 0.0417);
+  --qeds-btn-overlay-active: color(display-p3 0.3309 0.16093 0.06976);
+}
+.qeds-button[data-context="accent"][data-prominence="tertiary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+/* accent · quaternary (ghost orange) */
+.qeds-button[data-context="accent"][data-prominence="quaternary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.94717 0.6409 0.4663);
+}
+.qeds-button[data-context="accent"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):hover,
+.qeds-button[data-context="accent"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+/* accent · quinary (text-only orange link) */
+.qeds-button[data-context="accent"][data-prominence="quinary"] {
+  --qeds-btn-bg: transparent;
+  --qeds-btn-fg: color(display-p3 0.94717 0.6409 0.4663);
+  --qeds-btn-h: auto;
+  --qeds-btn-px: 0;
+  min-height: 0;
+}
+.qeds-button[data-context="accent"][data-prominence="quinary"]:not(:disabled):hover,
+.qeds-button[data-context="accent"][data-prominence="quinary"]:not(:disabled):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+
+/* ============================================================================
+   .qeds-text-field
+   ----
+   Web mirror of:  TextFieldComponent (SwiftUI)  /  QedsTextField (Compose, planned)
+
+   API attributes (on the root .qeds-text-field element):
+     data-validation  none | valid | invalid                 (default: none)
+
+   States flow from native DOM behaviour:
+     :focus-within             — mirrors  isFocused == true
+     input:not(:placeholder-shown)
+                               — mirrors  isFilled  == true
+     input:disabled            — mirrors  isEnabled == false
+                                 (root opacity 0.4, cursor not-allowed)
+
+   Slots:
+     .qeds-text-field__label       — optional top label
+     .qeds-text-field__field       — the input wrapper (background, stroke)
+     .qeds-text-field__input       — the native <input>
+     .qeds-text-field__clear       — clear button (icon-button quinary)
+     .qeds-text-field__description — optional helper text below
+     .qeds-text-field__validation  — validation message (shown when data-validation != none)
+
+   The placeholder MUST be set on the <input> via the placeholder attribute.
+   Browser handling of :placeholder-shown is what makes the clear button
+   appear / disappear and the value colour swap from placeholder→value
+   without any JS.
+   ============================================================================ */
+
+.qeds-text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                 /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* Disabled — opacity 0.4 on the whole component */
+.qeds-text-field:has(.qeds-text-field__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.qeds-text-field:has(.qeds-text-field__input:disabled) .qeds-text-field__field,
+.qeds-text-field:has(.qeds-text-field__input:disabled) .qeds-text-field__input {
+  cursor: not-allowed;
+}
+
+/* ----- Label -------------------------------------------------------------- */
+.qeds-text-field__label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* ----- Field wrapper ------------------------------------------------------ */
+.qeds-text-field__field {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;                                 /* wrapper.spacing */
+  height: 48px;                             /* wrapper.height */
+  padding-inline-start: 16px;               /* wrapper.paddingStart */
+  padding-inline-end: 12px;                 /* wrapper.paddingEnd */
+  border-radius: 12px;                      /* field.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);  /* field.bg default */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* field.stroke default */
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* Interaction overlay (mirrors wrapper.backgroundColorState) */
+.qeds-text-field__field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-text-field__field > * { position: relative; z-index: 1; }
+
+.qeds-text-field:not(:has(.qeds-text-field__input:disabled))
+  .qeds-text-field__field:hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-text-field:not(:has(.qeds-text-field__input:disabled))
+  .qeds-text-field__field:active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* ----- Focused (validation = none) — bright stroke, lifted bg ------------- */
+.qeds-text-field .qeds-text-field__field:focus-within {
+  background: color(display-p3 0.10394 0.13987 0.25412);
+  border-color: color(display-p3 0.81572 0.8496 0.9474);
+}
+
+/* ----- Validation: valid (green) ----------------------------------------- */
+.qeds-text-field[data-validation="valid"] .qeds-text-field__field,
+.qeds-text-field[data-validation="valid"] .qeds-text-field__field:focus-within {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+}
+
+/* ----- Validation: invalid (red) ----------------------------------------- */
+.qeds-text-field[data-validation="invalid"] .qeds-text-field__field,
+.qeds-text-field[data-validation="invalid"] .qeds-text-field__field:focus-within {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* ----- Native input ------------------------------------------------------- */
+.qeds-text-field__input {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);          /* value.fg none */
+  caret-color: color(display-p3 0.95718 0.9757 0.99754);    /* caret.fg */
+}
+.qeds-text-field__input::placeholder {
+  color: color(display-p3 0.34158 0.39027 0.53295);          /* placeholder.fg none/valid */
+  opacity: 1;
+}
+
+/* Value colour follows validation when filled (placeholder hidden by browser) */
+.qeds-text-field[data-validation="valid"] .qeds-text-field__input {
+  color: color(display-p3 0.74987 0.93823 0.8066);
+}
+.qeds-text-field[data-validation="invalid"] .qeds-text-field__input {
+  color: color(display-p3 0.97174 0.8302 0.81278);
+}
+.qeds-text-field[data-validation="invalid"] .qeds-text-field__input::placeholder {
+  color: color(display-p3 0.66543 0.30341 0.29316);
+}
+
+/* ----- Clear button (mirrors IconButton general/quinary/lg/compact) ------- */
+.qeds-text-field__clear {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: color(display-p3 0.66108 0.71925 0.8759);    /* quinary fg muted */
+  /* Hidden by default; shown only when focused AND filled */
+  visibility: hidden;
+  pointer-events: none;
+  transition: color 100ms ease;
+}
+.qeds-text-field__clear svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+.qeds-text-field__field:focus-within:has(.qeds-text-field__input:not(:placeholder-shown))
+  .qeds-text-field__clear {
+  visibility: visible;
+  pointer-events: auto;
+}
+.qeds-text-field__clear:hover,
+.qeds-text-field__clear:active {
+  color: color(display-p3 0.95718 0.9757 0.99754);    /* quinary fg active */
+}
+
+/* ----- Description ------------------------------------------------------- */
+.qeds-text-field__description {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* ----- Validation message ------------------------------------------------ */
+.qeds-text-field__validation {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);  /* fallback (validation .none) */
+  display: none;
+}
+.qeds-text-field[data-validation="valid"] .qeds-text-field__validation {
+  color: color(display-p3 0.50555 0.81371 0.61026);
+  display: block;
+}
+.qeds-text-field[data-validation="invalid"] .qeds-text-field__validation {
+  color: color(display-p3 0.97174 0.8302 0.81278);
+  display: block;
+}
+
+
+/* ============================================================================
+   .qeds-select
+   ----
+   Web mirror of:  SelectComponent (SwiftUI)  /  QedsSelect (Compose, planned)
+
+   API attributes (on the root .qeds-select element):
+     data-validation  default | valid | invalid              (default: default)
+     data-open        presence — chevron rotated 180°,
+                      mirrors  isFocused == true (menu open)
+
+   States:
+     :focus-visible / [data-open]   — open / focused
+     button:disabled                — mirrors isEnabled == false
+                                      (root opacity 0.4, cursor not-allowed)
+
+   Slots:
+     .qeds-select__label         — optional top label
+     .qeds-select__field         — the <button> wrapper (background, stroke, chevron)
+     .qeds-select__value         — the current value (shown when filled)
+     .qeds-select__placeholder   — the placeholder (shown when empty)
+     .qeds-select__end-icon      — chevron (always present)
+     .qeds-select__description   — optional helper text below
+     .qeds-select__validation    — validation message (visible when data-validation
+                                   is valid or invalid)
+
+   Filled vs empty: put .qeds-select__value (when there's a value) OR
+   .qeds-select__placeholder (when there isn't) — never both. The Swift
+   `textInput` view picks one branch; the HTML mirrors that explicitly.
+   ============================================================================ */
+
+.qeds-select {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                 /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* Disabled — opacity 0.4 on the whole component (matches Swift) */
+.qeds-select:has(.qeds-select__field:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.qeds-select:has(.qeds-select__field:disabled) .qeds-select__field {
+  cursor: not-allowed;
+}
+
+/* ----- Label -------------------------------------------------------------- */
+.qeds-select__label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* ----- Field (the <button>) ---------------------------------------------- */
+.qeds-select__field {
+  appearance: none;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;                                 /* wrapper.spacing */
+  width: 100%;
+  height: 48px;                             /* wrapper.height */
+  padding-inline-start: 16px;               /* wrapper.paddingStart */
+  padding-inline-end: 16px;                 /* wrapper.paddingEnd */
+  border-radius: 12px;                      /* field.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);  /* field.bg default */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* field.stroke default */
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* Interaction overlay (mirrors wrapper.backgroundColorState) */
+.qeds-select__field::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-select__field > * { position: relative; z-index: 1; }
+
+.qeds-select__field:not(:disabled):hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-select__field:not(:disabled):active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+.qeds-select__field:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+}
+
+/* ----- Validation: valid (green) ----------------------------------------- */
+.qeds-select[data-validation="valid"] .qeds-select__field {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+}
+
+/* ----- Validation: invalid (red) ----------------------------------------- */
+.qeds-select[data-validation="invalid"] .qeds-select__field {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* ----- Value (shown when filled) ----------------------------------------- */
+.qeds-select__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);   /* value.fg — white, validation-agnostic */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ----- Placeholder (shown when empty) ------------------------------------ */
+.qeds-select__placeholder {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.34158 0.39027 0.53295);  /* placeholder.fg default/valid */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.qeds-select[data-validation="invalid"] .qeds-select__placeholder {
+  color: color(display-p3 0.66543 0.30341 0.29316);
+}
+
+/* ----- End icon (chevron) ------------------------------------------------ */
+.qeds-select__end-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: color(display-p3 0.66108 0.71925 0.8759);   /* endIcon.fg */
+  transition: transform 160ms ease;
+}
+.qeds-select__end-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Rotated 180° when menu is open (mirrors endIcon.rotation(isFocused)) */
+.qeds-select[data-open] .qeds-select__end-icon {
+  transform: rotate(180deg);
+}
+
+/* ----- Description ------------------------------------------------------- */
+.qeds-select__description {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* ----- Validation message ------------------------------------------------ */
+.qeds-select__validation {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);  /* fallback (validation .default) */
+  display: none;
+}
+.qeds-select[data-validation="valid"] .qeds-select__validation {
+  color: color(display-p3 0.50555 0.81371 0.61026);
+  display: block;
+}
+.qeds-select[data-validation="invalid"] .qeds-select__validation {
+  color: color(display-p3 0.97174 0.8302 0.81278);
+  display: block;
+}
+
+
+/* ============================================================================
+   .qeds-separator
+   ----
+   Web mirror of:  SeparatorComponent (SwiftUI)  /  QedsSeparator (Compose, planned)
+
+   API: (no attributes)
+
+   Slots:
+     .qeds-separator__label   — optional inline label; when present, the
+                                line splits into two segments flanking the
+                                text (SwiftUI HStack: line · Text · line).
+   ============================================================================ */
+
+.qeds-separator {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+}
+.qeds-separator::before,
+.qeds-separator::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1.2px;                                           /* line.height */
+  background: color(display-p3 0.19142 0.2337 0.36595);    /* line.backgroundColor */
+}
+.qeds-separator__label {
+  flex: 0 0 auto;
+  padding-inline: 8px;                                     /* SwiftUI .padding(.horizontal, 8) */
+  font-size: 12px;                                         /* label.fontSize */
+  line-height: 17px;                                       /* label.fontLeading */
+  font-weight: 400;                                        /* label.fontWeight */
+  letter-spacing: 0;                                       /* label.fontTracking */
+  color: color(display-p3 0.34158 0.39027 0.53295);        /* label.foregroundColor */
+  white-space: nowrap;
+}
+
+
+/* ============================================================================
+   .qeds-spinner
+   ----
+   Web mirror of:  SpinnerComponent (SwiftUI)  /  QedsSpinner (Compose, planned)
+
+   24×24 stroked arc, round end caps, 75 % of full circumference, rotates
+   360° continuously over 1 s (linear, repeats forever — mirrors SwiftUI
+   .rotationEffect with .linear(1.0).repeatForever(autoreverses: false)).
+
+   API: (no attributes)
+
+   Markup contract: a wrapper element with one <svg viewBox="0 0 24 24">
+   child holding a <circle cx="12" cy="12" r="10">. The CSS spins the SVG
+   and trims the circle's stroke to 75 %.
+   ============================================================================ */
+
+.qeds-spinner {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  color: color(display-p3 0.97747 0.86777 0.80168);        /* spinner.foregroundColor */
+  flex: 0 0 auto;
+}
+.qeds-spinner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: qeds-spinner-rotate 1s linear infinite;
+  transform-origin: center;
+}
+.qeds-spinner svg circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;                                         /* spinner.strokeWidth */
+  stroke-linecap: round;                                   /* spinner.strokeCap */
+  /* Circumference of r=10 is 2π·10 ≈ 62.832.
+     trim(from: 0, to: 0.75) → arc length = 47.124, gap = anything ≥ 15.708. */
+  stroke-dasharray: 47.124 62.832;
+}
+@keyframes qeds-spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ============================================================================
+   .qeds-app-shell
+   ----
+   Web mirror of:  AppShellModifier (SwiftUI)  /  QedsAppShell (Compose, planned)
+
+   A page-level background utility. Wrap your app's root element with this
+   class to give it the canonical QEDS page surface — the same colour
+   SwiftUI's `.appShell()` applies via the env theme.
+
+   API: (no attributes; static utility)
+   ============================================================================ */
+
+.qeds-app-shell {
+  background: color(display-p3 0.0497 0.07364 0.14735);    /* root.backgroundColor */
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+/* ============================================================================
+   .qeds-link
+   ----
+   Web mirror of:  LinkComponent (SwiftUI)  /  QedsLink (Compose, planned)
+
+   API attributes:
+     data-size   xl | lg | md | sm | xs                       (default: md)
+     disabled                                                  (presence)
+   ============================================================================ */
+
+.qeds-link {
+  /* Reset */
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;                                        /* label.fontWeight */
+  font-size: var(--qeds-link-fs, 16px);
+  line-height: var(--qeds-link-lh, 22px);
+  letter-spacing: var(--qeds-link-tracking, -0.01em);
+
+  color: color(display-p3 0.94717 0.6409 0.4663);          /* label.foregroundColor(.default) */
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.2em;                            /* SwiftUI offsets dotted underline ~0.2 × fontSize */
+
+  cursor: pointer;
+  transition: color 100ms ease, opacity 100ms ease;
+}
+
+/* Sizes — fontSize / fontLeading / fontTracking per QedsLinkStyle.Size */
+.qeds-link                  { --qeds-link-fs: 16px; --qeds-link-lh: 22px; --qeds-link-tracking: -0.01em; }
+.qeds-link[data-size="xl"]  { --qeds-link-fs: 20px; --qeds-link-lh: 28px; --qeds-link-tracking: -0.02em; }
+.qeds-link[data-size="lg"]  { --qeds-link-fs: 18px; --qeds-link-lh: 25px; --qeds-link-tracking: -0.01em; }
+.qeds-link[data-size="md"]  { --qeds-link-fs: 16px; --qeds-link-lh: 22px; --qeds-link-tracking: -0.01em; }
+.qeds-link[data-size="sm"]  { --qeds-link-fs: 14px; --qeds-link-lh: 20px; --qeds-link-tracking: -0.01em; }
+.qeds-link[data-size="xs"]  { --qeds-link-fs: 12px; --qeds-link-lh: 17px; --qeds-link-tracking: 0; }
+
+/* Hover / active — both map to the same brighter orange */
+.qeds-link:not(:disabled):not([aria-disabled="true"]):hover,
+.qeds-link:not(:disabled):not([aria-disabled="true"]):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);        /* label.foregroundColor(.hover / .active) */
+}
+
+.qeds-link:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Disabled — root opacity 0.4 (matches Swift) */
+.qeds-link:disabled,
+.qeds-link[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+
+/* ============================================================================
+   .qeds-checkbox
+   ----
+   Web mirror of:  CheckboxComponent (SwiftUI)  /  QedsCheckbox (Compose, planned)
+
+   API attributes:
+     data-checked     unchecked | checked | indeterminate     (default: unchecked)
+     data-validation  none | valid | invalid                  (default: none)
+     data-size        lg | md                                  (default: md)
+     disabled                                                  (native)
+
+   DOM contract:
+     <button class="qeds-checkbox" data-checked data-validation data-size>
+       <span class="qeds-checkbox__indicator">
+         <svg class="qeds-checkbox__icon" data-icon="check">…</svg>
+         <svg class="qeds-checkbox__icon" data-icon="indeterminate">…</svg>
+       </span>
+       <span class="qeds-checkbox__labels">
+         <span class="qeds-checkbox__label">…</span>
+         <span class="qeds-checkbox__description">…</span>
+         <span class="qeds-checkbox__validation">…</span>
+       </span>
+     </button>
+   ============================================================================ */
+
+.qeds-checkbox {
+  /* Reset */
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;                                                /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  text-align: left;
+  color: inherit;
+  transition: opacity 100ms ease;
+}
+.qeds-checkbox:disabled {
+  opacity: 0.4;                                            /* root.opacity(disabled) */
+  cursor: not-allowed;
+}
+.qeds-checkbox:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ----- Indicator (the box) ----------------------------------------------- */
+.qeds-checkbox__indicator {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--qeds-cb-size, 20px);                        /* wrapper.width(size) */
+  height: var(--qeds-cb-size, 20px);                       /* wrapper.height(size) */
+  border-radius: 4px;                                      /* indicator.corner* */
+  border: 1.2px solid var(--qeds-cb-stroke,
+            color(display-p3 0.39324 0.44504 0.5876));     /* indicator.stroke (default: muted blue) */
+  background: var(--qeds-cb-bg,
+            color(display-p3 0.10394 0.13987 0.25412));    /* indicator.bg default (dark blue) */
+  box-sizing: border-box;
+  transition: background-color 100ms ease, border-color 100ms ease;
+}
+.qeds-checkbox__indicator::before {                        /* wrapper.backgroundColor overlay */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-checkbox__indicator > * { position: relative; z-index: 1; }
+
+.qeds-checkbox:not(:disabled):hover  .qeds-checkbox__indicator::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-checkbox:not(:disabled):active .qeds-checkbox__indicator::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* ----- Sizes ------------------------------------------------------------- */
+.qeds-checkbox                  { --qeds-cb-size: 20px; --qeds-cb-icon: 16px; }
+.qeds-checkbox[data-size="md"]  { --qeds-cb-size: 20px; --qeds-cb-icon: 16px; }
+.qeds-checkbox[data-size="lg"]  { --qeds-cb-size: 24px; --qeds-cb-icon: 20px; }
+
+/* ----- Icon (check / indeterminate) -------------------------------------- */
+.qeds-checkbox__icon {
+  width: var(--qeds-cb-icon, 16px);
+  height: var(--qeds-cb-icon, 16px);
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* icon.foregroundColor */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: none;
+}
+.qeds-checkbox[data-checked="checked"]        .qeds-checkbox__icon[data-icon="check"],
+.qeds-checkbox[data-checked="indeterminate"]  .qeds-checkbox__icon[data-icon="indeterminate"] {
+  display: block;
+}
+
+/* ----- Variants (checked × validation) ----------------------------------- *
+   Background and stroke colours are direct transcriptions of
+   QedsCheckboxStyleBasicDark.indicator.{backgroundColor, strokeColor}.
+ * ------------------------------------------------------------------------ */
+
+/* Unchecked + invalid → dark red bg, red stroke */
+.qeds-checkbox[data-validation="invalid"][data-checked="unchecked"] .qeds-checkbox__indicator,
+.qeds-checkbox[data-validation="invalid"]:not([data-checked]) .qeds-checkbox__indicator {
+  --qeds-cb-bg:     color(display-p3 0.21602 0.08459 0.07982);
+  --qeds-cb-stroke: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* Checked / indeterminate (validation-agnostic) → orange fill, orange stroke */
+.qeds-checkbox[data-checked="checked"]       .qeds-checkbox__indicator,
+.qeds-checkbox[data-checked="indeterminate"] .qeds-checkbox__indicator {
+  --qeds-cb-bg:     color(display-p3 0.90185 0.45292 0.20083);
+  --qeds-cb-stroke: color(display-p3 0.90185 0.45292 0.20083);
+}
+
+/* Unchecked + (none) hover/active → slightly darker fill
+   (Swift returns 0.08083 0.10498 0.18216 in these two cells only) */
+.qeds-checkbox:not(:disabled):not([data-checked="checked"]):not([data-checked="indeterminate"]):not([data-validation="valid"]):not([data-validation="invalid"]):hover .qeds-checkbox__indicator,
+.qeds-checkbox:not(:disabled):not([data-checked="checked"]):not([data-checked="indeterminate"]):not([data-validation="valid"]):not([data-validation="invalid"]):active .qeds-checkbox__indicator {
+  --qeds-cb-bg: color(display-p3 0.08083 0.10498 0.18216);
+}
+
+/* ----- Labels ------------------------------------------------------------ */
+.qeds-checkbox__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                                /* labelsWrapper.spacing */
+  padding-top: 1px;                                        /* labelsWrapper.paddingTop */
+  flex: 1 1 auto;
+  text-align: left;
+}
+.qeds-checkbox__label {
+  font-size: 16px; line-height: 22px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-checkbox__description {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-checkbox__validation {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  display: none;
+}
+.qeds-checkbox[data-validation="valid"]   .qeds-checkbox__validation {
+  color: color(display-p3 0.50555 0.81371 0.61026);
+  display: block;
+}
+.qeds-checkbox[data-validation="invalid"] .qeds-checkbox__validation {
+  color: color(display-p3 0.97174 0.8302 0.81278);
+  display: block;
+}
+
+
+/* ============================================================================
+   .qeds-radio
+   ----
+   Web mirror of:  RadioComponent (SwiftUI)  /  QedsRadio (Compose, planned)
+
+   API attributes:
+     data-selected    presence — mirrors isSelected: true       (default: false)
+     data-validation  none | valid | invalid                    (default: none)
+     disabled                                                    (native)
+
+   DOM contract:
+     <button class="qeds-radio" data-selected data-validation>
+       <span class="qeds-radio__indicator"><span class="qeds-radio__icon"></span></span>
+       <span class="qeds-radio__labels">…</span>
+     </button>
+   ============================================================================ */
+
+.qeds-radio {
+  /* Reset */
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;                                                /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  text-align: left;
+  color: inherit;
+  transition: opacity 100ms ease;
+}
+.qeds-radio:disabled {
+  opacity: 0.4;                                            /* root.opacity(disabled) */
+  cursor: not-allowed;
+}
+.qeds-radio:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.qeds-radio__indicator {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px;                                             /* wrapper.width */
+  height: 24px;                                            /* wrapper.height */
+  border-radius: 999px;                                    /* corner 1000 → full pill */
+  border: 1.2px solid var(--qeds-rd-stroke,
+            color(display-p3 0.39324 0.44504 0.5876));     /* indicator.stroke (default: muted blue) */
+  background: var(--qeds-rd-bg,
+            color(display-p3 0.10394 0.13987 0.25412));    /* indicator.bg default (dark blue) */
+  box-sizing: border-box;
+  transition: background-color 100ms ease, border-color 100ms ease;
+}
+.qeds-radio__indicator::before {                           /* wrapper.backgroundColor overlay */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-radio__indicator > * { position: relative; z-index: 1; }
+
+.qeds-radio:not(:disabled):hover  .qeds-radio__indicator::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-radio:not(:disabled):active .qeds-radio__indicator::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* Inner dot (icon) — 12 × 12 white circle, visible only when selected */
+.qeds-radio__icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: color(display-p3 0.95718 0.9757 0.99754);    /* icon.foregroundColor */
+  display: none;
+}
+.qeds-radio[data-selected] .qeds-radio__icon { display: block; }
+
+/* ----- Variants (selected × validation) ---------------------------------- *
+   Background and stroke colours per QedsRadioStyleBasicDark.indicator.
+   Note: in radio, validation OVERRIDES the selected colour (unlike checkbox).
+ * ------------------------------------------------------------------------ */
+
+/* Selected + none → orange fill + orange stroke */
+.qeds-radio[data-selected]:not([data-validation="valid"]):not([data-validation="invalid"]) .qeds-radio__indicator {
+  --qeds-rd-bg:     color(display-p3 0.90185 0.45292 0.20083);
+  --qeds-rd-stroke: color(display-p3 0.90185 0.45292 0.20083);
+}
+
+/* Selected + valid → dark-blue fill, muted-blue stroke (validation wins) */
+/* (defaults already apply — explicit for clarity) */
+.qeds-radio[data-selected][data-validation="valid"] .qeds-radio__indicator {
+  --qeds-rd-bg:     color(display-p3 0.10394 0.13987 0.25412);
+  --qeds-rd-stroke: color(display-p3 0.39324 0.44504 0.5876);
+}
+
+/* Unchecked / Selected + invalid → dark-red fill, red stroke */
+.qeds-radio[data-validation="invalid"] .qeds-radio__indicator {
+  --qeds-rd-bg:     color(display-p3 0.21602 0.08459 0.07982);
+  --qeds-rd-stroke: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* Unselected + none + hover/active → slightly darker fill
+   (mirrors the hover/active special-case in the Swift switch) */
+.qeds-radio:not(:disabled):not([data-selected]):not([data-validation="valid"]):not([data-validation="invalid"]):hover  .qeds-radio__indicator,
+.qeds-radio:not(:disabled):not([data-selected]):not([data-validation="valid"]):not([data-validation="invalid"]):active .qeds-radio__indicator {
+  --qeds-rd-bg: color(display-p3 0.08083 0.10498 0.18216);
+}
+
+/* ----- Labels ------------------------------------------------------------ */
+.qeds-radio__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                                /* labelWrapper.spacing */
+  padding-top: 1px;                                        /* labelWrapper.paddingTop */
+  flex: 1 1 auto;
+  text-align: left;
+}
+.qeds-radio__label {
+  font-size: 16px; line-height: 22px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-radio__description {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-radio__validation {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  display: none;
+}
+.qeds-radio[data-validation="valid"]   .qeds-radio__validation {
+  color: color(display-p3 0.50555 0.81371 0.61026);
+  display: block;
+}
+.qeds-radio[data-validation="invalid"] .qeds-radio__validation {
+  color: color(display-p3 0.97174 0.8302 0.81278);
+  display: block;
+}
+
+
+/* ============================================================================
+   .qeds-avatar
+   ----
+   Web mirror of:  QedsAvatarStyleBasicDark (component View not yet shipped in
+                   the iOS module; transcribed from the style alone).
+
+   API attributes:
+     data-size       lg | md | sm                              (default: md)
+     data-image      presence — mirrors  image == true; when present, an
+                                 <img> child fills the avatar and a stroke
+                                 appears. Without it, the icon slot is shown.
+
+   DOM contract:
+     <span class="qeds-avatar" data-size data-image?>
+       <img class="qeds-avatar__image" src="…">              (only when image)
+       <span class="qeds-avatar__icon"><svg>…</svg></span>   (only when !image)
+     </span>
+   ============================================================================ */
+
+.qeds-avatar {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--qeds-av-size, 48px);                        /* root.width(size) */
+  height: var(--qeds-av-size, 48px);                       /* root.height(size) */
+  border-radius: 12px;                                     /* root.corner* */
+  overflow: hidden;                                        /* root.overflow .hidden */
+  background: color(display-p3 0.10394 0.13987 0.25412);   /* root.backgroundColor */
+  box-sizing: border-box;
+  color: color(display-p3 0.66108 0.71925 0.8759);         /* icon.foregroundColor (via currentColor) */
+}
+
+/* Sizes — lg 80 / md 48 / sm 40 */
+.qeds-avatar                  { --qeds-av-size: 48px; --qeds-av-icon: 24px; }
+.qeds-avatar[data-size="lg"]  { --qeds-av-size: 80px; --qeds-av-icon: 32px; }
+.qeds-avatar[data-size="md"]  { --qeds-av-size: 48px; --qeds-av-icon: 24px; }
+.qeds-avatar[data-size="sm"]  { --qeds-av-size: 40px; --qeds-av-icon: 20px; }
+
+/* Stroke applies only when image is present */
+.qeds-avatar[data-image] {
+  border: 1.2px solid color(display-p3 0.19142 0.2337 0.36595);  /* wrapper.strokeColor(image=true) */
+}
+.qeds-avatar[data-image]:hover {
+  border-color: color(display-p3 0.19142 0.2337 0.36595);   /* same on hover */
+}
+.qeds-avatar[data-image]:active {
+  border-color: color(display-p3 0.95718 0.9757 0.99754);   /* white on active */
+}
+
+/* Image (fills) */
+.qeds-avatar__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+}
+
+/* Icon (visible when no image) */
+.qeds-avatar__icon {
+  display: inline-flex;
+  width: var(--qeds-av-icon, 24px);
+  height: var(--qeds-av-icon, 24px);
+  color: currentColor;
+  z-index: 1;
+}
+.qeds-avatar__icon svg {
+  width: 100%; height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  display: block;
+}
+
+/* Overlay (mirrors overlay.backgroundColor — applied on hover/active) */
+.qeds-avatar::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 2;
+}
+.qeds-avatar:hover::after  { background: color(display-p3 0.91547 0.94016 0.98367 / 0.05); }
+.qeds-avatar:active::after { background: color(display-p3 0.98824 0.98824 0.98824 / 0.15); }
+
+
+/* ============================================================================
+   .qeds-search-field
+   ----
+   Web mirror of:  SearchFieldComponent (SwiftUI)  /  QedsSearchField (Compose, planned)
+
+   API: (no attributes — single focus/fill state machine)
+
+   Slots:
+     .qeds-search-field__icon    — leading search glyph (always present)
+     .qeds-search-field__input   — native <input> (placeholder + value)
+     .qeds-search-field__clear   — clear button, shown only when filled AND focused
+   ============================================================================ */
+
+.qeds-search-field {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;                                                /* wrapper.spacing */
+  height: 48px;                                            /* wrapper.height */
+  padding-inline-start: 16px;                              /* wrapper.paddingStart */
+  padding-inline-end: 12px;                                /* wrapper.paddingEnd */
+  border-radius: 12px;                                     /* root.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);   /* root.backgroundColor(isFocused=false) */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* root.strokeColor(isFocused=false) */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  cursor: text;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.qeds-search-field::before {                               /* wrapper.backgroundColor (hover/active) */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-search-field > * { position: relative; z-index: 1; }
+
+.qeds-search-field:not(:has(.qeds-search-field__input:disabled)):hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-search-field:not(:has(.qeds-search-field__input:disabled)):active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+.qeds-search-field:focus-within {
+  background: color(display-p3 0.10394 0.13987 0.25412);   /* root.backgroundColor(isFocused=true) */
+  border-color: color(display-p3 0.81572 0.8496 0.9474);   /* root.strokeColor(isFocused=true) */
+}
+
+.qeds-search-field:has(.qeds-search-field__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.qeds-search-field:has(.qeds-search-field__input:disabled) .qeds-search-field__input {
+  cursor: not-allowed;
+}
+
+/* Leading icon */
+.qeds-search-field__icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  color: color(display-p3 0.66108 0.71925 0.8759);         /* icon.foregroundColor */
+}
+.qeds-search-field__icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Native input */
+.qeds-search-field__input {
+  appearance: none;
+  background: transparent;
+  border: 0; outline: 0;
+  padding: 0; margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;                                         /* value.fontSize */
+  line-height: 22px;                                       /* value.fontLeading */
+  font-weight: 400;                                        /* value.fontWeight */
+  letter-spacing: -0.01em;                                 /* value.fontTracking */
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* value.foregroundColor */
+  caret-color: color(display-p3 0.95718 0.9757 0.99754);   /* caret.foregroundColor */
+}
+.qeds-search-field__input::placeholder {
+  color: color(display-p3 0.34158 0.39027 0.53295);        /* placeholder.foregroundColor */
+  opacity: 1;
+}
+
+/* Clear button — same shape as IconButton general/quinary/lg/compact */
+.qeds-search-field__clear {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0; margin: 0;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  flex: 0 0 auto;
+  cursor: pointer;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  visibility: hidden;
+  pointer-events: none;
+  transition: color 100ms ease;
+}
+.qeds-search-field__clear svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qeds-search-field:focus-within:has(.qeds-search-field__input:not(:placeholder-shown)) .qeds-search-field__clear {
+  visibility: visible;
+  pointer-events: auto;
+}
+.qeds-search-field__clear:hover,
+.qeds-search-field__clear:active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+
+/* ============================================================================
+   .qeds-pin-field-cell
+   ----
+   Web mirror of:  PinFieldCellComponent (SwiftUI)
+
+   API attributes:
+     data-validation  none | valid | invalid           (default: none)
+     data-focused                                       (presence — caret + bright stroke)
+     data-filled                                        (presence — value weight 500)
+   ============================================================================ */
+
+.qeds-pin-field-cell {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  max-width: 48px;                                         /* cell.widthMax */
+  height: 56px;                                            /* cell.height */
+  border-radius: 12px;                                     /* cell.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);   /* cell.bg(rest, none) */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* cell.stroke(rest, none) */
+  box-sizing: border-box;
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  font-size: 20px;                                         /* value.fontSize */
+  line-height: 28px;                                       /* value.fontLeading */
+  letter-spacing: -0.02em;
+  font-weight: 400;                                        /* value.fontWeight(isFilled=false) */
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* value.foregroundColor(.none) */
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.qeds-pin-field-cell[data-filled] {
+  font-weight: 500;                                        /* value.fontWeight(isFilled=true) */
+}
+.qeds-pin-field-cell[data-focused] {
+  background: color(display-p3 0.10394 0.13987 0.25412);   /* cell.bg(focused, none) */
+  border-color: color(display-p3 0.81572 0.8496 0.9474);   /* cell.stroke(focused, none) */
+}
+
+/* Validation — valid (green) */
+.qeds-pin-field-cell[data-validation="valid"] {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+  color: color(display-p3 0.74987 0.93823 0.8066);
+}
+/* Validation — invalid (red) */
+.qeds-pin-field-cell[data-validation="invalid"] {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+  color: color(display-p3 0.97174 0.8302 0.81278);
+}
+
+/* Caret — 2-px white blinking bar, visible when [data-focused] and empty */
+.qeds-pin-field-cell__caret {
+  display: none;
+  width: 2px;
+  height: 20px;
+  background: color(display-p3 0.95718 0.9757 0.99754);
+  animation: qeds-pin-caret 1.06s steps(2, end) infinite;
+}
+.qeds-pin-field-cell[data-focused]:not([data-filled]) .qeds-pin-field-cell__caret {
+  display: block;
+}
+@keyframes qeds-pin-caret {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+/* ============================================================================
+   .qeds-icon-button
+   ----
+   Web mirror of:  IconButtonComponent (SwiftUI)  /  QedsIconButton (Compose, planned)
+
+   API attributes:
+     data-context     general | accent                                (default: general)
+     data-prominence  primary | secondary | quaternary | quinary       (default: primary)
+     data-size        lg | md                                          (default: lg)
+     data-compact                                                       (presence — smaller square)
+     data-loading                                                       (presence — spinner shown, icon faded)
+     disabled                                                           (native)
+
+   DOM contract:
+     <button class="qeds-icon-button" data-* ...>
+       <svg class="qeds-icon-button__icon">…</svg>
+       <span class="qeds-icon-button__spinner">  (rendered when data-loading)
+         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+       </span>
+     </button>
+   ============================================================================ */
+
+.qeds-icon-button {
+  /* Reset */
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  user-select: none;
+
+  width: var(--qeds-ib-size, 48px);
+  height: var(--qeds-ib-size, 48px);
+  border-radius: var(--qeds-ib-r, 12px);
+  border: 0;
+  background: var(--qeds-ib-bg, transparent);
+  color: var(--qeds-ib-fg, currentColor);
+  transition: opacity 150ms ease, color 100ms ease;
+}
+
+/* Interaction overlay (mirrors wrapper.backgroundColorState — only set for
+   primary and secondary; quaternary/quinary use icon colour change only). */
+.qeds-icon-button::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-icon-button > * { position: relative; z-index: 1; }
+
+.qeds-icon-button[data-prominence="primary"]:not(:disabled):not([data-loading]):hover::before,
+.qeds-icon-button[data-prominence="secondary"]:not(:disabled):not([data-loading]):hover::before,
+.qeds-icon-button:not([data-prominence]):not(:disabled):not([data-loading]):hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-icon-button[data-prominence="primary"]:not(:disabled):not([data-loading]):active::before,
+.qeds-icon-button[data-prominence="secondary"]:not(:disabled):not([data-loading]):active::before,
+.qeds-icon-button:not([data-prominence]):not(:disabled):not([data-loading]):active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+.qeds-icon-button:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: 2px;
+}
+
+.qeds-icon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;                                            /* root.opacity(disabled) */
+}
+
+/* ----- Sizes (default + compact) ----------------------------------------- *
+   wrapper.height/width(isCompact, prominence, size):
+     primary / secondary / quaternary: full lg 48, md 40; compact lg 32, md 28
+     quinary: full lg 24, md 20;            compact lg 24, md 20  (no shrink)
+   icon.width/height(size): lg 24, md 20
+   corner: full 12, compact 8
+ * ------------------------------------------------------------------------ */
+
+.qeds-icon-button                                  { --qeds-ib-size: 48px; --qeds-ib-r: 12px; --qeds-ib-icon: 24px; }
+.qeds-icon-button[data-size="lg"]                  { --qeds-ib-size: 48px; --qeds-ib-icon: 24px; }
+.qeds-icon-button[data-size="md"]                  { --qeds-ib-size: 40px; --qeds-ib-icon: 20px; }
+.qeds-icon-button[data-compact][data-size="lg"]    { --qeds-ib-size: 32px; --qeds-ib-r: 8px; --qeds-ib-icon: 24px; }
+.qeds-icon-button[data-compact][data-size="md"]    { --qeds-ib-size: 28px; --qeds-ib-r: 8px; --qeds-ib-icon: 20px; }
+.qeds-icon-button[data-compact]:not([data-size])   { --qeds-ib-size: 32px; --qeds-ib-r: 8px; --qeds-ib-icon: 24px; }
+
+/* Quinary collapses to the icon size, no chrome */
+.qeds-icon-button[data-prominence="quinary"][data-size="lg"],
+.qeds-icon-button[data-prominence="quinary"]:not([data-size]) { --qeds-ib-size: 24px; --qeds-ib-icon: 24px; }
+.qeds-icon-button[data-prominence="quinary"][data-size="md"]  { --qeds-ib-size: 20px; --qeds-ib-icon: 20px; }
+
+/* Icon slot */
+.qeds-icon-button__icon {
+  display: inline-flex;
+  width: var(--qeds-ib-icon, 24px);
+  height: var(--qeds-ib-icon, 24px);
+  color: currentColor;
+  flex: 0 0 auto;
+  transition: opacity 150ms ease;
+}
+.qeds-icon-button__icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Loading — icon fades to 0, spinner overlays */
+.qeds-icon-button[data-loading] { cursor: not-allowed; }
+.qeds-icon-button[data-loading] .qeds-icon-button__icon { opacity: 0; }
+
+.qeds-icon-button__spinner {
+  display: none;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--qeds-ib-icon, 24px);
+  height: var(--qeds-ib-icon, 24px);
+  color: currentColor;
+  z-index: 2;
+}
+.qeds-icon-button[data-loading] .qeds-icon-button__spinner { display: inline-flex; }
+.qeds-icon-button__spinner svg {
+  width: 100%; height: 100%;
+  display: block;
+  animation: qeds-spinner-rotate 1s linear infinite;
+  transform-origin: center;
+}
+.qeds-icon-button__spinner svg circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 47.124 62.832;
+}
+
+/* ----- Variants: context × prominence (icon + bg) ----------------------- *
+   Direct transcription of QedsIconButtonStyleBasicDark.
+ * ------------------------------------------------------------------------ */
+
+/* general · primary */
+.qeds-icon-button[data-context="general"][data-prominence="primary"],
+.qeds-icon-button:not([data-context]):not([data-prominence]) {
+  --qeds-ib-bg: color(display-p3 0.39324 0.44504 0.5876);
+  --qeds-ib-fg: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* general · secondary */
+.qeds-icon-button[data-context="general"][data-prominence="secondary"] {
+  --qeds-ib-bg: color(display-p3 0.15634 0.19844 0.32722);
+  --qeds-ib-fg: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* general · quaternary (ghost, muted text) */
+.qeds-icon-button[data-context="general"][data-prominence="quaternary"] {
+  --qeds-ib-bg: transparent;
+  --qeds-ib-fg: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-icon-button[data-context="general"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):hover,
+.qeds-icon-button[data-context="general"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* general · quinary (icon-only, no chrome) */
+.qeds-icon-button[data-context="general"][data-prominence="quinary"] {
+  --qeds-ib-bg: transparent;
+  --qeds-ib-fg: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-icon-button[data-context="general"][data-prominence="quinary"]:not(:disabled):not([data-loading]):hover,
+.qeds-icon-button[data-context="general"][data-prominence="quinary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* accent · primary */
+.qeds-icon-button[data-context="accent"][data-prominence="primary"] {
+  --qeds-ib-bg: color(display-p3 0.90185 0.45292 0.20083);
+  --qeds-ib-fg: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* accent · secondary */
+.qeds-icon-button[data-context="accent"][data-prominence="secondary"] {
+  --qeds-ib-bg: color(display-p3 0.3309 0.16093 0.06976);
+  --qeds-ib-fg: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+/* accent · quaternary (ghost orange) */
+.qeds-icon-button[data-context="accent"][data-prominence="quaternary"] {
+  --qeds-ib-bg: transparent;
+  --qeds-ib-fg: color(display-p3 0.94717 0.6409 0.4663);
+}
+.qeds-icon-button[data-context="accent"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):hover,
+.qeds-icon-button[data-context="accent"][data-prominence="quaternary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+/* accent · quinary (icon-only orange) */
+.qeds-icon-button[data-context="accent"][data-prominence="quinary"] {
+  --qeds-ib-bg: transparent;
+  --qeds-ib-fg: color(display-p3 0.94717 0.6409 0.4663);
+}
+.qeds-icon-button[data-context="accent"][data-prominence="quinary"]:not(:disabled):not([data-loading]):hover,
+.qeds-icon-button[data-context="accent"][data-prominence="quinary"]:not(:disabled):not([data-loading]):active {
+  color: color(display-p3 0.97747 0.86777 0.80168);
+}
+
+
+/* ============================================================================
+   .qeds-header
+   ----
+   Web mirror of:  QedsHeaderStyleBasicDark (component View not yet shipped;
+                   transcribed from the style alone).
+
+   API attributes:
+     data-nav-controls   back | close | all | none      (default: none)
+
+   DOM contract:
+     <div class="qeds-header" data-nav-controls>
+       <div class="qeds-header__back">    (rendered when back|all)
+         <button class="qeds-icon-button" …>…</button>
+       </div>
+       <div class="qeds-header__start">…</div>     (optional)
+       <div class="qeds-header__main">…</div>      (centred main content)
+       <div class="qeds-header__end">…</div>       (optional)
+       <div class="qeds-header__close">   (rendered when close|all)
+         <button class="qeds-icon-button" …>…</button>
+       </div>
+     </div>
+   ============================================================================ */
+
+.qeds-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;                                            /* root.height */
+  background: color(display-p3 0.0497 0.07364 0.14735);    /* root.backgroundColor */
+  padding-inline-start: var(--qeds-hdr-ps, 16px);
+  padding-inline-end:   var(--qeds-hdr-pe, 16px);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Padding per navControls */
+.qeds-header                                  { --qeds-hdr-ps: 16px; --qeds-hdr-pe: 16px; }
+.qeds-header[data-nav-controls="none"]        { --qeds-hdr-ps: 16px; --qeds-hdr-pe: 16px; }
+.qeds-header[data-nav-controls="back"]        { --qeds-hdr-ps:  4px; --qeds-hdr-pe:  4px; }
+.qeds-header[data-nav-controls="close"]       { --qeds-hdr-ps: 16px; --qeds-hdr-pe:  4px; }
+.qeds-header[data-nav-controls="all"]         { --qeds-hdr-ps:  4px; --qeds-hdr-pe:  4px; }
+
+/* Slots */
+.qeds-header__back,
+.qeds-header__close {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+.qeds-header__start {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+}
+.qeds-header__main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.qeds-header__end {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* ============================================================================
+   .qeds-banner
+   ----
+   Web mirror of:  BannerComponent (SwiftUI)  /  QedsBanner (Compose, planned)
+
+   API attributes:
+     data-context     general | accent | warning | positive | negative  (default: general)
+
+   DOM contract:
+     <div class="qeds-banner" data-context>
+       <span class="qeds-banner__icon"><svg>…</svg></span>          (context-mapped glyph)
+       <div class="qeds-banner__body">
+         <div class="qeds-banner__title">…</div>
+         <div class="qeds-banner__description">…</div>              (optional)
+         <div class="qeds-banner__extra">                            (optional)
+           <span class="qeds-banner__extra-icon"><svg>…</svg></span> (optional within extra)
+           <span class="qeds-banner__extra-text">…</span>
+         </div>
+         <div class="qeds-banner__action">                           (optional — slot for qeds-button)
+           <button class="qeds-button" data-context="general" data-prominence="tertiary" data-size="sm">…</button>
+         </div>
+       </div>
+     </div>
+   ============================================================================ */
+
+.qeds-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;                                                /* root.spacing */
+  padding: 16px 12px 16px 12px;                            /* paddingTop/End/Bottom/Start */
+  border-radius: 12px;                                     /* root.corner* */
+  background: var(--qeds-bnr-bg, color(display-p3 0.10394 0.13987 0.25412));
+  color: var(--qeds-bnr-fg, color(display-p3 0.95718 0.9757 0.99754));
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ----- Variants — direct transcription of root/icon/title/description/colours */
+
+/* general */
+.qeds-banner,
+.qeds-banner[data-context="general"] {
+  --qeds-bnr-bg: color(display-p3 0.10394 0.13987 0.25412);
+  --qeds-bnr-icon-fg: color(display-p3 0.66108 0.71925 0.8759);
+  --qeds-bnr-title-fg: color(display-p3 0.95718 0.9757 0.99754);
+  --qeds-bnr-desc-fg:  color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-banner[data-context="accent"] {
+  --qeds-bnr-bg: color(display-p3 0.2016 0.11856 0.07562);
+  --qeds-bnr-icon-fg: color(display-p3 0.94717 0.6409 0.4663);
+  --qeds-bnr-title-fg: color(display-p3 0.97747 0.86777 0.80168);
+  --qeds-bnr-desc-fg:  color(display-p3 0.94717 0.6409 0.4663);
+}
+.qeds-banner[data-context="warning"] {
+  --qeds-bnr-bg: color(display-p3 0.1741 0.14265 0.0679);
+  --qeds-bnr-icon-fg: color(display-p3 0.97006 0.81895 0.40344);
+  --qeds-bnr-title-fg: color(display-p3 0.98087 0.90907 0.74957);
+  --qeds-bnr-desc-fg:  color(display-p3 0.97006 0.81895 0.40344);
+}
+.qeds-banner[data-context="positive"] {
+  --qeds-bnr-bg: color(display-p3 0.10769 0.17423 0.12932);
+  --qeds-bnr-icon-fg: color(display-p3 0.50555 0.81371 0.61026);
+  --qeds-bnr-title-fg: color(display-p3 0.74987 0.93823 0.8066);
+  --qeds-bnr-desc-fg:  color(display-p3 0.50555 0.81371 0.61026);
+}
+.qeds-banner[data-context="negative"] {
+  --qeds-bnr-bg: color(display-p3 0.21602 0.08459 0.07982);
+  --qeds-bnr-icon-fg: color(display-p3 0.94182 0.58995 0.56582);
+  --qeds-bnr-title-fg: color(display-p3 0.97174 0.8302 0.81278);
+  --qeds-bnr-desc-fg:  color(display-p3 0.94182 0.58995 0.56582);
+}
+
+/* Slots */
+.qeds-banner__icon {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  color: var(--qeds-bnr-icon-fg);
+}
+.qeds-banner__icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qeds-banner__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                                                /* body.spacing */
+}
+.qeds-banner__title {
+  font-size: 16px;                                         /* title.fontSize */
+  line-height: 22px;                                       /* title.fontLeading */
+  font-weight: 500;                                        /* title.fontWeight */
+  letter-spacing: -0.01em;                                 /* title.fontTracking */
+  color: var(--qeds-bnr-title-fg);
+}
+.qeds-banner__description {
+  font-size: 14px;                                         /* description.fontSize */
+  line-height: 20px;                                       /* description.fontLeading */
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--qeds-bnr-desc-fg);
+  padding-top: 1px;                                        /* textWrapper.paddingTop */
+}
+.qeds-banner__extra {
+  display: flex;
+  align-items: center;
+  gap: 4px;                                                /* extraDescription.spacing */
+}
+.qeds-banner__extra-icon {
+  width: 20px; height: 20px;
+  display: inline-flex;
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* extraIcon.fg (fixed white) */
+  flex: 0 0 auto;
+}
+.qeds-banner__extra-icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qeds-banner__extra-text {
+  font-size: 14px;                                         /* extraText.fontSize */
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* extraText.fg (fixed white) */
+}
+.qeds-banner__action {
+  display: inline-flex;
+}
+
+
+/* ============================================================================
+   .qeds-phone-field
+   ----
+   Web mirror of:  PhoneFieldComponent (SwiftUI)  /  QedsPhoneField (Compose, planned)
+
+   API attributes (on root):
+     data-validation   none | valid | invalid             (default: none)
+   States from native DOM:
+     :focus-within on .__field — mirrors isFocused
+     .__input:not(:placeholder-shown) — mirrors isFilled
+     .__input:disabled — mirrors isEnabled: false
+
+   DOM contract:
+     <div class="qeds-phone-field" data-validation>
+       <div class="qeds-phone-field__label">…</div>          (optional)
+       <div class="qeds-phone-field__inputs">
+         <button class="qeds-phone-field__select" type="button">
+           <img class="qeds-phone-field__flag" src="…">      (or SVG)
+           <span class="qeds-phone-field__code">+44</span>
+           <span class="qeds-phone-field__select-icon"><svg>…</svg></span>
+         </button>
+         <div class="qeds-phone-field__field">
+           <input class="qeds-phone-field__input" type="tel" placeholder="…">
+           <button class="qeds-phone-field__clear" type="button">…</button>
+         </div>
+       </div>
+       <div class="qeds-phone-field__description">…</div>      (optional)
+       <div class="qeds-phone-field__validation">…</div>       (visible when validation ≠ none)
+     </div>
+   ============================================================================ */
+
+.qeds-phone-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                                /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-phone-field:has(.qeds-phone-field__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.qeds-phone-field:has(.qeds-phone-field__input:disabled) .qeds-phone-field__input,
+.qeds-phone-field:has(.qeds-phone-field__input:disabled) .qeds-phone-field__select {
+  cursor: not-allowed;
+}
+
+/* Label */
+.qeds-phone-field__label {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* Inputs row (select + field) */
+.qeds-phone-field__inputs {
+  display: flex;
+  gap: 8px;                                                /* inputs.spacing */
+  align-items: stretch;
+}
+
+/* ----- Select (country code) — fixed bg/stroke, no focus state ----------- */
+.qeds-phone-field__select {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;                                                /* select.spacing */
+  height: 48px;                                            /* select.height */
+  padding-inline: 16px;                                    /* select.paddingStart/End */
+  border-radius: 12px;                                     /* select.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);   /* select.backgroundColor */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* select.strokeColor */
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+.qeds-phone-field__flag {
+  width: 24px; height: 24px;                               /* startIcon.size */
+  border-radius: 999px;                                    /* SwiftUI .clipShape(Circle) */
+  object-fit: cover;
+  flex: 0 0 auto;
+}
+.qeds-phone-field__code {
+  font-size: 16px;                                         /* codeText.fontSize */
+  line-height: 22px;                                       /* codeText.fontLeading */
+  font-weight: 400;                                        /* codeText.fontWeight */
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* codeText.foregroundColor */
+}
+.qeds-phone-field__select-icon {
+  display: inline-flex;
+  width: 24px; height: 24px;                               /* endIcon.size */
+  color: color(display-p3 0.66108 0.71925 0.8759);         /* endIcon.foregroundColor */
+  flex: 0 0 auto;
+}
+.qeds-phone-field__select-icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Field (phone input) — validation × focus drives bg + stroke ------ */
+.qeds-phone-field__field {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;                                                /* wrapper.spacing */
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 48px;                                            /* wrapper.height */
+  padding-inline-start: 16px;                              /* wrapper.paddingStart */
+  padding-inline-end: 12px;                                /* wrapper.paddingEnd */
+  border-radius: 12px;                                     /* field.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);   /* field.bg (default, fallback) */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);  /* field.stroke (default) */
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.qeds-phone-field__field::before {                         /* wrapper hover/active overlay */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-phone-field__field > * { position: relative; z-index: 1; }
+.qeds-phone-field:not(:has(.qeds-phone-field__input:disabled)) .qeds-phone-field__field:hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-phone-field:not(:has(.qeds-phone-field__input:disabled)) .qeds-phone-field__field:active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+
+/* Focused (validation = none) — bright stroke, lifted bg */
+.qeds-phone-field .qeds-phone-field__field:focus-within {
+  background: color(display-p3 0.10394 0.13987 0.25412);
+  border-color: color(display-p3 0.81572 0.8496 0.9474);
+}
+
+/* Validation overrides */
+.qeds-phone-field[data-validation="valid"]   .qeds-phone-field__field,
+.qeds-phone-field[data-validation="valid"]   .qeds-phone-field__field:focus-within {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+}
+.qeds-phone-field[data-validation="invalid"] .qeds-phone-field__field,
+.qeds-phone-field[data-validation="invalid"] .qeds-phone-field__field:focus-within {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* Native input */
+.qeds-phone-field__input {
+  appearance: none;
+  background: transparent;
+  border: 0; outline: 0;
+  padding: 0; margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;                                         /* value.fontSize */
+  line-height: 22px;                                       /* value.fontLeading */
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);         /* value.fg(.none) */
+  caret-color: color(display-p3 0.95718 0.9757 0.99754);   /* caret.fg */
+}
+.qeds-phone-field__input::placeholder {
+  color: color(display-p3 0.34158 0.39027 0.53295);        /* placeholder.fg(.none/.valid) */
+  opacity: 1;
+}
+.qeds-phone-field[data-validation="valid"]   .qeds-phone-field__input            { color: color(display-p3 0.74987 0.93823 0.8066); }
+.qeds-phone-field[data-validation="invalid"] .qeds-phone-field__input            { color: color(display-p3 0.97174 0.8302 0.81278); }
+.qeds-phone-field[data-validation="invalid"] .qeds-phone-field__input::placeholder { color: color(display-p3 0.66543 0.30341 0.29316); }
+
+/* Clear button — IconButton general/quinary/lg/compact equivalent */
+.qeds-phone-field__clear {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0; margin: 0;
+  width: 24px; height: 24px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  visibility: hidden;
+  pointer-events: none;
+  transition: color 100ms ease;
+}
+.qeds-phone-field__clear svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qeds-phone-field__field:focus-within:has(.qeds-phone-field__input:not(:placeholder-shown)) .qeds-phone-field__clear {
+  visibility: visible;
+  pointer-events: auto;
+}
+.qeds-phone-field__clear:hover,
+.qeds-phone-field__clear:active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+
+/* Description / validation message — same as text-field */
+.qeds-phone-field__description,
+.qeds-phone-field__validation {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-phone-field__validation { display: none; }
+.qeds-phone-field[data-validation="valid"]   .qeds-phone-field__validation { color: color(display-p3 0.50555 0.81371 0.61026); display: block; }
+.qeds-phone-field[data-validation="invalid"] .qeds-phone-field__validation { color: color(display-p3 0.97174 0.8302 0.81278); display: block; }
+
+
+/* ============================================================================
+   .qeds-toast-notification
+   ----
+   Web mirror of:  ToastNotificationComponent (SwiftUI)  /  QedsToast (Compose, planned)
+
+   API attributes:
+     data-context     general | critical                 (default: general)
+     data-loading                                         (presence — swaps content
+                                                          for spinner + loadingText)
+
+   DOM contract:
+     <div class="qeds-toast-notification" data-context data-loading?>
+       <!-- regular content (when not loading) -->
+       <div class="qeds-toast-notification__wrapper">
+         <div class="qeds-toast-notification__title-row">
+           <span class="qeds-toast-notification__icon"><svg>…</svg></span>
+           <div class="qeds-toast-notification__title">…</div>
+           <div class="qeds-toast-notification__close">      (optional)
+             <button class="qeds-icon-button" …>…</button>
+           </div>
+         </div>
+         <div class="qeds-toast-notification__content">       (indented past icon)
+           <div class="qeds-toast-notification__description">…</div>  (optional)
+           <div class="qeds-toast-notification__action">              (optional)
+             <button class="qeds-button" …>…</button>
+           </div>
+         </div>
+       </div>
+
+       <!-- loading content (when data-loading) -->
+       <div class="qeds-toast-notification__loading">
+         <span class="qeds-toast-notification__spinner">
+           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+         </span>
+         <div class="qeds-toast-notification__loading-text">Processing…</div>
+       </div>
+     </div>
+   ============================================================================ */
+
+.qeds-toast-notification {
+  border-radius: 12px;                                     /* root.corner* */
+  padding: 16px 12px;                                      /* root.paddingTop/Bottom 16 · Start/End 12 */
+  background: var(--qeds-tn-bg, color(display-p3 0.10394 0.13987 0.25412));
+  border: 1.2px solid var(--qeds-tn-stroke, color(display-p3 0.19142 0.2337 0.36595));
+  color: var(--qeds-tn-title-fg, color(display-p3 0.95718 0.9757 0.99754));
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Variants */
+.qeds-toast-notification,
+.qeds-toast-notification[data-context="general"] {
+  --qeds-tn-bg:        color(display-p3 0.10394 0.13987 0.25412);
+  --qeds-tn-stroke:    color(display-p3 0.19142 0.2337  0.36595);
+  --qeds-tn-icon-fg:   color(display-p3 0.66108 0.71925 0.8759);
+  --qeds-tn-title-fg:  color(display-p3 0.95718 0.9757  0.99754);
+  --qeds-tn-desc-fg:   color(display-p3 0.66108 0.71925 0.8759);
+  --qeds-tn-spinner-fg: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-toast-notification[data-context="critical"] {
+  --qeds-tn-bg:        color(display-p3 0.21602 0.08459 0.07982);
+  --qeds-tn-stroke:    color(display-p3 0.41948 0.16678 0.15996);
+  --qeds-tn-icon-fg:   color(display-p3 0.94182 0.58995 0.56582);
+  --qeds-tn-title-fg:  color(display-p3 0.97174 0.8302  0.81278);
+  --qeds-tn-desc-fg:   color(display-p3 0.94182 0.58995 0.56582);
+  --qeds-tn-spinner-fg: color(display-p3 0.94182 0.58995 0.56582);
+}
+
+/* Visibility split — regular vs loading */
+.qeds-toast-notification__wrapper { display: flex; flex-direction: column; }
+.qeds-toast-notification__loading { display: none; }
+
+.qeds-toast-notification[data-loading] .qeds-toast-notification__wrapper { display: none; }
+.qeds-toast-notification[data-loading] .qeds-toast-notification__loading { display: flex; }
+
+/* ----- Regular content (icon + title + close, then indented content) ----- */
+.qeds-toast-notification__title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;                                                /* wrapper.spacing */
+}
+.qeds-toast-notification__icon {
+  display: inline-flex;
+  width: 24px; height: 24px;
+  color: var(--qeds-tn-icon-fg);
+  flex: 0 0 auto;
+}
+.qeds-toast-notification__icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.qeds-toast-notification__title {
+  flex: 1 1 auto;
+  font-size: 16px;                                         /* title.fontSize */
+  line-height: 22px;                                       /* title.fontLeading */
+  font-weight: 500;                                        /* title.fontWeight */
+  letter-spacing: -0.01em;
+  color: var(--qeds-tn-title-fg);
+}
+.qeds-toast-notification__close {
+  flex: 0 0 auto;
+}
+.qeds-toast-notification__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                                                /* content.spacing */
+  padding-inline-start: 32px;                              /* icon.width 24 + wrapper.spacing 8 */
+}
+.qeds-toast-notification__description {
+  font-size: 14px;                                         /* description.fontSize */
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--qeds-tn-desc-fg);
+  padding-top: 1px;                                        /* textWrapper.paddingTop */
+}
+.qeds-toast-notification__action {
+  display: inline-flex;
+}
+
+/* ----- Loading content --------------------------------------------------- */
+.qeds-toast-notification__loading {
+  align-items: center;
+  gap: 8px;                                                /* loadingWrapper.spacing */
+}
+.qeds-toast-notification__spinner {
+  display: inline-flex;
+  width: 24px; height: 24px;
+  color: var(--qeds-tn-spinner-fg);
+  flex: 0 0 auto;
+}
+.qeds-toast-notification__spinner svg {
+  width: 100%; height: 100%;
+  display: block;
+  animation: qeds-spinner-rotate 1s linear infinite;
+  transform-origin: center;
+}
+.qeds-toast-notification__spinner svg circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 47.124 62.832;
+}
+.qeds-toast-notification__loading-text {
+  font-size: 16px;                                         /* loadingText.fontSize */
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--qeds-tn-title-fg);
+}
+
+
+/* ============================================================================
+   .qeds-tabs · .qeds-tab
+   ----
+   Web mirror of:  TabsComponent + TabComponent (SwiftUI)  /  QedsTabs (Compose, planned)
+
+   API attributes on container (.qeds-tabs):
+     (no required attrs)
+   API attributes on tab (.qeds-tab):
+     data-selected             (presence — mirrors isSelected: true)
+     disabled                  (native — mirrors isEnabled: false)
+
+   DOM contract:
+     <div class="qeds-tabs">
+       <div class="qeds-tabs__bar">
+         <div class="qeds-tabs__bar-scroll">
+           <button class="qeds-tab" data-selected>…</button>
+           <button class="qeds-tab">…</button>
+           …
+         </div>
+         <div class="qeds-tabs__overlay qeds-tabs__overlay--start"> (optional)
+           <button class="qeds-icon-button" …>…</button>
+         </div>
+         <div class="qeds-tabs__overlay qeds-tabs__overlay--end">   (optional)
+           <button class="qeds-icon-button" …>…</button>
+         </div>
+       </div>
+       <div class="qeds-tabs__content">…current tab's content…</div>
+     </div>
+   ============================================================================ */
+
+.qeds-tabs {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+}
+.qeds-tabs__bar {
+  position: relative;
+  overflow: hidden;
+}
+.qeds-tabs__bar-scroll {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;                                   /* hide scrollbar — mirrors showsIndicators: false */
+  -ms-overflow-style: none;
+  align-items: stretch;
+}
+.qeds-tabs__bar-scroll::-webkit-scrollbar { display: none; }
+
+/* Optional scroll-affordance arrows pinned to either edge */
+.qeds-tabs__overlay {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40px;                                             /* startOverlay/endOverlay.width */
+  background: color(display-p3 0.0497 0.07364 0.14735);    /* overlay bg (page colour) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.qeds-tabs__overlay > * { pointer-events: auto; }
+.qeds-tabs__overlay--start { left: 0; }
+.qeds-tabs__overlay--end   { right: 0; }
+
+/* Tab — a button with bottom stroke that varies by selected/interaction. */
+.qeds-tab {
+  /* Reset */
+  appearance: none;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;                                                /* tabWrapper.spacing */
+  min-height: 48px;                                        /* tabWrapper.heightMin */
+  padding-inline: 12px;                                    /* tabWrapper.paddingStart/End */
+
+  background: transparent;
+  border: 0;
+  border-bottom: 1.2px solid color(display-p3 0.19142 0.2337 0.36595);  /* tab.stroke (rest, !selected) */
+
+  font-size: 16px;                                         /* tabLabel.fontSize */
+  line-height: 22px;                                       /* tabLabel.fontLeading */
+  font-weight: 400;                                        /* tabLabel.fontWeight(false) */
+  letter-spacing: -0.01em;                                 /* tabLabel.fontTracking */
+  color: color(display-p3 0.66108 0.71925 0.8759);         /* tabLabel.fg(rest, !selected) */
+  white-space: nowrap;
+  flex: 1 1 auto;                                          /* widthMode .fill (non-compact default) */
+  box-sizing: border-box;
+  transition: color 100ms ease, border-color 100ms ease;
+}
+
+/* Compact mode — shrinks to content width (.hug) */
+.qeds-tabs[data-compact] .qeds-tab,
+.qeds-tab[data-compact] {
+  flex: 0 0 auto;
+}
+
+/* Hover/active overlay on the tab wrapper */
+.qeds-tab::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-tab > * { position: relative; z-index: 1; }
+
+.qeds-tab:not(:disabled):hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);   /* tabWrapper.bg(hover) */
+}
+.qeds-tab:not(:disabled):active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);   /* tabWrapper.bg(active) */
+}
+
+/* Hover / active brighten the label (unselected) */
+.qeds-tab:not(:disabled):hover,
+.qeds-tab:not(:disabled):active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+/* Hover/active on unselected → stroke becomes muted blue */
+.qeds-tab:not([data-selected]):not(:disabled):hover,
+.qeds-tab:not([data-selected]):not(:disabled):active {
+  border-bottom-color: color(display-p3 0.39324 0.44504 0.5876);
+}
+
+/* Selected — orange stroke, white label, font 500 */
+.qeds-tab[data-selected] {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+  font-weight: 500;
+  border-bottom-color: color(display-p3 0.90185 0.45292 0.20083);
+}
+
+/* Disabled */
+.qeds-tab:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qeds-tab:focus-visible {
+  outline: 2px solid color(display-p3 0.91547 0.94016 0.98367 / 0.45);
+  outline-offset: -2px;
+}
+
+/* Optional icon slots */
+.qeds-tab__start-icon,
+.qeds-tab__end-icon {
+  display: inline-flex;
+  width: 20px; height: 20px;
+  flex: 0 0 auto;
+}
+.qeds-tab__start-icon svg,
+.qeds-tab__end-icon svg {
+  width: 100%; height: 100%;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Tabs content (the panel below the bar) — zero padding per spec */
+.qeds-tabs__content {
+  overflow: hidden;
+  padding: 0;
+}
+
+
+/* ============================================================================
+   .qeds-password-field
+   ----
+   Web mirror of:  PasswordFieldComponent (SwiftUI)  /  QedsPasswordField (Compose, planned)
+
+   API attributes:
+     data-validation   none | valid | invalid             (default: none)
+     data-revealed                                        (presence — input type=text, eye-off icon)
+     data-strength     positive | negative | warning      (drives strength text colour + indicator fill)
+
+   DOM contract:
+     <div class="qeds-password-field" data-validation data-revealed? data-strength?>
+       <div class="qeds-password-field__label">…</div>          (optional)
+       <div class="qeds-password-field__field">
+         <input class="qeds-password-field__input" type="password" placeholder="…">
+         <button class="qeds-password-field__reveal" type="button" aria-label="Show password">
+           <svg class="qeds-password-field__reveal-icon" data-icon="eye-off" viewBox="0 0 24 24">…</svg>
+           <svg class="qeds-password-field__reveal-icon" data-icon="eye"     viewBox="0 0 24 24">…</svg>
+         </button>
+       </div>
+       <div class="qeds-password-field__strength">              (optional — show on filled + has progress)
+         <div class="qeds-password-field__strength-bar">
+           <div class="qeds-password-field__strength-indicator" style="width: 60%;"></div>
+         </div>
+         <div class="qeds-password-field__strength-text">Medium</div>
+       </div>
+       <div class="qeds-password-field__description">…</div>     (optional)
+       <div class="qeds-password-field__validation">…</div>      (visible when data-validation ≠ none)
+     </div>
+   ============================================================================ */
+
+.qeds-password-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                                /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-password-field:has(.qeds-password-field__input:disabled) {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.qeds-password-field:has(.qeds-password-field__input:disabled) .qeds-password-field__input,
+.qeds-password-field:has(.qeds-password-field__input:disabled) .qeds-password-field__reveal {
+  cursor: not-allowed;
+}
+
+/* Label */
+.qeds-password-field__label {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+
+/* Field — mirrors text-field structure with focus / validation behaviour */
+.qeds-password-field__field {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: 8px;                                                /* wrapper.spacing */
+  height: 48px;                                            /* wrapper.height */
+  padding-inline-start: 16px;                              /* wrapper.paddingStart */
+  padding-inline-end: 12px;                                /* wrapper.paddingEnd */
+  border-radius: 12px;                                     /* field.corner* */
+  background: color(display-p3 0.08083 0.10498 0.18216);   /* field.bg default */
+  border: 1.2px solid color(display-p3 0.39324 0.44504 0.5876);
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+.qeds-password-field__field::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 100ms ease;
+  z-index: 0;
+}
+.qeds-password-field__field > * { position: relative; z-index: 1; }
+.qeds-password-field:not(:has(.qeds-password-field__input:disabled)) .qeds-password-field__field:hover::before {
+  background: color(display-p3 0.91547 0.94016 0.98367 / 0.05);
+}
+.qeds-password-field:not(:has(.qeds-password-field__input:disabled)) .qeds-password-field__field:active::before {
+  background: color(display-p3 0.98824 0.98824 0.98824 / 0.15);
+}
+.qeds-password-field .qeds-password-field__field:focus-within {
+  background: color(display-p3 0.10394 0.13987 0.25412);
+  border-color: color(display-p3 0.81572 0.8496 0.9474);
+}
+.qeds-password-field[data-validation="valid"] .qeds-password-field__field,
+.qeds-password-field[data-validation="valid"] .qeds-password-field__field:focus-within {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+}
+.qeds-password-field[data-validation="invalid"] .qeds-password-field__field,
+.qeds-password-field[data-validation="invalid"] .qeds-password-field__field:focus-within {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+}
+
+/* Native input */
+.qeds-password-field__input {
+  appearance: none;
+  background: transparent;
+  border: 0; outline: 0;
+  padding: 0; margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: color(display-p3 0.95718 0.9757 0.99754);
+  caret-color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-password-field__input::placeholder {
+  color: color(display-p3 0.34158 0.39027 0.53295);
+  opacity: 1;
+}
+.qeds-password-field[data-validation="valid"]   .qeds-password-field__input            { color: color(display-p3 0.74987 0.93823 0.8066); }
+.qeds-password-field[data-validation="invalid"] .qeds-password-field__input            { color: color(display-p3 0.97174 0.8302 0.81278); }
+.qeds-password-field[data-validation="invalid"] .qeds-password-field__input::placeholder { color: color(display-p3 0.66543 0.30341 0.29316); }
+
+/* Reveal button — always visible (mirrors iconButton.isVisible = true) */
+.qeds-password-field__reveal {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0; margin: 0;
+  width: 24px; height: 24px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  transition: color 100ms ease;
+}
+.qeds-password-field__reveal:hover,
+.qeds-password-field__reveal:active {
+  color: color(display-p3 0.95718 0.9757 0.99754);
+}
+.qeds-password-field__reveal-icon {
+  width: 100%; height: 100%;
+  display: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+/* Default (masked) shows the eye-off icon (view-off — "click to show") */
+.qeds-password-field:not([data-revealed]) .qeds-password-field__reveal-icon[data-icon="eye-off"] { display: block; }
+/* Revealed shows the eye icon (view — "click to hide") */
+.qeds-password-field[data-revealed]      .qeds-password-field__reveal-icon[data-icon="eye"]     { display: block; }
+
+/* ----- Password strength ------------------------------------------------- */
+.qeds-password-field__strength {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                                                /* passwordStrength.spacing */
+  padding-top: 8px;                                        /* passwordStrength.paddingTop */
+}
+.qeds-password-field__strength-bar {
+  position: relative;
+  width: 100%;
+  height: 4px;                                             /* Swift .frame(height: 4) */
+  border-radius: 999px;                                    /* strengthBar.corner 1000 */
+  background: color(display-p3 0.12818 0.16719 0.29243);
+  overflow: hidden;
+}
+.qeds-password-field__strength-indicator {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  border-radius: 999px;                                    /* strengthIndicator.corner 1000 */
+  background: var(--qeds-pwd-strength-fg, color(display-p3 0.96471 0.78153 0.34917));  /* default: warning */
+  transition: width 200ms ease, background-color 100ms ease;
+}
+.qeds-password-field[data-strength="positive"] .qeds-password-field__strength-indicator { --qeds-pwd-strength-fg: color(display-p3 0.33221 0.63418 0.44162); }
+.qeds-password-field[data-strength="negative"] .qeds-password-field__strength-indicator { --qeds-pwd-strength-fg: color(display-p3 0.83001 0.32942 0.32393); }
+.qeds-password-field[data-strength="warning"]  .qeds-password-field__strength-indicator { --qeds-pwd-strength-fg: color(display-p3 0.96471 0.78153 0.34917); }
+
+.qeds-password-field__strength-text {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;                                        /* strengthText.fontWeight */
+  letter-spacing: -0.01em;
+  color: var(--qeds-pwd-strength-text-fg, color(display-p3 0.98087 0.90907 0.74957));   /* default: warning */
+}
+.qeds-password-field[data-strength="positive"] .qeds-password-field__strength-text { --qeds-pwd-strength-text-fg: color(display-p3 0.74987 0.93823 0.8066); }
+.qeds-password-field[data-strength="negative"] .qeds-password-field__strength-text { --qeds-pwd-strength-text-fg: color(display-p3 0.97174 0.8302 0.81278); }
+.qeds-password-field[data-strength="warning"]  .qeds-password-field__strength-text { --qeds-pwd-strength-text-fg: color(display-p3 0.98087 0.90907 0.74957); }
+
+/* Description / validation — same as text-field */
+.qeds-password-field__description,
+.qeds-password-field__validation {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-password-field__validation { display: none; }
+.qeds-password-field[data-validation="valid"]   .qeds-password-field__validation { color: color(display-p3 0.50555 0.81371 0.61026); display: block; }
+.qeds-password-field[data-validation="invalid"] .qeds-password-field__validation { color: color(display-p3 0.97174 0.8302 0.81278); display: block; }
+
+
+/* ============================================================================
+   .qeds-pin-field
+   ----
+   Web mirror of:  PinFieldComponent (SwiftUI)  /  QedsPinField (Compose, planned)
+
+   API attributes:
+     data-validation   none | valid | invalid     (default: none; Swift uses .default
+                                                   as a synonym for .none here)
+
+   DOM contract:
+     <div class="qeds-pin-field" data-validation>
+       <div class="qeds-pin-field__cells">
+         <div class="qeds-pin-field-cell" data-filled>1</div>
+         <div class="qeds-pin-field-cell" data-filled>2</div>
+         <div class="qeds-pin-field-cell" data-focused>
+           <span class="qeds-pin-field-cell__caret"></span>
+         </div>
+         <div class="qeds-pin-field-cell"></div>
+       </div>
+       <div class="qeds-pin-field__description">…</div>    (optional)
+       <div class="qeds-pin-field__validation">…</div>     (visible when validation ≠ none)
+     </div>
+
+   Apply [data-validation] on the .qeds-pin-field root; child cells inherit
+   the same value via the per-cell .qeds-pin-field-cell[data-validation] rule.
+   ============================================================================ */
+
+.qeds-pin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                                                /* root.spacing */
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+}
+.qeds-pin-field[data-disabled] { opacity: 0.4; cursor: not-allowed; }
+
+.qeds-pin-field__cells {
+  display: flex;
+  gap: 8px;                                                /* field.spacing */
+  width: 100%;
+}
+
+/* Mirror the parent's validation onto each cell so the cell's existing
+   [data-validation] selectors fire. */
+.qeds-pin-field[data-validation="valid"]   .qeds-pin-field-cell {
+  background: color(display-p3 0.08173 0.10879 0.08798);
+  border-color: color(display-p3 0.33221 0.63418 0.44162);
+  color: color(display-p3 0.74987 0.93823 0.8066);
+}
+.qeds-pin-field[data-validation="invalid"] .qeds-pin-field-cell {
+  background: color(display-p3 0.12183 0.08057 0.07602);
+  border-color: color(display-p3 0.83001 0.32942 0.32393);
+  color: color(display-p3 0.97174 0.8302 0.81278);
+}
+
+.qeds-pin-field__description {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+}
+.qeds-pin-field__validation {
+  font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: -0.01em;
+  color: color(display-p3 0.66108 0.71925 0.8759);
+  display: none;
+}
+.qeds-pin-field[data-validation="valid"]   .qeds-pin-field__validation { color: color(display-p3 0.50555 0.81371 0.61026); display: block; }
+.qeds-pin-field[data-validation="invalid"] .qeds-pin-field__validation { color: color(display-p3 0.97174 0.8302 0.81278); display: block; }
+
+
+/* ============================================================================
+   .qeds-text
+   ----
+   Web mirror of:  TextComponent (SwiftUI)  /  QedsText (Compose, planned)
+
+   API attributes:
+     data-size           xl | lg | md | sm | xs                  (default: md)
+     data-text-context   title | content | label                  (default: content)
+     data-compact                                                  (presence — denser metrics)
+     data-context        general | accent | helping | negative    (default: general)
+     data-prominence     primary | secondary | tertiary           (default: primary)
+     data-inverse                                                  (presence — colour palette inverted)
+     data-weight         regular | medium | semibold              (default: regular)
+     data-align          left | center | right                    (default: left)
+
+   30-cell type matrix (5 size × 3 textContext × 2 isCompact) for font-size /
+   line-height / tracking; 24-cell colour matrix (4 context × 3 prominence ×
+   2 isInverse) for foreground.
+   ============================================================================ */
+
+.qeds-text {
+  font-family: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont,
+               "Segoe UI", system-ui, sans-serif;
+  font-weight: var(--qeds-tx-weight, 400);
+  font-size: var(--qeds-tx-fs, 16px);
+  line-height: var(--qeds-tx-lh, 26px);
+  letter-spacing: var(--qeds-tx-tracking, 0em);
+  color: var(--qeds-tx-fg, color(display-p3 0.95718 0.9757 0.99754));
+  margin: 0;
+}
+
+/* ----- Weights ----------------------------------------------------------- */
+.qeds-text                              { --qeds-tx-weight: 400; }
+.qeds-text[data-weight="regular"]        { --qeds-tx-weight: 400; }
+.qeds-text[data-weight="medium"]         { --qeds-tx-weight: 500; }
+.qeds-text[data-weight="semibold"]       { --qeds-tx-weight: 600; }
+
+/* ----- Alignment --------------------------------------------------------- */
+.qeds-text[data-align="left"]    { text-align: left; }
+.qeds-text[data-align="center"]  { text-align: center; }
+.qeds-text[data-align="right"]   { text-align: right; }
+
+/* ----- Type matrix — non-compact (default) -------------------------------- */
+.qeds-text[data-size="xl"][data-text-context="title"]    { --qeds-tx-fs: 32px; --qeds-tx-lh: 45px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-size="xl"][data-text-context="content"]  { --qeds-tx-fs: 20px; --qeds-tx-lh: 32px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="xl"][data-text-context="label"]    { --qeds-tx-fs: 20px; --qeds-tx-lh: 28px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-size="lg"][data-text-context="title"]    { --qeds-tx-fs: 24px; --qeds-tx-lh: 34px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-size="lg"][data-text-context="content"]  { --qeds-tx-fs: 18px; --qeds-tx-lh: 30px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="lg"][data-text-context="label"]    { --qeds-tx-fs: 18px; --qeds-tx-lh: 25px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-size="md"][data-text-context="title"],
+.qeds-text:not([data-size]):not([data-text-context])     { --qeds-tx-fs: 20px; --qeds-tx-lh: 28px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-size="md"][data-text-context="content"]  { --qeds-tx-fs: 16px; --qeds-tx-lh: 26px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="md"][data-text-context="label"]    { --qeds-tx-fs: 16px; --qeds-tx-lh: 22px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-size="sm"][data-text-context="title"]    { --qeds-tx-fs: 16px; --qeds-tx-lh: 22px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-size="sm"][data-text-context="content"]  { --qeds-tx-fs: 14px; --qeds-tx-lh: 22px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="sm"][data-text-context="label"]    { --qeds-tx-fs: 14px; --qeds-tx-lh: 20px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-size="xs"][data-text-context="title"]    { --qeds-tx-fs: 12px; --qeds-tx-lh: 17px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="xs"][data-text-context="content"]  { --qeds-tx-fs: 12px; --qeds-tx-lh: 20px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="xs"][data-text-context="label"]    { --qeds-tx-fs: 12px; --qeds-tx-lh: 17px; --qeds-tx-tracking: 0em; }
+
+/* Defaults when only data-text-context or only data-size is provided */
+.qeds-text[data-size="xl"]:not([data-text-context])      { --qeds-tx-fs: 20px; --qeds-tx-lh: 32px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="lg"]:not([data-text-context])      { --qeds-tx-fs: 18px; --qeds-tx-lh: 30px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="md"]:not([data-text-context])      { --qeds-tx-fs: 16px; --qeds-tx-lh: 26px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="sm"]:not([data-text-context])      { --qeds-tx-fs: 14px; --qeds-tx-lh: 22px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-size="xs"]:not([data-text-context])      { --qeds-tx-fs: 12px; --qeds-tx-lh: 20px; --qeds-tx-tracking: 0em; }
+.qeds-text:not([data-size])[data-text-context="title"]   { --qeds-tx-fs: 20px; --qeds-tx-lh: 28px; --qeds-tx-tracking: -0.02em; }
+.qeds-text:not([data-size])[data-text-context="content"] { --qeds-tx-fs: 16px; --qeds-tx-lh: 26px; --qeds-tx-tracking: 0em; }
+.qeds-text:not([data-size])[data-text-context="label"]   { --qeds-tx-fs: 16px; --qeds-tx-lh: 22px; --qeds-tx-tracking: -0.01em; }
+
+/* ----- Type matrix — compact --------------------------------------------- */
+.qeds-text[data-compact][data-size="xl"][data-text-context="title"]   { --qeds-tx-fs: 28px; --qeds-tx-lh: 38px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-compact][data-size="xl"][data-text-context="content"] { --qeds-tx-fs: 18px; --qeds-tx-lh: 28px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="xl"][data-text-context="label"]   { --qeds-tx-fs: 18px; --qeds-tx-lh: 28px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-compact][data-size="lg"][data-text-context="title"]   { --qeds-tx-fs: 22px; --qeds-tx-lh: 30px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-compact][data-size="lg"][data-text-context="content"] { --qeds-tx-fs: 16px; --qeds-tx-lh: 26px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="lg"][data-text-context="label"]   { --qeds-tx-fs: 16px; --qeds-tx-lh: 25px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-compact][data-size="md"][data-text-context="title"]   { --qeds-tx-fs: 18px; --qeds-tx-lh: 24px; --qeds-tx-tracking: -0.02em; }
+.qeds-text[data-compact][data-size="md"][data-text-context="content"] { --qeds-tx-fs: 14px; --qeds-tx-lh: 22px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="md"][data-text-context="label"]   { --qeds-tx-fs: 14px; --qeds-tx-lh: 22px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-compact][data-size="sm"][data-text-context="title"]   { --qeds-tx-fs: 14px; --qeds-tx-lh: 20px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-compact][data-size="sm"][data-text-context="content"] { --qeds-tx-fs: 12px; --qeds-tx-lh: 20px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="sm"][data-text-context="label"]   { --qeds-tx-fs: 12px; --qeds-tx-lh: 20px; --qeds-tx-tracking: -0.01em; }
+.qeds-text[data-compact][data-size="xs"][data-text-context="title"]   { --qeds-tx-fs: 11px; --qeds-tx-lh: 16px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="xs"][data-text-context="content"] { --qeds-tx-fs: 11px; --qeds-tx-lh: 18px; --qeds-tx-tracking: 0em; }
+.qeds-text[data-compact][data-size="xs"][data-text-context="label"]   { --qeds-tx-fs: 10px; --qeds-tx-lh: 12px; --qeds-tx-tracking: 0em; }
+
+/* ----- Foreground colour matrix — (context × prominence × isInverse) ----- */
+
+/* general · non-inverse */
+.qeds-text,
+.qeds-text[data-context="general"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.95718 0.9757  0.99754); }
+.qeds-text[data-context="general"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.66108 0.71925 0.8759); }
+.qeds-text[data-context="general"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.34158 0.39027 0.53295); }
+/* general · inverse */
+.qeds-text[data-inverse][data-context="general"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.09732 0.12447 0.22011); }
+.qeds-text[data-inverse][data-context="general"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.35089 0.3906  0.50738); }
+.qeds-text[data-inverse][data-context="general"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.67599 0.73113 0.89132); }
+/* accent · non-inverse */
+.qeds-text[data-context="accent"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.97747 0.86777 0.80168); }
+.qeds-text[data-context="accent"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.94717 0.6409  0.4663); }
+.qeds-text[data-context="accent"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.61401 0.36103 0.22856); }
+/* accent · inverse */
+.qeds-text[data-inverse][data-context="accent"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.31945 0.1883  0.1178); }
+.qeds-text[data-inverse][data-context="accent"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.76314 0.33739 0.1352); }
+.qeds-text[data-inverse][data-context="accent"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.89266 0.58279 0.422); }
+/* helping (blue) · non-inverse */
+.qeds-text[data-context="helping"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.80446 0.88694 0.98937); }
+.qeds-text[data-context="helping"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.50083 0.71049 0.97657); }
+.qeds-text[data-context="helping"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.2264  0.43299 0.71145); }
+/* helping · inverse */
+.qeds-text[data-inverse][data-context="helping"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.07101 0.2003  0.37512); }
+.qeds-text[data-inverse][data-context="helping"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.19117 0.44393 0.83829); }
+.qeds-text[data-inverse][data-context="helping"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.48725 0.67204 0.93043); }
+/* negative · non-inverse */
+.qeds-text[data-context="negative"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.97174 0.8302  0.81278); }
+.qeds-text[data-context="negative"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.94182 0.58995 0.56582); }
+.qeds-text[data-context="negative"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.66543 0.30341 0.29316); }
+/* negative · inverse */
+.qeds-text[data-inverse][data-context="negative"][data-prominence="primary"]    { --qeds-tx-fg: color(display-p3 0.35984 0.11808 0.11673); }
+.qeds-text[data-inverse][data-context="negative"][data-prominence="secondary"]  { --qeds-tx-fg: color(display-p3 0.73632 0.23867 0.24665); }
+.qeds-text[data-inverse][data-context="negative"][data-prominence="tertiary"]   { --qeds-tx-fg: color(display-p3 0.87142 0.57771 0.5556); }

@@ -15,6 +15,7 @@ SRC  = ROOT / "index.html"
 TPL  = ROOT / "template.html"
 I18N = ROOT / "i18n"
 BASE = "https://iqoptionmcp.com"
+DATE = "2026-06-09"   # datePublished / dateModified (bump on content change)
 
 # code, dir, autonym, hreflang, sub-path ('' = site root)
 LANGS = [
@@ -63,6 +64,24 @@ def keys_in(el):
     return re.findall(r"⟦(t\d+)⟧", el.get_text())
 
 
+def segments_of(el):
+    """Ordered text segments of an element: translatable {'k': key} placeholders
+    AND literal {'lit': text} (e.g. <code>/<a> content skipped from translation).
+    Lets JSON-LD reconstruct COMPLETE answer text, not just the translatable parts."""
+    segs = []
+    if el is None:
+        return segs
+    for nd in el.descendants:
+        if isinstance(nd, NavigableString) and not isinstance(nd, Comment):
+            s = str(nd)
+            m = re.fullmatch(r"\s*⟦(t\d+)⟧\s*", s)
+            if m:
+                segs.append({"k": m.group(1)})
+            elif s.strip():
+                segs.append({"lit": s.strip()})
+    return segs
+
+
 def extract():
     raw = SRC.read_text(encoding="utf-8")
     head_part, body_inner = re.split(r"<body>", raw, 1)
@@ -84,15 +103,14 @@ def extract():
         node.replace_with(NavigableString(f"{lead}⟦{key}⟧{trail}"))
 
     # Structural map for JSON-LD (FAQ + HowTo), language-independent.
-    faq = [{"q": keys_in(it.summary), "a": keys_in(it.p)}
+    # Stored as ordered segments so reconstructed text keeps inline <code>/<a> content.
+    faq = [{"q": segments_of(it.summary), "a": segments_of(it.p)}
            for it in soup.select("details.faq-item")]
     howto = []
     for step in soup.select(".steps .step"):
-        h3 = step.find("h3")
         intro = step.find("p")
-        lis = step.find_all("li")
-        name = keys_in(h3) if h3 else []
-        text = (keys_in(intro) if intro else []) + [k for li in lis for k in keys_in(li)]
+        name = segments_of(step.find("h3"))
+        text = segments_of(intro) + [s for li in step.find_all("li") for s in segments_of(li)]
         howto.append({"name": name, "text": text})
 
     body_str = str(soup).replace("</nav>", "⟦LANG_SWITCH⟧</nav>", 1)
@@ -123,14 +141,14 @@ def lang_switch_html(cur_path, cur_dir):
         else:                             # current page is site root
             href = path if path else "./"
         cur = ' aria-current="true"' if path == cur_path else ""
-        items.append(f'<li role="none"><a role="menuitem" href="{href}" hreflang="{hl}" lang="{code}"{cur}>{name}</a></li>')
+        items.append(f'<li><a href="{href}" hreflang="{hl}" lang="{code}"{cur}>{name}</a></li>')
     cur_name = next(n for c, _d, n, _h, p in LANGS if p == cur_path)
     return (
         '<div class="lang-switch">'
-        f'<button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language">'
+        f'<button class="lang-toggle" type="button" aria-expanded="false" aria-controls="lang-menu" aria-label="Language">'
         f'<span aria-hidden="true">🌐</span> <span class="lang-current">{cur_name}</span>'
         '<span class="lang-caret" aria-hidden="true">▾</span></button>'
-        f'<ul class="lang-menu" role="menu" hidden>{"".join(items)}</ul>'
+        f'<ul class="lang-menu" id="lang-menu" hidden>{"".join(items)}</ul>'
         '</div>'
     )
 
@@ -144,26 +162,42 @@ def hreflang_block():
 
 
 def build_jsonld(code, page_url, strings, meta, mp):
-    def text_of(keys):
-        return " ".join(strings[k] for k in keys if k in strings).strip()
+    def render(segs):
+        parts = [strings.get(s["k"], "") if "k" in s else s["lit"] for s in segs]
+        return re.sub(r"\s+", " ", " ".join(p for p in parts if p)).strip()
     graph = [
         {"@type": "WebSite", "@id": f"{BASE}/#website", "url": f"{BASE}/",
          "name": "IQ Option · AI Integrations", "inLanguage": code,
          "publisher": {"@id": f"{BASE}/#org"}},
         {"@type": "Organization", "@id": f"{BASE}/#org", "name": "IQ Option",
-         "url": "https://iqoption.com", "logo": f"{BASE}/assets/img/logo.png"},
+         "url": "https://iqoption.com", "logo": f"{BASE}/assets/img/logo.png",
+         "sameAs": ["https://iqoption.com"]},
+        {"@type": "SoftwareApplication", "@id": f"{BASE}/#app",
+         "name": "IQ Option AI Integrations (MCP)", "applicationCategory": "FinanceApplication",
+         "operatingSystem": "Web, macOS, Windows, Linux", "inLanguage": code,
+         "description": meta["m_article_desc"], "url": f"{BASE}/",
+         "publisher": {"@id": f"{BASE}/#org"},
+         "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+         "featureList": [
+             "Read balance, quotes, history and open positions in plain language",
+             "Per-market trade permissions (read default, trade opt-in)",
+             "Works with Claude, ChatGPT, Cursor and 12+ AI assistants",
+             "Four MCP servers: digital options, CFD, crypto, forex"]},
         {"@type": "TechArticle", "@id": f"{page_url}#article",
          "headline": meta["m_article_headline"], "description": meta["m_article_desc"],
          "inLanguage": code, "isPartOf": {"@id": f"{BASE}/#website"},
-         "author": {"@id": f"{BASE}/#org"}, "publisher": {"@id": f"{BASE}/#org"}},
+         "datePublished": DATE, "dateModified": DATE, "image": f"{BASE}/assets/img/og.png",
+         "author": {"@id": f"{BASE}/#org"}, "publisher": {"@id": f"{BASE}/#org"},
+         "about": {"@type": "Thing", "name": "Model Context Protocol",
+                   "sameAs": "https://modelcontextprotocol.io"}},
         {"@type": "HowTo", "@id": f"{page_url}#howto", "inLanguage": code,
          "name": meta["m_howto_name"], "description": meta["m_howto_desc"], "totalTime": "PT3M",
-         "step": [{"@type": "HowToStep", "position": i + 1,
-                   "name": text_of(s["name"]), "text": text_of(s["text"])}
+         "step": [{"@type": "HowToStep", "position": i + 1, "url": f"{page_url}#setup",
+                   "name": render(s["name"]), "text": render(s["text"])}
                   for i, s in enumerate(mp["howto"])]},
         {"@type": "FAQPage", "@id": f"{page_url}#faq", "inLanguage": code,
-         "mainEntity": [{"@type": "Question", "name": text_of(f["q"]),
-                         "acceptedAnswer": {"@type": "Answer", "text": text_of(f["a"])}}
+         "mainEntity": [{"@type": "Question", "name": render(f["q"]),
+                         "acceptedAnswer": {"@type": "Answer", "text": render(f["a"])}}
                         for f in mp["faq"]]},
     ]
     return json.dumps({"@context": "https://schema.org", "@graph": graph},
@@ -239,7 +273,7 @@ def write_sitemap():
             for _c2, _d2, _n2, hl, p in LANGS)
         alts += f'\n    <xhtml:link rel="alternate" hreflang="x-default" href="{BASE}/"/>'
         urls.append(
-            f'  <url>\n    <loc>{BASE}/{path}</loc>\n    <lastmod>2026-06-09</lastmod>'
+            f'  <url>\n    <loc>{BASE}/{path}</loc>\n    <lastmod>{DATE}</lastmod>'
             f'\n    <changefreq>monthly</changefreq>\n    <priority>{"1.0" if not path else "0.9"}</priority>'
             f'{alts}\n  </url>')
     (ROOT / "sitemap.xml").write_text(
@@ -250,6 +284,23 @@ def write_sitemap():
     print("  wrote sitemap.xml")
 
 
+def remap():
+    """Rebuild i18n/_map.json (FAQ + HowTo segments) from template.html placeholders,
+    without re-running extract (which would overwrite the template head)."""
+    soup = BeautifulSoup(TPL.read_text(encoding="utf-8"), "html.parser")
+    faq = [{"q": segments_of(it.summary), "a": segments_of(it.p)}
+           for it in soup.select("details.faq-item")]
+    howto = []
+    for step in soup.select(".steps .step"):
+        intro = step.find("p")
+        name = segments_of(step.find("h3"))
+        text = segments_of(intro) + [s for li in step.find_all("li") for s in segments_of(li)]
+        howto.append({"name": name, "text": text})
+    (I18N / "_map.json").write_text(
+        json.dumps({"faq": faq, "howto": howto}, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"remapped from template: faq {len(faq)} | howto {len(howto)}")
+
+
 if __name__ == "__main__":
     mode = sys.argv[1] if len(sys.argv) > 1 else "extract"
-    {"extract": extract, "generate": generate}[mode]()
+    {"extract": extract, "generate": generate, "remap": remap}[mode]()

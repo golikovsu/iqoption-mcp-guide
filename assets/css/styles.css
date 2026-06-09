@@ -195,7 +195,7 @@
   .hstat-label {
     margin-top: 8px;
     font-size: 11px;
-    color: var(--text-mute);
+    color: #8C99A3;            /* WCAG AA 5.45:1 on the stat tile */
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-weight: 700;
@@ -329,7 +329,7 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: all 0.18s;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
     font-family: inherit;
   }
   .copy-btn:hover { background: rgba(255,255,255,0.08); border-color: var(--border-strong); }
@@ -458,7 +458,7 @@
     font-weight: 700;
     color: var(--text-soft);
     cursor: pointer;
-    transition: all 0.16s;
+    transition: background 0.16s, border-color 0.16s, color 0.16s, box-shadow 0.16s;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -612,49 +612,6 @@
     border-radius: 4px;
     font-size: 12.5px;
     color: var(--success-bright);
-  }
-
-  /* ============ SERVER PICKER (sticky in panel) ============ */
-  .srv-picker {
-    margin: 0 0 26px;
-    padding: 16px 18px;
-    background: rgba(255,138,0,0.06);
-    border: 1px solid rgba(255,138,0,0.22);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .srv-picker-label {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .srv-pills {
-    display: inline-flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .srv-pill {
-    padding: 7px 12px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-pill);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--text-soft);
-    cursor: pointer;
-    transition: all 0.16s;
-    font-family: inherit;
-  }
-  .srv-pill:hover { background: rgba(255,255,255,0.07); color: var(--text-strong); }
-  .srv-pill.active {
-    background: linear-gradient(135deg, #FF8A00 0%, #FFB000 100%);
-    color: #0C1326;
-    border-color: transparent;
   }
 
   /* ============ SAFETY ============ */
@@ -812,7 +769,7 @@
     line-height: 1.65;
   }
   .foot-bottom {
-    color: var(--text-fade);
+    color: #8C99A3;            /* WCAG AA 5.59:1 on --bg-surface */
     font-size: 12px;
   }
   .foot-brand {
@@ -869,7 +826,7 @@
     .prompt-cats { grid-template-columns: 1fr; }
     h1.hero-title { font-size: 36px; }
     .hero-cta { flex-direction: column; align-items: stretch; }
-    .btn { justify-content: center; }
+    .hero-cta .qeds-button { justify-content: center; }
   }
 
   /* Reveal animation */
@@ -1053,10 +1010,11 @@
   :focus:not(:focus-visible) { outline: none; }
   .pt:focus-visible,
   .copy-btn:focus-visible,
-  .srv-pill:focus-visible,
   .qeds-checkbox:focus-visible,
   .qeds-button:focus-visible,
   .to-top:focus-visible,
+  .lang-toggle:focus-visible,
+  .lang-menu a:focus-visible,
   .nav-links a:focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
@@ -1181,3 +1139,15 @@
   .lang-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text-strong); }
   .lang-menu a[aria-current="true"] { color: var(--accent); background: rgba(255,138,0,0.10); }
   .lang-menu a[aria-current="true"]::after { content: "✓"; font-weight: 800; }
+
+  /* ════════════════════════════════════════════════════════════════════
+     RESPONSIVE & TOUCH REFINEMENTS
+     ════════════════════════════════════════════════════════════════════ */
+  /* Tablet tier: avoid the 3-col → 1-col jump at 880px */
+  @media (min-width: 600px) and (max-width: 880px) {
+    .cap-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .safety-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* Comfortable touch target for the primary repeated action (server-URL copy) */
+  .srv-card .copy-btn { min-height: 44px; }

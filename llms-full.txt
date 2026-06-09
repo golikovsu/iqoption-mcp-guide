@@ -7,7 +7,7 @@
 At a glance:
 - 1 token for everything
 - 4 MCP servers
-- 12+ AI assistants supported
+- 13 AI assistants with ready-made configs
 - ~3 minutes to set up
 
 ---

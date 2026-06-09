@@ -47,4 +47,11 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# AI ingestion map: https://iqoptionmcp.com/llms.txt (+ /llms-full.txt)
 Sitemap: https://iqoptionmcp.com/sitemap.xml

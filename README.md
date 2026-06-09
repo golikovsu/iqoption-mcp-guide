@@ -78,10 +78,10 @@ python3 build_i18n.py generate   # → per-language pages + sitemap.xml
 **https://iqoptionmcp.com/** (apex; DNS on Vercel). Every push to `main` triggers an automatic
 redeploy. No build step — the static files are served as-is.
 
-**Mirror (optional):** GitHub Pages can also serve the repo at
-`https://golikovsu.github.io/iqoption-mcp-guide/` (branch `main`, root, `.nojekyll`). All absolute
-URLs (canonical, Open Graph, `hreflang`, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt`) point to
-the canonical `https://iqoptionmcp.com`, so the mirror is canonicalized to the custom domain.
+**Single host:** the GitHub Pages mirror is **disabled** to avoid duplicate content — Vercel is the
+sole public host. (The repo still builds on Pages if re-enabled; `.nojekyll` is kept for that case.)
+All absolute URLs (canonical, Open Graph, `hreflang`, JSON-LD, `sitemap.xml`, `robots.txt`,
+`llms.txt`) point to `https://iqoptionmcp.com`.
 
 > If you fork, rename, or change the domain, update `BASE` in `build_i18n.py` and run
 > `python3 build_i18n.py generate` to regenerate every page with the new URLs.

@@ -25,24 +25,29 @@
 <meta property="og:title" content="Ikonekta ang anumang AI assistant sa IQ Option · Gabay sa Integrasyon ng MCP">
 <meta property="og:description" content="Isang token, apat na market, anumang AI. Ikonekta ang Claude, ChatGPT o Cursor sa IQ Option sa pamamagitan ng MCP sa tatlong hakbang.">
 <meta property="og:url" content="https://iqoptionmcp.com/tl/">
-<meta property="og:image" content="https://iqoptionmcp.com/assets/img/logo.png">
+<meta property="og:image" content="https://iqoptionmcp.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Connect any AI assistant to your IQ Option account via MCP">
 <meta property="og:locale" content="tl">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ikonekta ang anumang AI assistant sa IQ Option sa pamamagitan ng MCP">
 <meta name="twitter:description" content="Isang token, apat na market, anumang AI. Claude, ChatGPT, Cursor — nakakonekta sa IQ Option sa tatlong hakbang.">
-<meta name="twitter:image" content="https://iqoptionmcp.com/assets/img/logo.png">
+<meta name="twitter:image" content="https://iqoptionmcp.com/assets/img/og.png">
 
 <link rel="icon" type="image/png" href="../assets/img/logo.png">
 <link rel="apple-touch-icon" href="../assets/img/logo.png">
+<!-- AI ingestion: full guide as plain markdown -->
+<link rel="alternate" type="text/markdown" title="llms-full" href="/llms-full.txt">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- QEDS · Quadcode Enterprise Design System (v1.2-pilot, dark) -->
-<link rel="stylesheet" href="https://gnezdilovdenis.github.io/qeds/dist/v1/qeds.css">
+<!-- QEDS · Quadcode Enterprise Design System (v1.2-pilot, dark) — self-hosted snapshot -->
+<link rel="stylesheet" href="../assets/css/qeds.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
 <link rel="stylesheet" href="../assets/css/styles.css">
 
@@ -69,7 +74,34 @@
       "@id": "https://iqoptionmcp.com/#org",
       "name": "IQ Option",
       "url": "https://iqoption.com",
-      "logo": "https://iqoptionmcp.com/assets/img/logo.png"
+      "logo": "https://iqoptionmcp.com/assets/img/logo.png",
+      "sameAs": [
+        "https://iqoption.com"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://iqoptionmcp.com/#app",
+      "name": "IQ Option AI Integrations (MCP)",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, macOS, Windows, Linux",
+      "inLanguage": "tl",
+      "description": "Isang Bearer token, apat na market MCP server (digital options, CFD, crypto, forex). Mga handa nang config para sa Claude, ChatGPT, Cursor at 12+ na assistant. Walang code, tatlong hakbang.",
+      "url": "https://iqoptionmcp.com/",
+      "publisher": {
+        "@id": "https://iqoptionmcp.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Read balance, quotes, history and open positions in plain language",
+        "Per-market trade permissions (read default, trade opt-in)",
+        "Works with Claude, ChatGPT, Cursor and 12+ AI assistants",
+        "Four MCP servers: digital options, CFD, crypto, forex"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -80,11 +112,19 @@
       "isPartOf": {
         "@id": "https://iqoptionmcp.com/#website"
       },
+      "datePublished": "2026-06-09",
+      "dateModified": "2026-06-09",
+      "image": "https://iqoptionmcp.com/assets/img/og.png",
       "author": {
         "@id": "https://iqoptionmcp.com/#org"
       },
       "publisher": {
         "@id": "https://iqoptionmcp.com/#org"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Model Context Protocol",
+        "sameAs": "https://modelcontextprotocol.io"
       }
     },
     {
@@ -98,18 +138,21 @@
         {
           "@type": "HowToStep",
           "position": 1,
+          "url": "https://iqoptionmcp.com/tl/#setup",
           "name": "Gumawa ng token",
           "text": "Sa mobile app o sa web: Buksan ang Settings → AI integrations → I-tap ang + Add integration Bigyan ang token ng pangalan at pag-expire Lagyan ng tsek kung aling mga market ang pinapayagan para sa trading (ang read ay laging nakabukas). Mga detalye — seksyon 03 sa itaas Kopyahin agad ang token — kapag isinara mo ang screen ay hindi na ito ipapakita muli"
         },
         {
           "@type": "HowToStep",
           "position": 2,
+          "url": "https://iqoptionmcp.com/tl/#setup",
           "name": "Piliin ang iyong assistant",
           "text": "Ang native na suporta sa MCP ay available sa: Claude Desktop / Claude Code Cursor / Windsurf / Zed OpenAI Codex / ChatGPT Desktop Cline / Continue / Goose / LibreChat"
         },
         {
           "@type": "HowToStep",
           "position": 3,
+          "url": "https://iqoptionmcp.com/tl/#setup",
           "name": "I-paste ang config",
           "text": "Kopyahin ang snippet para sa iyong assistant. Bawat isa ay nangangailangan ng tatlong bagay: Ang server URL Authorization: Bearer + iyong token I-restart ang iyong assistant"
         }
@@ -133,7 +176,7 @@
           "name": "Talaga bang gumagana ang isang token sa lahat ng 4 na server?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oo. Gumawa ng isang Bearer token sa at gamitin ito sa Authorization header para sa lahat ng apat na endpoint: digital-options, marginal-cfd, marginal-crypto, marginal-forex."
+            "text": "Oo. Gumawa ng isang Bearer token sa Settings → AI integrations at gamitin ito sa Authorization header para sa lahat ng apat na endpoint: digital-options, marginal-cfd, marginal-crypto, marginal-forex."
           }
         },
         {
@@ -141,7 +184,7 @@
           "name": "Paano kung gusto kong ikonekta ang isang market lang, hal. Forex?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Burahin ang ibang mga block mula sa config — panatilihin lang ang . Makikita lang ng AI ang mga tool mula sa server na iyon at hindi nito mahahawakan, hal., ang options nang aksidente."
+            "text": "Burahin ang ibang mga block mula sa config — panatilihin lang ang iq-margin-forex . Makikita lang ng AI ang mga tool mula sa server na iyon at hindi nito mahahawakan, hal., ang options nang aksidente."
           }
         },
         {
@@ -157,7 +200,7 @@
           "name": "Paano ko sisiguraduhin na hindi makapag-trade ang AI?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Kapag gumagawa ng token sa ay basta huwag lagyan ng tsek ang alinman sa apat na \"Trade · …\" na checkbox. Ang Read ay nananatiling nakabukas (hindi ito maaaring patayin — kailangan ito ng AI), at anumang pagtatangkang tumawag sa isang trading tool ay magbabalik ng . Ito ang pinakaligtas na setup para sa mga use case ng pananaliksik."
+            "text": "Kapag gumagawa ng token sa Settings → AI integrations ay basta huwag lagyan ng tsek ang alinman sa apat na \"Trade · …\" na checkbox. Ang Read ay nananatiling nakabukas (hindi ito maaaring patayin — kailangan ito ng AI), at anumang pagtatangkang tumawag sa isang trading tool ay magbabalik ng 403 Forbidden . Ito ang pinakaligtas na setup para sa mga use case ng pananaliksik."
           }
         },
         {
@@ -165,7 +208,7 @@
           "name": "Maaari ko bang payagan ang trading sa isang instrumento lang?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oo. Halimbawa, lagyan ng tsek lang ang — magagawa ng AI na magbukas/magsara ng mga crypto position, ngunit ang options, CFD at forex ay nananatiling read-only. Kapaki-pakinabang kapag sinusubok mo ang AI setup sa isang market na komportable ka."
+            "text": "Oo. Halimbawa, lagyan ng tsek lang ang Trade · Margin Crypto — magagawa ng AI na magbukas/magsara ng mga crypto position, ngunit ang options, CFD at forex ay nananatiling read-only. Kapaki-pakinabang kapag sinusubok mo ang AI setup sa isang market na komportable ka."
           }
         },
         {
@@ -173,7 +216,7 @@
           "name": "Paano kung gusto kong alisin ang pahintulot sa trade mula sa isang umiiral na token?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Buksan ang , hanapin ang token at alisin ang tsek sa kaugnay na box (hal. ). Agad na maaalis ang pahintulot — magsisimula ang server na magbalik ng sa mga trading call para sa market na iyon. Ang halaga ng token mismo ay hindi nagbabago, kaya hindi mo na kailangang hawakan ang config ng iyong assistant."
+            "text": "Buksan ang Settings → AI integrations , hanapin ang token at alisin ang tsek sa kaugnay na box (hal. Trade · Margin CFD ). Agad na maaalis ang pahintulot — magsisimula ang server na magbalik ng 403 Forbidden sa mga trading call para sa market na iyon. Ang halaga ng token mismo ay hindi nagbabago, kaya hindi mo na kailangang hawakan ang config ng iyong assistant."
           }
         },
         {
@@ -181,7 +224,7 @@
           "name": "Paano kung nag-leak ang aking token?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pumunta sa , hanapin ang nakompromisong token at pindutin ang Revoke. Lahat ng kahilingang gumagamit nito ay agad na titigil sa paggana. Gumawa ng bago at i-update ang config ng assistant."
+            "text": "Pumunta sa Settings → AI integrations , hanapin ang nakompromisong token at pindutin ang Revoke. Lahat ng kahilingang gumagamit nito ay agad na titigil sa paggana. Gumawa ng bago at i-update ang config ng assistant."
           }
         },
         {
@@ -197,7 +240,7 @@
           "name": "Hindi nakikita ng aking assistant ang mga tool pagkatapos ng setup. Ano na?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Checklist: (1) i-restart nang buo ang assistant, (2) tiyakin na ang token ay nakopya nang walang labis na whitespace sa simula/dulo, (3) suriin na ang URL ay walang trailing slash at tumutugma sa iyong subscription, (4) tiyakin na ang Authorization header ay nagsisimula nang eksakto sa (pansinin ang espasyo), (5) suriin ang mga log ng assistant — kadalasan ito ay JSON syntax error sa config."
+            "text": "Checklist: (1) i-restart nang buo ang assistant, (2) tiyakin na ang token ay nakopya nang walang labis na whitespace sa simula/dulo, (3) suriin na ang URL ay walang trailing slash at tumutugma sa iyong subscription, (4) tiyakin na ang Authorization header ay nagsisimula nang eksakto sa Bearer (pansinin ang espasyo), (5) suriin ang mga log ng assistant — kadalasan ito ay JSON syntax error sa config."
           }
         },
         {
@@ -245,7 +288,7 @@
 <a href="#safety">Kaligtasan</a>
 <a href="#faq">FAQ</a>
 </div>
-<div class="lang-switch"><button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">Tagalog</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" role="menu" hidden><li role="none"><a role="menuitem" href="../" hreflang="en" lang="en">English</a></li><li role="none"><a role="menuitem" href="../ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li role="none"><a role="menuitem" href="../th/" hreflang="th" lang="th">ไทย</a></li><li role="none"><a role="menuitem" href="../pt/" hreflang="pt" lang="pt">Português</a></li><li role="none"><a role="menuitem" href="../es/" hreflang="es" lang="es">Español</a></li><li role="none"><a role="menuitem" href="../tl/" hreflang="tl" lang="tl" aria-current="true">Tagalog</a></li><li role="none"><a role="menuitem" href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
+<div class="lang-switch"><button class="lang-toggle" type="button" aria-expanded="false" aria-controls="lang-menu" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">Tagalog</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" id="lang-menu" hidden><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li><a href="../th/" hreflang="th" lang="th">ไทย</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../tl/" hreflang="tl" lang="tl" aria-current="true">Tagalog</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
 <div class="hero">
 <span class="badge">
 <span class="badge-dot"></span>

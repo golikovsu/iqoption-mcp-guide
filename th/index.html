@@ -25,24 +25,29 @@
 <meta property="og:title" content="เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option · คู่มือการเชื่อมต่อ MCP">
 <meta property="og:description" content="โทเคนหนึ่งตัว สี่ตลาด AI ตัวใดก็ได้ เชื่อมต่อ Claude, ChatGPT หรือ Cursor เข้ากับ IQ Option ผ่าน MCP ในสามขั้นตอน">
 <meta property="og:url" content="https://iqoptionmcp.com/th/">
-<meta property="og:image" content="https://iqoptionmcp.com/assets/img/logo.png">
+<meta property="og:image" content="https://iqoptionmcp.com/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Connect any AI assistant to your IQ Option account via MCP">
 <meta property="og:locale" content="th">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option ผ่าน MCP">
 <meta name="twitter:description" content="โทเคนหนึ่งตัว สี่ตลาด AI ตัวใดก็ได้ Claude, ChatGPT, Cursor — เชื่อมต่อกับ IQ Option ในสามขั้นตอน">
-<meta name="twitter:image" content="https://iqoptionmcp.com/assets/img/logo.png">
+<meta name="twitter:image" content="https://iqoptionmcp.com/assets/img/og.png">
 
 <link rel="icon" type="image/png" href="../assets/img/logo.png">
 <link rel="apple-touch-icon" href="../assets/img/logo.png">
+<!-- AI ingestion: full guide as plain markdown -->
+<link rel="alternate" type="text/markdown" title="llms-full" href="/llms-full.txt">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- QEDS · Quadcode Enterprise Design System (v1.2-pilot, dark) -->
-<link rel="stylesheet" href="https://gnezdilovdenis.github.io/qeds/dist/v1/qeds.css">
+<!-- QEDS · Quadcode Enterprise Design System (v1.2-pilot, dark) — self-hosted snapshot -->
+<link rel="stylesheet" href="../assets/css/qeds.css">
 <link rel="stylesheet" href="../assets/css/tokens.css">
 <link rel="stylesheet" href="../assets/css/styles.css">
 
@@ -69,7 +74,34 @@
       "@id": "https://iqoptionmcp.com/#org",
       "name": "IQ Option",
       "url": "https://iqoption.com",
-      "logo": "https://iqoptionmcp.com/assets/img/logo.png"
+      "logo": "https://iqoptionmcp.com/assets/img/logo.png",
+      "sameAs": [
+        "https://iqoption.com"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://iqoptionmcp.com/#app",
+      "name": "IQ Option AI Integrations (MCP)",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web, macOS, Windows, Linux",
+      "inLanguage": "th",
+      "description": "โทเคน Bearer หนึ่งตัว เซิร์ฟเวอร์ MCP ตลาดสี่แห่ง (digital options, CFD, crypto, forex) คอนฟิกสำเร็จรูปสำหรับ Claude, ChatGPT, Cursor และผู้ช่วยกว่า 12 ตัว ไม่ต้องเขียนโค้ด เพียงสามขั้นตอน",
+      "url": "https://iqoptionmcp.com/",
+      "publisher": {
+        "@id": "https://iqoptionmcp.com/#org"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Read balance, quotes, history and open positions in plain language",
+        "Per-market trade permissions (read default, trade opt-in)",
+        "Works with Claude, ChatGPT, Cursor and 12+ AI assistants",
+        "Four MCP servers: digital options, CFD, crypto, forex"
+      ]
     },
     {
       "@type": "TechArticle",
@@ -80,11 +112,19 @@
       "isPartOf": {
         "@id": "https://iqoptionmcp.com/#website"
       },
+      "datePublished": "2026-06-09",
+      "dateModified": "2026-06-09",
+      "image": "https://iqoptionmcp.com/assets/img/og.png",
       "author": {
         "@id": "https://iqoptionmcp.com/#org"
       },
       "publisher": {
         "@id": "https://iqoptionmcp.com/#org"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Model Context Protocol",
+        "sameAs": "https://modelcontextprotocol.io"
       }
     },
     {
@@ -98,18 +138,21 @@
         {
           "@type": "HowToStep",
           "position": 1,
+          "url": "https://iqoptionmcp.com/th/#setup",
           "name": "สร้างโทเคน",
           "text": "ในแอปมือถือหรือบนเว็บ: เปิด Settings → AI integrations → แตะ + Add integration ตั้งชื่อโทเคนและกำหนดวันหมดอายุ ติ๊กตลาดที่อนุญาตให้เทรดได้ (การอ่านเปิดอยู่เสมอ) รายละเอียด — ส่วน 03 ด้านบน คัดลอกโทเคนทันที — เมื่อปิดหน้าจอแล้วจะไม่แสดงอีก"
         },
         {
           "@type": "HowToStep",
           "position": 2,
+          "url": "https://iqoptionmcp.com/th/#setup",
           "name": "เลือกผู้ช่วยของคุณ",
           "text": "รองรับ MCP โดยตรงใน: Claude Desktop / Claude Code Cursor / Windsurf / Zed OpenAI Codex / ChatGPT Desktop Cline / Continue / Goose / LibreChat"
         },
         {
           "@type": "HowToStep",
           "position": 3,
+          "url": "https://iqoptionmcp.com/th/#setup",
           "name": "วางคอนฟิก",
           "text": "คัดลอกสนิปเป็ตสำหรับผู้ช่วยของคุณ แต่ละตัวต้องการสามสิ่ง: เซิร์ฟเวอร์ URL Authorization: Bearer + โทเคนของคุณ รีสตาร์ต ผู้ช่วยของคุณ"
         }
@@ -133,7 +176,7 @@
           "name": "โทเคนเดียวใช้ได้กับเซิร์ฟเวอร์ทั้ง 4 จริงหรือ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ใช่ สร้างโทเคน Bearer หนึ่งตัวใน แล้วใช้ในเฮดเดอร์ Authorization สำหรับทั้งสี่เอนด์พอยต์: digital-options, marginal-cfd, marginal-crypto, marginal-forex"
+            "text": "ใช่ สร้างโทเคน Bearer หนึ่งตัวใน Settings → AI integrations แล้วใช้ในเฮดเดอร์ Authorization สำหรับทั้งสี่เอนด์พอยต์: digital-options, marginal-cfd, marginal-crypto, marginal-forex"
           }
         },
         {
@@ -141,7 +184,7 @@
           "name": "จะเป็นอย่างไรถ้าฉันต้องการเชื่อมต่อเพียงตลาดเดียว เช่น Forex?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ลบบล็อกอื่น ๆ ออกจากคอนฟิก — เก็บไว้เฉพาะ  AI จะเห็นเฉพาะเครื่องมือจากเซิร์ฟเวอร์นั้นและจะไม่สามารถแตะต้อง เช่น ออปชัน โดยไม่ตั้งใจได้"
+            "text": "ลบบล็อกอื่น ๆ ออกจากคอนฟิก — เก็บไว้เฉพาะ iq-margin-forex AI จะเห็นเฉพาะเครื่องมือจากเซิร์ฟเวอร์นั้นและจะไม่สามารถแตะต้อง เช่น ออปชัน โดยไม่ตั้งใจได้"
           }
         },
         {
@@ -157,7 +200,7 @@
           "name": "ฉันจะทำให้แน่ใจได้อย่างไรว่า AI เทรดไม่ได้?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ตอนสร้างโทเคนใน เพียง อย่าติ๊ก ช่องทำเครื่องหมาย \"เทรด · …\" ใด ๆ ในสี่ช่องนั้น การอ่านยังคงเปิดอยู่ (ปิดไม่ได้ — AI ต้องใช้) และความพยายามใด ๆ ที่จะเรียกเครื่องมือเทรดจะตอบกลับ  นี่คือการตั้งค่าที่ปลอดภัยที่สุดสำหรับกรณีการใช้งานเชิงวิจัย"
+            "text": "ตอนสร้างโทเคนใน Settings → AI integrations เพียง อย่าติ๊ก ช่องทำเครื่องหมาย \"เทรด · …\" ใด ๆ ในสี่ช่องนั้น การอ่านยังคงเปิดอยู่ (ปิดไม่ได้ — AI ต้องใช้) และความพยายามใด ๆ ที่จะเรียกเครื่องมือเทรดจะตอบกลับ 403 Forbidden นี่คือการตั้งค่าที่ปลอดภัยที่สุดสำหรับกรณีการใช้งานเชิงวิจัย"
           }
         },
         {
@@ -165,7 +208,7 @@
           "name": "ฉันสามารถอนุญาตให้เทรดเฉพาะเครื่องมือเดียวได้ไหม?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ได้ ตัวอย่างเช่น ติ๊กเฉพาะ — AI จะสามารถเปิด/ปิดสถานะคริปโตได้ แต่ออปชัน, CFD และ forex จะยังคงเป็นแบบอ่านอย่างเดียว มีประโยชน์เมื่อคุณกำลังทดสอบการตั้งค่า AI กับตลาดที่คุณคุ้นเคย"
+            "text": "ได้ ตัวอย่างเช่น ติ๊กเฉพาะ Trade · Margin Crypto — AI จะสามารถเปิด/ปิดสถานะคริปโตได้ แต่ออปชัน, CFD และ forex จะยังคงเป็นแบบอ่านอย่างเดียว มีประโยชน์เมื่อคุณกำลังทดสอบการตั้งค่า AI กับตลาดที่คุณคุ้นเคย"
           }
         },
         {
@@ -173,7 +216,7 @@
           "name": "จะเป็นอย่างไรถ้าฉันต้องการยกเลิกสิทธิ์เทรดจากโทเคนที่มีอยู่?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "เปิด หาโทเคนแล้วยกเลิกการติ๊กช่องที่เกี่ยวข้อง (เช่น ) สิทธิ์จะถูกยกเลิกทันที — เซิร์ฟเวอร์จะเริ่มตอบกลับ สำหรับการเรียกเทรดในตลาดนั้น ค่าของโทเคนเองไม่เปลี่ยนแปลง จึงไม่ต้องแตะต้องคอนฟิกของผู้ช่วย"
+            "text": "เปิด Settings → AI integrations หาโทเคนแล้วยกเลิกการติ๊กช่องที่เกี่ยวข้อง (เช่น Trade · Margin CFD ) สิทธิ์จะถูกยกเลิกทันที — เซิร์ฟเวอร์จะเริ่มตอบกลับ 403 Forbidden สำหรับการเรียกเทรดในตลาดนั้น ค่าของโทเคนเองไม่เปลี่ยนแปลง จึงไม่ต้องแตะต้องคอนฟิกของผู้ช่วย"
           }
         },
         {
@@ -181,7 +224,7 @@
           "name": "จะเป็นอย่างไรถ้าโทเคนของฉันรั่วไหล?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "ไปที่ หาโทเคนที่ถูกบุกรุกแล้วกด Revoke คำขอทั้งหมดที่ใช้โทเคนนั้นจะหยุดทำงานทันที สร้างโทเคนใหม่แล้วอัปเดตคอนฟิกของผู้ช่วย"
+            "text": "ไปที่ Settings → AI integrations หาโทเคนที่ถูกบุกรุกแล้วกด Revoke คำขอทั้งหมดที่ใช้โทเคนนั้นจะหยุดทำงานทันที สร้างโทเคนใหม่แล้วอัปเดตคอนฟิกของผู้ช่วย"
           }
         },
         {
@@ -197,7 +240,7 @@
           "name": "ผู้ช่วยของฉันมองไม่เห็นเครื่องมือหลังตั้งค่า ต้องทำอย่างไร?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "รายการตรวจสอบ: (1) รีสตาร์ตผู้ช่วยอย่างสมบูรณ์ (2) ตรวจสอบให้แน่ใจว่าคัดลอกโทเคนมาโดยไม่มีช่องว่างเกินที่ต้น/ท้าย (3) ตรวจสอบว่า URL ไม่มีเครื่องหมายสแลชต่อท้ายและตรงกับการสมัครสมาชิกของคุณ (4) ตรวจสอบให้แน่ใจว่าเฮดเดอร์ Authorization ขึ้นต้นด้วย พอดี (สังเกตช่องว่าง) (5) ตรวจสอบบันทึกของผู้ช่วย — โดยปกติจะเป็นข้อผิดพลาดไวยากรณ์ JSON ในคอนฟิก"
+            "text": "รายการตรวจสอบ: (1) รีสตาร์ตผู้ช่วยอย่างสมบูรณ์ (2) ตรวจสอบให้แน่ใจว่าคัดลอกโทเคนมาโดยไม่มีช่องว่างเกินที่ต้น/ท้าย (3) ตรวจสอบว่า URL ไม่มีเครื่องหมายสแลชต่อท้ายและตรงกับการสมัครสมาชิกของคุณ (4) ตรวจสอบให้แน่ใจว่าเฮดเดอร์ Authorization ขึ้นต้นด้วย Bearer พอดี (สังเกตช่องว่าง) (5) ตรวจสอบบันทึกของผู้ช่วย — โดยปกติจะเป็นข้อผิดพลาดไวยากรณ์ JSON ในคอนฟิก"
           }
         },
         {
@@ -245,7 +288,7 @@
 <a href="#safety">ความปลอดภัย</a>
 <a href="#faq">คำถามที่พบบ่อย</a>
 </div>
-<div class="lang-switch"><button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">ไทย</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" role="menu" hidden><li role="none"><a role="menuitem" href="../" hreflang="en" lang="en">English</a></li><li role="none"><a role="menuitem" href="../ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li role="none"><a role="menuitem" href="../th/" hreflang="th" lang="th" aria-current="true">ไทย</a></li><li role="none"><a role="menuitem" href="../pt/" hreflang="pt" lang="pt">Português</a></li><li role="none"><a role="menuitem" href="../es/" hreflang="es" lang="es">Español</a></li><li role="none"><a role="menuitem" href="../tl/" hreflang="tl" lang="tl">Tagalog</a></li><li role="none"><a role="menuitem" href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
+<div class="lang-switch"><button class="lang-toggle" type="button" aria-expanded="false" aria-controls="lang-menu" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">ไทย</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" id="lang-menu" hidden><li><a href="../" hreflang="en" lang="en">English</a></li><li><a href="../ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li><a href="../th/" hreflang="th" lang="th" aria-current="true">ไทย</a></li><li><a href="../pt/" hreflang="pt" lang="pt">Português</a></li><li><a href="../es/" hreflang="es" lang="es">Español</a></li><li><a href="../tl/" hreflang="tl" lang="tl">Tagalog</a></li><li><a href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
 <div class="hero">
 <span class="badge">
 <span class="badge-dot"></span>

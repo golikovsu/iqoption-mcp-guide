@@ -193,11 +193,5 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && !menu.hidden) { close(); toggle.focus(); }
     });
-    menu.addEventListener('keydown', e => {
-      const items = $$('a', menu);
-      const i = items.indexOf(document.activeElement);
-      if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
-    });
   }
 })();
