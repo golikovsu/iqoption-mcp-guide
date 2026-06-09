@@ -1346,3 +1346,15 @@
   /* Assistant-tab brand logos (filled) + Lucide fallbacks (stroked) */
   .pt-logo { width: 16px; height: 16px; }
   .ic-brand { fill: currentColor; stroke: none; }
+
+  /* Assistant picker — category group labels (visual only; AT ignores them) */
+  .pt-group {
+    flex-basis: 100%;
+    margin: 10px 2px 0;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+  .pt-group:first-child { margin-top: 0; }
