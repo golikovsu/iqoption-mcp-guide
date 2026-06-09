@@ -148,7 +148,7 @@ def lang_switch_html(cur_path, cur_dir):
             href = path if path else "./"
         cur = ' aria-current="true"' if path == cur_path else ""
         items.append(f'<li><a href="{href}" hreflang="{hl}" lang="{code}"{cur}>'
-                     f'<span class="lang-name">{flag(code)}{name}</span></a></li>')
+                     f'<span class="lang-name">{flag(code)}<span class="lang-label">{name}</span></span></a></li>')
     cur_code, cur_name = next((c, n) for c, _d, n, _h, p in LANGS if p == cur_path)
     return (
         '<div class="lang-switch">'
