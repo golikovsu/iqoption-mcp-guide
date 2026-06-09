@@ -1342,3 +1342,7 @@
   [dir="rtl"] .chat-msg.user p { border-bottom-right-radius: 14px; border-bottom-left-radius: 4px; }
   [dir="rtl"] .chat-msg.ai p { border-bottom-left-radius: 14px; border-bottom-right-radius: 4px; }
   [dir="rtl"] .chat-dot { margin-left: 0; margin-right: auto; }
+
+  /* Assistant-tab brand logos (filled) + Lucide fallbacks (stroked) */
+  .pt-logo { width: 16px; height: 16px; }
+  .ic-brand { fill: currentColor; stroke: none; }
