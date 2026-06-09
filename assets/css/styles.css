@@ -1278,3 +1278,67 @@
     .nav-links a { padding: 10px 12px; border-radius: 8px; font-size: 14px; color: var(--text-base); }
     .nav-links a:hover { background: rgba(255,255,255,0.06); color: var(--text-strong); }
   }
+
+  /* ════════════════════════════════════════════════════════════════════
+     AI CONVERSATION MOCK (shows the product)
+     ════════════════════════════════════════════════════════════════════ */
+  .chat-mock {
+    max-width: 560px;
+    margin: 4px auto 52px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 28px 64px -28px rgba(0,0,0,0.65);
+  }
+  .chat-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--border);
+  }
+  .chat-avatar {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #FF8A00 0%, #FFB000 100%);
+    color: #0C1326;
+  }
+  .chat-avatar .ic { width: 17px; height: 17px; }
+  .chat-name { font-weight: 800; font-size: 14px; color: var(--text-strong); }
+  .chat-dot {
+    width: 8px; height: 8px;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--success-bright);
+    box-shadow: 0 0 0 3px rgba(0,230,139,0.16);
+  }
+  .chat-body { display: flex; flex-direction: column; gap: 12px; padding: 18px; }
+  .chat-msg { max-width: 86%; }
+  .chat-msg p {
+    margin: 0;
+    padding: 11px 15px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    border-radius: 14px;
+  }
+  .chat-msg.user { align-self: flex-end; }
+  .chat-msg.user p {
+    background: linear-gradient(135deg, #FF8A00 0%, #FFB000 100%);
+    color: #0C1326;
+    font-weight: 600;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg.ai { align-self: flex-start; }
+  .chat-msg.ai p {
+    background: var(--bg-elevated);
+    color: var(--text-base);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+  /* RTL: flip the tail corners */
+  [dir="rtl"] .chat-msg.user p { border-bottom-right-radius: 14px; border-bottom-left-radius: 4px; }
+  [dir="rtl"] .chat-msg.ai p { border-bottom-left-radius: 14px; border-bottom-right-radius: 4px; }
+  [dir="rtl"] .chat-dot { margin-left: 0; margin-right: auto; }
