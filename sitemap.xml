@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://golikovsu.github.io/iqoption-mcp-guide/</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/ar/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/th/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/pt/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/es/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/tl/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+  </url>
+  <url>
+    <loc>https://golikovsu.github.io/iqoption-mcp-guide/id/</loc>
+    <lastmod>2026-06-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
+    <xhtml:link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/"/>
+    <xhtml:link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/"/>
+    <xhtml:link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/"/>
   </url>
 </urlset>

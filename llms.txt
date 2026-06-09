@@ -24,6 +24,18 @@ Claude Desktop, Claude Code (CLI), Cursor, Windsurf, OpenAI Codex CLI, ChatGPT D
 - [Integration guide](https://golikovsu.github.io/iqoption-mcp-guide/): full setup, permissions matrix, safety, FAQ, and ready-made configs for all 13 assistants.
 - [Full content as markdown](https://golikovsu.github.io/iqoption-mcp-guide/llms-full.txt): the entire guide as plain text, optimized for LLM ingestion.
 
+## Localized versions
+
+The guide is available in seven languages (English is the default). Each has its own URL and `hreflang` alternates.
+
+- English — https://golikovsu.github.io/iqoption-mcp-guide/
+- العربية (Arabic) — https://golikovsu.github.io/iqoption-mcp-guide/ar/
+- ไทย (Thai) — https://golikovsu.github.io/iqoption-mcp-guide/th/
+- Português (Portuguese) — https://golikovsu.github.io/iqoption-mcp-guide/pt/
+- Español (Spanish) — https://golikovsu.github.io/iqoption-mcp-guide/es/
+- Tagalog — https://golikovsu.github.io/iqoption-mcp-guide/tl/
+- Bahasa Indonesia (Indonesian) — https://golikovsu.github.io/iqoption-mcp-guide/id/
+
 ## Disclaimer
 
 AI assistants are independent third-party tools. Trading CFDs, options, forex and crypto involves a high risk of capital loss. Every trade is taken at the user's own responsibility.

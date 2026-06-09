@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="th" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option · คู่มือการเชื่อมต่อ MCP</title>
+<meta name="description" content="เชื่อมต่อ Claude, ChatGPT, Cursor และผู้ช่วย AI กว่า 12 ตัวเข้ากับบัญชี IQ Option ของคุณผ่าน Model Context Protocol (MCP) ใช้โทเคน Bearer หนึ่งตัวกับเซิร์ฟเวอร์ตลาดสี่แห่ง — digital options, CFD, crypto, forex ไม่ต้องเขียนโค้ด เพียงสามขั้นตอน">
+<meta name="keywords" content="IQ Option, MCP, Model Context Protocol, Claude, ChatGPT, Cursor, AI trading assistant, digital options, forex, crypto, CFD, Bearer token">
+<meta name="author" content="IQ Option">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#0C1326">
+<link rel="canonical" href="https://golikovsu.github.io/iqoption-mcp-guide/th/">
+<link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/">
+<link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/">
+<link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/">
+<link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/">
+<link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/">
+<link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/">
+<link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/">
+<link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IQ Option · AI Integrations">
+<meta property="og:title" content="เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option · คู่มือการเชื่อมต่อ MCP">
+<meta property="og:description" content="โทเคนหนึ่งตัว สี่ตลาด AI ตัวใดก็ได้ เชื่อมต่อ Claude, ChatGPT หรือ Cursor เข้ากับ IQ Option ผ่าน MCP ในสามขั้นตอน">
+<meta property="og:url" content="https://golikovsu.github.io/iqoption-mcp-guide/th/">
+<meta property="og:image" content="https://golikovsu.github.io/iqoption-mcp-guide/assets/img/logo.png">
+<meta property="og:locale" content="th">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option ผ่าน MCP">
+<meta name="twitter:description" content="โทเคนหนึ่งตัว สี่ตลาด AI ตัวใดก็ได้ Claude, ChatGPT, Cursor — เชื่อมต่อกับ IQ Option ในสามขั้นตอน">
+<meta name="twitter:image" content="https://golikovsu.github.io/iqoption-mcp-guide/assets/img/logo.png">
+
+<link rel="icon" type="image/png" href="../assets/img/logo.png">
+<link rel="apple-touch-icon" href="../assets/img/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- QEDS · Quadcode Enterprise Design System (v1.2-pilot, dark) -->
+<link rel="stylesheet" href="https://gnezdilovdenis.github.io/qeds/dist/v1/qeds.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/styles.css">
+
+<!-- Structured data for AI answer engines & search -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#website",
+      "url": "https://golikovsu.github.io/iqoption-mcp-guide/",
+      "name": "IQ Option · AI Integrations",
+      "inLanguage": "th",
+      "publisher": {
+        "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org",
+      "name": "IQ Option",
+      "url": "https://iqoption.com",
+      "logo": "https://golikovsu.github.io/iqoption-mcp-guide/assets/img/logo.png"
+    },
+    {
+      "@type": "TechArticle",
+      "@id": "https://golikovsu.github.io/iqoption-mcp-guide/th/#article",
+      "headline": "เชื่อมต่อผู้ช่วย AI ใด ๆ เข้ากับ IQ Option ผ่าน MCP",
+      "description": "โทเคน Bearer หนึ่งตัว เซิร์ฟเวอร์ MCP ตลาดสี่แห่ง (digital options, CFD, crypto, forex) คอนฟิกสำเร็จรูปสำหรับ Claude, ChatGPT, Cursor และผู้ช่วยกว่า 12 ตัว ไม่ต้องเขียนโค้ด เพียงสามขั้นตอน",
+      "inLanguage": "th",
+      "isPartOf": {
+        "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#website"
+      },
+      "author": {
+        "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org"
+      },
+      "publisher": {
+        "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org"
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://golikovsu.github.io/iqoption-mcp-guide/th/#howto",
+      "inLanguage": "th",
+      "name": "วิธีเชื่อมต่อผู้ช่วย AI เข้ากับ IQ Option",
+      "description": "เชื่อมต่อผู้ช่วย AI ที่รองรับ MCP เข้ากับ IQ Option ในสามขั้นตอน",
+      "totalTime": "PT3M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "สร้างโทเคน",
+          "text": "ในแอปมือถือหรือบนเว็บ: เปิด Settings → AI integrations → แตะ + Add integration ตั้งชื่อโทเคนและกำหนดวันหมดอายุ ติ๊กตลาดที่อนุญาตให้เทรดได้ (การอ่านเปิดอยู่เสมอ) รายละเอียด — ส่วน 03 ด้านบน คัดลอกโทเคนทันที — เมื่อปิดหน้าจอแล้วจะไม่แสดงอีก"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "เลือกผู้ช่วยของคุณ",
+          "text": "รองรับ MCP โดยตรงใน: Claude Desktop / Claude Code Cursor / Windsurf / Zed OpenAI Codex / ChatGPT Desktop Cline / Continue / Goose / LibreChat"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "วางคอนฟิก",
+          "text": "คัดลอกสนิปเป็ตสำหรับผู้ช่วยของคุณ แต่ละตัวต้องการสามสิ่ง: เซิร์ฟเวอร์ URL Authorization: Bearer + โทเคนของคุณ รีสตาร์ต ผู้ช่วยของคุณ"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://golikovsu.github.io/iqoption-mcp-guide/th/#faq",
+      "inLanguage": "th",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ฉันต้องติดตั้งอะไรในคอมพิวเตอร์ของฉันไหม?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ไม่ต้อง เซิร์ฟเวอร์ MCP ของเราโฮสต์โดยเรา — ไม่ต้องโคลน repo ไม่ต้องติดตั้ง Python หรือ venv เพียงแค่ใส่ URL + โทเคน Bearer ในคอนฟิกของผู้ช่วย AI ของคุณ"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "โทเคนเดียวใช้ได้กับเซิร์ฟเวอร์ทั้ง 4 จริงหรือ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ใช่ สร้างโทเคน Bearer หนึ่งตัวใน แล้วใช้ในเฮดเดอร์ Authorization สำหรับทั้งสี่เอนด์พอยต์: digital-options, marginal-cfd, marginal-crypto, marginal-forex"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "จะเป็นอย่างไรถ้าฉันต้องการเชื่อมต่อเพียงตลาดเดียว เช่น Forex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ลบบล็อกอื่น ๆ ออกจากคอนฟิก — เก็บไว้เฉพาะ  AI จะเห็นเฉพาะเครื่องมือจากเซิร์ฟเวอร์นั้นและจะไม่สามารถแตะต้อง เช่น ออปชัน โดยไม่ตั้งใจได้"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "จริง ๆ แล้ว AI ทำอะไรได้บ้างผ่าน MCP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "เซิร์ฟเวอร์แต่ละตัวของเราเปิดเผยรายการเครื่องมือของตัวเอง — คุณสามารถดูชุดเต็มได้ทันทีหลังเชื่อมต่อโดยถามผู้ช่วยว่า: \"คุณมีเครื่องมือ IQ Option อะไรบ้าง?\" โดยรวมแล้วคือการอ่านข้อมูลตลาด พอร์ต และการเทรด รวมถึงเมธอดในการเปิด/ปิดสถานะ เมธอดใดที่ใช้ได้กับโทเคนเฉพาะตัวขึ้นอยู่กับขอบเขตของมัน (อ่าน + เลือกเทรดได้ตามแต่ละตลาด)"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ฉันจะทำให้แน่ใจได้อย่างไรว่า AI เทรดไม่ได้?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ตอนสร้างโทเคนใน เพียง อย่าติ๊ก ช่องทำเครื่องหมาย \"เทรด · …\" ใด ๆ ในสี่ช่องนั้น การอ่านยังคงเปิดอยู่ (ปิดไม่ได้ — AI ต้องใช้) และความพยายามใด ๆ ที่จะเรียกเครื่องมือเทรดจะตอบกลับ  นี่คือการตั้งค่าที่ปลอดภัยที่สุดสำหรับกรณีการใช้งานเชิงวิจัย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ฉันสามารถอนุญาตให้เทรดเฉพาะเครื่องมือเดียวได้ไหม?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ได้ ตัวอย่างเช่น ติ๊กเฉพาะ — AI จะสามารถเปิด/ปิดสถานะคริปโตได้ แต่ออปชัน, CFD และ forex จะยังคงเป็นแบบอ่านอย่างเดียว มีประโยชน์เมื่อคุณกำลังทดสอบการตั้งค่า AI กับตลาดที่คุณคุ้นเคย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "จะเป็นอย่างไรถ้าฉันต้องการยกเลิกสิทธิ์เทรดจากโทเคนที่มีอยู่?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "เปิด หาโทเคนแล้วยกเลิกการติ๊กช่องที่เกี่ยวข้อง (เช่น ) สิทธิ์จะถูกยกเลิกทันที — เซิร์ฟเวอร์จะเริ่มตอบกลับ สำหรับการเรียกเทรดในตลาดนั้น ค่าของโทเคนเองไม่เปลี่ยนแปลง จึงไม่ต้องแตะต้องคอนฟิกของผู้ช่วย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "จะเป็นอย่างไรถ้าโทเคนของฉันรั่วไหล?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ไปที่ หาโทเคนที่ถูกบุกรุกแล้วกด Revoke คำขอทั้งหมดที่ใช้โทเคนนั้นจะหยุดทำงานทันที สร้างโทเคนใหม่แล้วอัปเดตคอนฟิกของผู้ช่วย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ข้อจำกัดของโทเคนและเซิร์ฟเวอร์มีอะไรบ้าง?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "หนึ่งบัญชีสามารถมีโทเคนที่ใช้งานได้หลายตัวพร้อมกัน (ดูได้ในรายการ Active tokens) โทเคนหนึ่งตัวใช้ได้กับเซิร์ฟเวอร์ทั้ง 4 หากต้องการแยกกุญแจตามแต่ละการเชื่อมต่อเพื่อให้เพิกถอนได้ง่ายขึ้น — ให้สร้างหลายตัวและตั้งชื่อที่มีความหมาย"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ผู้ช่วยของฉันมองไม่เห็นเครื่องมือหลังตั้งค่า ต้องทำอย่างไร?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "รายการตรวจสอบ: (1) รีสตาร์ตผู้ช่วยอย่างสมบูรณ์ (2) ตรวจสอบให้แน่ใจว่าคัดลอกโทเคนมาโดยไม่มีช่องว่างเกินที่ต้น/ท้าย (3) ตรวจสอบว่า URL ไม่มีเครื่องหมายสแลชต่อท้ายและตรงกับการสมัครสมาชิกของคุณ (4) ตรวจสอบให้แน่ใจว่าเฮดเดอร์ Authorization ขึ้นต้นด้วย พอดี (สังเกตช่องว่าง) (5) ตรวจสอบบันทึกของผู้ช่วย — โดยปกติจะเป็นข้อผิดพลาดไวยากรณ์ JSON ในคอนฟิก"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ผู้ช่วยตัวไหนตั้งค่าจากศูนย์ได้ง่ายที่สุด?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "หากคุณไม่ใช่นักพัฒนา — Claude Desktop หรือ Cherry Studio: ทั้งคู่มี UI ที่จัดการคอนฟิกให้คุณ หากคุณอยู่กับโค้ดเป็นประจำ — Cursor หรือ Claude Code จะรู้สึกเป็นธรรมชาติกว่า"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "การใช้ MCP ฟรีไหม?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ในขณะนี้ — ใช่ ฟรีสำหรับลูกค้า IQ Option ทุกคนที่มีบัญชีที่ใช้งานอยู่ คุณจ่ายเฉพาะค่าสมัครสมาชิกผู้ช่วย AI ของคุณเท่านั้น (Claude Pro / ChatGPT Plus ฯลฯ)"
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- ════════════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════════════ -->
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหา</a>
+<main id="main">
+<div class="hero-shell">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="container">
+<nav aria-label="Primary" class="nav">
+<div class="logo">
+<img alt="IQ Option" class="logo-mark" height="32" src="../assets/img/logo.png" width="32"/>
+        IQ OPTION · การเชื่อมต่อ AI
+      </div>
+<div class="nav-links">
+<a href="#what">คืออะไร</a>
+<a href="#servers">เซิร์ฟเวอร์</a>
+<a href="#setup">ตั้งค่า</a>
+<a href="#assistants">ผู้ช่วย</a>
+<a href="#safety">ความปลอดภัย</a>
+<a href="#faq">คำถามที่พบบ่อย</a>
+</div>
+<div class="lang-switch"><button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">ไทย</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" role="menu" hidden><li role="none"><a role="menuitem" href="../" hreflang="en" lang="en">English</a></li><li role="none"><a role="menuitem" href="../ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li role="none"><a role="menuitem" href="../th/" hreflang="th" lang="th" aria-current="true">ไทย</a></li><li role="none"><a role="menuitem" href="../pt/" hreflang="pt" lang="pt">Português</a></li><li role="none"><a role="menuitem" href="../es/" hreflang="es" lang="es">Español</a></li><li role="none"><a role="menuitem" href="../tl/" hreflang="tl" lang="tl">Tagalog</a></li><li role="none"><a role="menuitem" href="../id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
+<div class="hero">
+<span class="badge">
+<span class="badge-dot"></span>
+        Model Context Protocol · พร้อมใช้งาน
+      </span>
+<h1 class="hero-title">
+        เชื่อมต่อผู้ช่วย AI ใด ๆ<br/>
+        เข้ากับ <span class="hero-grad">IQ Option</span>
+</h1>
+<p class="hero-sub">
+        โทเคนหนึ่งตัว สี่ตลาด AI ตัวใดก็ได้ที่คุณเลือก พูดคุยกับ Claude, ChatGPT หรือ Cursor เกี่ยวกับสถานะการลงทุน ตลาด และการเทรดของคุณ ไม่ต้องเขียนโค้ด เพียงสามขั้นตอน
+      </p>
+<div class="hero-cta">
+<a class="qeds-button" data-context="accent" data-prominence="primary" data-size="lg" href="#setup">
+<span class="qeds-button__label">เริ่มต้นใน 3 ขั้นตอน →</span>
+</a>
+<a class="qeds-button" data-context="general" data-prominence="tertiary" data-size="lg" href="#assistants">
+<span class="qeds-button__label">คอนฟิกสำเร็จรูป</span>
+</a>
+</div>
+<div class="hero-stats reveal">
+<div class="hstat">
+<div class="hstat-num">1</div>
+<div class="hstat-label">โทเคนเดียวสำหรับทุกอย่าง</div>
+</div>
+<div class="hstat">
+<div class="hstat-num green">4</div>
+<div class="hstat-label">เซิร์ฟเวอร์ MCP</div>
+</div>
+<div class="hstat">
+<div class="hstat-num cyan">12+</div>
+<div class="hstat-label">ผู้ช่วย AI</div>
+</div>
+<div class="hstat">
+<div class="hstat-num gold">~3 นาที</div>
+<div class="hstat-label">สำหรับการตั้งค่า</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ════════════════════════════════════════════════════════════════════
+     WHAT IS MCP
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="what">
+<div class="container">
+<div class="section-eyebrow">01 · MCP คืออะไร</div>
+<h2 class="section-title">หนึ่งโปรโตคอล AI ตัวใดก็ได้สื่อสารกับบัญชีของคุณ</h2>
+<p class="section-sub">
+      MCP (Model Context Protocol) เป็นมาตรฐานเปิดจาก Anthropic ที่ผู้ช่วย AI ใช้เชื่อมต่อกับระบบภายนอก เราโฮสต์เซิร์ฟเวอร์สำหรับเครื่องมือแต่ละประเภท — คุณเพียงสร้างโทเคนแล้ววางลงในผู้ช่วยของคุณ
+    </p>
+<div class="cap-grid">
+<div class="cap-card reveal">
+<div class="cap-ic orange">⚡</div>
+<h3>วิเคราะห์ตลาดด้วยภาษาธรรมดา</h3>
+<p>ถาม AI เกี่ยวกับราคาสด แท่งเทียนย้อนหลัง สเปรด ปริมาณการซื้อขาย — ด้วยคำพูดของคุณเอง ครอบคลุมทั้ง 4 ตลาดพร้อมกัน</p>
+</div>
+<div class="cap-card reveal">
+<div class="cap-ic green">📊</div>
+<h3>ดูพอร์ตของคุณในแชต</h3>
+<p>สถานะการลงทุนที่เปิดอยู่ คำสั่งที่รอดำเนินการ ประวัติการเทรด มูลค่ารวมของบัญชี — ทั้งหมดผ่านการสนทนาธรรมดา ไม่ต้องสลับหน้าต่าง</p>
+</div>
+<div class="cap-card reveal">
+<div class="cap-ic cyan">🛡️</div>
+<h3>ควบคุมในระดับโทเคน</h3>
+<p>โทเคนแต่ละตัวคือการเชื่อมต่อแยกที่มีอายุการใช้งานของตัวเอง ดูโทเคนที่ใช้งานอยู่ทั้งหมดได้ใน Settings → AI integrations และเพิกถอนได้ด้วยคลิกเดียว</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     SERVERS
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="servers" style="padding-top:0;">
+<div class="container">
+<div class="section-eyebrow">02 · เซิร์ฟเวอร์ที่ใช้งานได้</div>
+<h2 class="section-title">สี่ตลาด — สี่เอนด์พอยต์ MCP</h2>
+<p class="section-sub">
+      เครื่องมือแต่ละประเภทอยู่บนเซิร์ฟเวอร์ของตัวเอง โทเคนเดียวจากการตั้งค่า IQ Option ใช้ได้กับทั้งสี่เซิร์ฟเวอร์ — เชื่อมต่อทั้งหมดหรือเฉพาะที่คุณต้องการ
+    </p>
+<div class="servers-row">
+<div class="srv-card">
+<div class="srv-info">
+<div class="srv-name">▸ Digital Options</div>
+<div class="srv-url">https://digital-options.mcp.iqoption.com</div>
+</div>
+<button class="copy-btn" data-copy="https://digital-options.mcp.iqoption.com">📋 คัดลอก URL</button>
+</div>
+<div class="srv-card green">
+<div class="srv-info">
+<div class="srv-name">▸ Margin CFD</div>
+<div class="srv-url">https://marginal-cfd.mcp.iqoption.com</div>
+</div>
+<button class="copy-btn" data-copy="https://marginal-cfd.mcp.iqoption.com">📋 คัดลอก URL</button>
+</div>
+<div class="srv-card cyan">
+<div class="srv-info">
+<div class="srv-name">▸ Margin Crypto</div>
+<div class="srv-url">https://marginal-crypto.mcp.iqoption.com</div>
+</div>
+<button class="copy-btn" data-copy="https://marginal-crypto.mcp.iqoption.com">📋 คัดลอก URL</button>
+</div>
+<div class="srv-card gold">
+<div class="srv-info">
+<div class="srv-name">▸ Margin Forex</div>
+<div class="srv-url">https://marginal-forex.mcp.iqoption.com</div>
+</div>
+<button class="copy-btn" data-copy="https://marginal-forex.mcp.iqoption.com">📋 คัดลอก URL</button>
+</div>
+</div>
+<div class="one-token-tip">
+<div class="info-ic">i</div>
+<div>
+<strong>1 โทเคน — 4 เซิร์ฟเวอร์</strong> สร้างโทเคน Bearer หนึ่งตัวใน IQ Option (<a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank">Settings → AI integrations</a>) แล้วนำกลับมาใช้ในคอนฟิกทั้งสี่ ด้านล่างนี้เรามีคอนฟิกสำเร็จรูปที่เชื่อมต่อทุกตลาดในบล็อกเดียว
+      </div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     PERMISSIONS · per-instrument trade opt-in
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="permissions" style="padding-top:0;">
+<div class="container">
+<div class="section-eyebrow">03 · สิทธิ์ของโทเคน</div>
+<h2 class="section-title">อ่านโดยค่าเริ่มต้น เทรด — เลือกเปิดเอง แยกตามแต่ละตลาด</h2>
+<p class="section-sub">
+      โทเคนแต่ละตัวมีขอบเขตของตัวเอง สิทธิ์อ่านสำหรับเซิร์ฟเวอร์ทั้ง 4 จะเปิดใช้งานอัตโนมัติและปิดไม่ได้ — AI ต้องใช้สิทธิ์นี้เพียงเพื่อ "เห็น" ข้อมูลของคุณ สิทธิ์ในการ <strong style="color:var(--accent);">เปิดและปิดการเทรด</strong> จะมอบให้อย่างชัดเจน — แยกตามแต่ละตลาดเมื่อคุณสร้างโทเคน
+    </p>
+<div class="perm-shell">
+<!-- LEFT: Mockup of the token creation card -->
+<div class="perm-card">
+<div class="perm-head">
+<div class="perm-head-ic">🔑</div>
+<div>
+<h3>โทเคนการเชื่อมต่อ AI ใหม่</h3>
+<div class="perm-head-sub">Settings → AI integrations → Add</div>
+</div>
+</div>
+<div class="perm-body">
+<!-- READ section -->
+<div class="perm-section">
+<div class="perm-section-label green">▸ สิทธิ์อ่าน · เปิดเสมอ</div>
+<div class="perm-row">
+<button class="qeds-checkbox" data-checked="checked" data-size="md" disabled="" type="button">
+<span class="qeds-checkbox__indicator">
+<svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="qeds-checkbox__labels">
+<span class="qeds-checkbox__label">อ่าน · เซิร์ฟเวอร์ทั้ง 4</span>
+<span class="qeds-checkbox__description">ยอดเงิน ราคา ประวัติ สถานะการลงทุนที่เปิดอยู่ คำสั่งที่รอดำเนินการ</span>
+</span>
+</button>
+<span class="perm-tag always">เสมอ</span>
+</div>
+</div>
+<!-- TRADE section -->
+<div class="perm-section">
+<div class="perm-section-label">▸ สิทธิ์เทรด · เลือกเปิดเอง</div>
+<div class="perm-row">
+<button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
+<span class="qeds-checkbox__indicator">
+<svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="qeds-checkbox__labels">
+<span class="qeds-checkbox__label">เทรด · Digital Options</span>
+<span class="qeds-checkbox__description">เปิดและปิดออปชัน</span>
+</span>
+</button>
+<span class="perm-tag optional">ไม่บังคับ</span>
+</div>
+<div class="perm-row">
+<button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
+<span class="qeds-checkbox__indicator">
+<svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="qeds-checkbox__labels">
+<span class="qeds-checkbox__label">เทรด · Margin CFD</span>
+<span class="qeds-checkbox__description">ซื้อ/ขายชอร์ตในเครื่องมือ CFD ด้วยเลเวอเรจ</span>
+</span>
+</button>
+<span class="perm-tag optional">ไม่บังคับ</span>
+</div>
+<div class="perm-row">
+<button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
+<span class="qeds-checkbox__indicator">
+<svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="qeds-checkbox__labels">
+<span class="qeds-checkbox__label">เทรด · Margin Crypto</span>
+<span class="qeds-checkbox__description">BTC, ETH, altcoin ด้วยเลเวอเรจ</span>
+</span>
+</button>
+<span class="perm-tag optional">ไม่บังคับ</span>
+</div>
+<div class="perm-row">
+<button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
+<span class="qeds-checkbox__indicator">
+<svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<span class="qeds-checkbox__labels">
+<span class="qeds-checkbox__label">เทรด · Margin Forex</span>
+<span class="qeds-checkbox__description">EUR/USD, GBP/JPY และคู่สกุลเงินอื่น ๆ</span>
+</span>
+</button>
+<span class="perm-tag optional">ไม่บังคับ</span>
+</div>
+</div>
+<div class="perm-meta">
+<div class="perm-meta-item">⏱ วันหมดอายุ: <strong>30–90 วัน</strong></div>
+<div class="perm-meta-item">🏷 ป้ายกำกับ: <strong>Claude · เดโม</strong></div>
+<div class="perm-meta-item">📍 ขอบเขต: <strong>เฉพาะบัญชี</strong></div>
+</div>
+</div>
+</div>
+<!-- RIGHT: explanatory callouts -->
+<div class="perm-aside">
+<div class="perm-callout ok">
+<h4>🟢 อ่าน — ปิดไม่ได้</h4>
+<p>หากไม่มีสิทธิ์อ่าน AI ก็ไร้ประโยชน์ — มันแสดงยอดเงินหรือราคาของคุณไม่ได้ ด้วยเหตุนี้ขอบเขตการอ่านจึงเปิดใช้งานอัตโนมัติในเซิร์ฟเวอร์ทั้ง 4 นี่คือระดับที่ปลอดภัยที่สุด: AI เพียงแค่ดู ไม่แตะต้องอะไร</p>
+</div>
+<div class="perm-callout warn">
+<h4>🟠 เทรด — แม่นยำ ตามกรณีการใช้งาน</h4>
+<p>ต้องการให้ AI ช่วยเทรดเฉพาะออปชันใช่ไหม? ติ๊ก <code>Trade · Digital Options</code> เท่านั้น Margin CFD/Crypto/Forex จะยังคงเป็นแบบอ่านอย่างเดียว — แม้ AI พยายาม เซิร์ฟเวอร์ก็จะตอบกลับ <code>403 Forbidden</code>.</p>
+</div>
+<div class="perm-callout info">
+<h4>🔵 เปลี่ยนขอบเขตได้โดยไม่ต้องสร้างโทเคนใหม่</h4>
+<p>ต้องการยกเลิกสิทธิ์เทรดจากโทเคนที่ใช้งานอยู่แล้วใช่ไหม? เปิด <code>Settings → AI integrations</code>หาโทเคน ยกเลิกการติ๊กตลาดนั้น — สิทธิ์จะถูกยกเลิกทันที ค่าของโทเคนเองไม่เปลี่ยนแปลง จึงไม่ต้องอัปเดตคอนฟิกของผู้ช่วย</p>
+</div>
+</div>
+</div>
+<!-- Recommended scopes for typical scenarios -->
+<div class="perm-card" style="margin-top: 24px;">
+<div class="perm-head">
+<div class="perm-head-ic" style="background: rgba(94,218,255,0.15); color: var(--cyan); border:1px solid rgba(94,218,255,0.32);">📋</div>
+<div>
+<h3>ชุดสิทธิ์สำเร็จรูปตามสถานการณ์</h3>
+<div class="perm-head-sub">เลือกชุดที่ใกล้เคียงกับกรณีการใช้งานของคุณที่สุด</div>
+</div>
+</div>
+<div class="perm-body">
+<div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
+<div style="flex:1;">
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">📊 การวิจัยแบบอ่านอย่างเดียว</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">AI ช่วยวิเคราะห์ตลาด อ่านพอร์ต คำนวณกำไรขาดทุน — แต่ไม่เทรดเลย เป็นการตั้งค่าที่ปลอดภัยที่สุด</div>
+</div>
+<span class="perm-tag always" style="margin-left:14px;">อ่านอย่างเดียว</span>
+</div>
+<div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
+<div style="flex:1;">
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🎯 เทรดอัตโนมัติเฉพาะออปชัน</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">อ่านทุกที่ + เทรดบน <strong style="color:var(--text-strong);">Digital Options</strong> CFD/Crypto/Forex ยังคงถูกห้าม</div>
+</div>
+<span class="perm-tag optional" style="margin-left:14px;">+ ออปชัน</span>
+</div>
+<div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
+<div style="flex:1;">
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🪙 สวิงเฉพาะคริปโต</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">อ่านทุกที่ + เทรดบน <strong style="color:var(--text-strong);">Margin Crypto</strong> ออปชัน, CFD และ forex ยังคงแตะต้องไม่ได้สำหรับ AI</div>
+</div>
+<span class="perm-tag optional" style="margin-left:14px;">+ คริปโต</span>
+</div>
+<div class="perm-row" style="padding:14px 0 0;">
+<div style="flex:1;">
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🚀 สิทธิ์เต็มรูปแบบ</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">อ่าน + เทรดบนเซิร์ฟเวอร์ทั้ง 4 ความสามารถสูงสุด — และความรับผิดชอบสูงสุดด้วย ใช้เฉพาะเมื่อคุณไว้วางใจผู้ช่วยตัวนี้อย่างเต็มที่</div>
+</div>
+<span class="perm-tag optional" style="margin-left:14px;">ทั้ง 4</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     SETUP STEPS
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="setup">
+<div class="container">
+<div class="section-eyebrow">04 · วิธีเชื่อมต่อ</div>
+<h2 class="section-title">สามขั้นตอน ไม่ต้องเขียนโค้ด ไม่ต้องใช้เทอร์มินัล</h2>
+<p class="section-sub">
+      MCP ของเราทำงานผ่าน streamable-HTTP — ไม่ต้องมีสภาพแวดล้อม Python ไม่ต้องมี virtual venv ไม่ต้องโคลน repo เพียงแค่ URL + โทเคน Bearer ที่คุณสร้างได้ด้วยคลิกเดียว
+    </p>
+<div class="steps">
+<div class="step reveal">
+<div class="step-num">1</div>
+<h3>สร้างโทเคน</h3>
+<p>ในแอปมือถือหรือบนเว็บ:</p>
+<ol>
+<li>เปิด <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank"><strong>Settings → AI integrations →</strong></a></li>
+<li>แตะ <strong>+ Add integration</strong></li>
+<li>ตั้งชื่อโทเคนและกำหนดวันหมดอายุ</li>
+<li>ติ๊กตลาดที่อนุญาตให้เทรดได้ (การอ่านเปิดอยู่เสมอ) รายละเอียด — ส่วน 03 ด้านบน</li>
+<li>คัดลอกโทเคนทันที — เมื่อปิดหน้าจอแล้วจะไม่แสดงอีก</li>
+</ol>
+<a class="qeds-button" data-context="accent" data-prominence="tertiary" data-size="sm" href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="margin-top:16px;" target="_blank">
+<span class="qeds-button__label">เปิด AI integrations →</span>
+</a>
+</div>
+<div class="step reveal">
+<div class="step-num">2</div>
+<h3>เลือกผู้ช่วยของคุณ</h3>
+<p>รองรับ MCP โดยตรงใน:</p>
+<ol>
+<li>Claude Desktop / Claude Code</li>
+<li>Cursor / Windsurf / Zed</li>
+<li>OpenAI Codex / ChatGPT Desktop</li>
+<li>Cline / Continue / Goose / LibreChat</li>
+</ol>
+</div>
+<div class="step reveal">
+<div class="step-num">3</div>
+<h3>วางคอนฟิก</h3>
+<p>คัดลอกสนิปเป็ตสำหรับผู้ช่วยของคุณ แต่ละตัวต้องการสามสิ่ง:</p>
+<ol>
+<li>เซิร์ฟเวอร์ <strong>URL</strong></li>
+<li><strong>Authorization: Bearer</strong> + โทเคนของคุณ</li>
+<li><strong>รีสตาร์ต</strong> ผู้ช่วยของคุณ</li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     ASSISTANT PICKER
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="assistants" style="padding-top:0;">
+<div class="container">
+<div class="section-eyebrow">05 · คอนฟิกสำเร็จรูป</div>
+<h2 class="section-title">เลือกผู้ช่วยของคุณ — คอนฟิกพร้อมแล้ว</h2>
+<p class="section-sub">
+      สนิปเป็ตแต่ละชุดเชื่อมต่อเซิร์ฟเวอร์ทั้ง 4 พร้อมกัน เพียงแทนที่ <span style="color:var(--accent);font-weight:700">YOUR_TOKEN</span> ด้วยโทเคนที่คุณสร้างในขั้นตอนที่ 1 หากต้องการเพียงตลาดเดียว ให้เก็บเฉพาะบล็อกนั้นไว้และลบที่เหลือ
+    </p>
+<div class="picker-shell">
+<div class="picker-tabs" id="picker-tabs">
+<button class="pt active" data-tab="claude-desktop">🧠 Claude Desktop <span class="pt-diff">ง่าย</span></button>
+<button class="pt" data-tab="claude-code">⌨️ Claude Code <span class="pt-diff">ง่าย</span></button>
+<button class="pt" data-tab="cursor">📦 Cursor <span class="pt-diff">ง่าย</span></button>
+<button class="pt" data-tab="windsurf">🌊 Windsurf <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="codex">🤖 OpenAI Codex <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="chatgpt">💬 ChatGPT Desktop <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="cline">🧩 Cline (VS Code) <span class="pt-diff">ง่าย</span></button>
+<button class="pt" data-tab="continue">↻ Continue.dev <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="zed">⚡ Zed <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="goose">🦢 Goose <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="cherry">🍒 Cherry Studio <span class="pt-diff">ง่าย</span></button>
+<button class="pt" data-tab="librechat">🔓 LibreChat <span class="pt-diff med">ปานกลาง</span></button>
+<button class="pt" data-tab="custom">⚙️ กำหนดเอง / องค์กร <span class="pt-diff med">ปานกลาง</span></button>
+</div>
+<div class="picker-body" id="picker-body">
+<!-- ============ CLAUDE DESKTOP ============ -->
+<div class="pb-tab active" data-tab="claude-desktop">
+<div class="pb-head">
+<h3>Claude Desktop</h3>
+<span class="pt-diff">ง่าย</span>
+</div>
+<div class="pb-desc">
+            แอปเดสก์ท็อปของ Anthropic สำหรับ Mac และ Windows รองรับ MCP โดยตรง แก้ไขไฟล์ JSON ไฟล์เดียว รีสตาร์ต — เสร็จเรียบร้อย
+          </div>
+<div class="pb-platform">▸ Mac</div>
+<div class="pb-path">~/Library/Application Support/Claude/claude_desktop_config.json</div>
+<div class="pb-platform">▸ Windows</div>
+<div class="pb-path">%APPDATA%\Claude\claude_desktop_config.json</div>
+<div class="code-block">
+<div class="code-head">
+<span>claude_desktop_config.json</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>{
+  <span class="tk-key">"mcpServers"</span>: {
+    <span class="tk-key">"iq-digital-options"</span>: {
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-cfd"</span>: {
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-crypto"</span>: {
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-forex"</span>: {
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    }
+  }
+}</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+<strong>ตรวจสอบการเชื่อมต่อ</strong> รีสตาร์ต Claude Desktop แล้วถามว่า: <code>What IQ Option tools do I have available?</code> — คุณจะเห็นรายการเครื่องมือจากเซิร์ฟเวอร์ทั้งสี่
+            </div>
+</div>
+</div>
+<!-- ============ CLAUDE CODE ============ -->
+<div class="pb-tab" data-tab="claude-code">
+<div class="pb-head">
+<h3>Claude Code (CLI)</h3>
+<span class="pt-diff">ง่าย</span>
+</div>
+<div class="pb-desc">
+            AI บนเทอร์มินัลของ Anthropic หนึ่งคำสั่งเชลล์ต่อหนึ่งเซิร์ฟเวอร์ ไม่ต้องมีไฟล์คอนฟิก — ทุกอย่างผ่าน CLI
+          </div>
+<div class="code-block">
+<div class="code-head">
+<span>เทอร์มินัล · เพิ่มเซิร์ฟเวอร์ 4 ตัว</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code><span class="tk-cmt"># Digital Options</span>
+claude mcp add --transport http iq-digital-options \
+  https://digital-options.mcp.iqoption.com \
+  --header <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+<span class="tk-cmt"># Margin CFD</span>
+claude mcp add --transport http iq-margin-cfd \
+  https://marginal-cfd.mcp.iqoption.com \
+  --header <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+<span class="tk-cmt"># Margin Crypto</span>
+claude mcp add --transport http iq-margin-crypto \
+  https://marginal-crypto.mcp.iqoption.com \
+  --header <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+<span class="tk-cmt"># Margin Forex</span>
+claude mcp add --transport http iq-margin-forex \
+  https://marginal-forex.mcp.iqoption.com \
+  --header <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+<strong>ตรวจสอบ</strong> รัน <code>claude mcp list</code> — คุณควรเห็น 4 บรรทัดที่มีสถานะ ✓ เชื่อมต่อแล้ว
+            </div>
+</div>
+</div>
+<!-- ============ CURSOR ============ -->
+<div class="pb-tab" data-tab="cursor">
+<div class="pb-head">
+<h3>Cursor</h3>
+<span class="pt-diff">ง่าย</span>
+</div>
+<div class="pb-desc">
+            โปรแกรมแก้ไขโค้ดที่เน้น AI Settings → MCP → แก้ไข <code>mcp.json</code> โดยตรงหรือผ่าน UI
+          </div>
+<div class="pb-platform">▸ Mac · Linux</div>
+<div class="pb-path">~/.cursor/mcp.json</div>
+<div class="pb-platform">▸ Windows</div>
+<div class="pb-path">%USERPROFILE%\.cursor\mcp.json</div>
+<div class="code-block">
+<div class="code-head">
+<span>mcp.json</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>{
+  <span class="tk-key">"mcpServers"</span>: {
+    <span class="tk-key">"iq-digital-options"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-cfd"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-crypto"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-forex"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    }
+  }
+}</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+<strong>Settings → MCP</strong> จะแสดงเซิร์ฟเวอร์ 4 ตัวที่มีสถานะ ● สีเขียว ไม่ต้องรีสตาร์ต — Cursor โหลดใหม่อัตโนมัติทันที
+            </div>
+</div>
+</div>
+<!-- ============ WINDSURF ============ -->
+<div class="pb-tab" data-tab="windsurf">
+<div class="pb-head">
+<h3>Windsurf (Codeium)</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            โปรแกรมแก้ไข AI โดย Codeium ตั้งค่าผ่าน UI หรือผ่านไฟล์ JSON โดยตรง
+          </div>
+<div class="pb-path">Settings → Windsurf Settings → MCP Servers → Edit configuration</div>
+<div class="code-block">
+<div class="code-head">
+<span>mcp_config.json</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>{
+  <span class="tk-key">"mcpServers"</span>: {
+    <span class="tk-key">"iq-digital-options"</span>: {
+      <span class="tk-key">"serverUrl"</span>: <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-cfd"</span>: {
+      <span class="tk-key">"serverUrl"</span>: <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-crypto"</span>: {
+      <span class="tk-key">"serverUrl"</span>: <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-forex"</span>: {
+      <span class="tk-key">"serverUrl"</span>: <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    }
+  }
+}</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+<strong>Windsurf → Settings → MCP servers</strong> จะแสดงสถานะ หากพบข้อผิดพลาด ให้กด Refresh
+            </div>
+</div>
+</div>
+<!-- ============ CODEX ============ -->
+<div class="pb-tab" data-tab="codex">
+<div class="pb-head">
+<h3>OpenAI Codex CLI</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            Codex CLI ของ OpenAI ไฟล์คอนฟิกในรูปแบบ TOML ภายในไดเรกทอรีโปรไฟล์ Codex
+          </div>
+<div class="pb-path">Codex profile · <code>config.toml</code></div>
+<div class="code-block">
+<div class="code-head">
+<span>config.toml</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>[mcp_servers.iq-digital-options]
+url = <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>
+headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+
+[mcp_servers.iq-margin-cfd]
+url = <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>
+headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+
+[mcp_servers.iq-margin-crypto]
+url = <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>
+headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+
+[mcp_servers.iq-margin-forex]
+url = <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>
+headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              ในแชต: <code>/mcp</code> แสดงรายการเซิร์ฟเวอร์ รัน <code>codex mcp status</code> เพื่อตรวจสอบ
+            </div>
+</div>
+</div>
+<!-- ============ CHATGPT DESKTOP ============ -->
+<div class="pb-tab" data-tab="chatgpt">
+<div class="pb-head">
+<h3>ChatGPT Desktop</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            แอปเดสก์ท็อปของ OpenAI เพิ่ม MCP ผ่าน <strong>Settings → Connectors → Custom MCP Server</strong>.
+          </div>
+<div class="code-block">
+<div class="code-head">
+<span>Settings → Connectors</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code><span class="tk-cmt"># Add 4 connectors, one at a time:</span>
+
+<span class="tk-key">Name:</span>           IQ Digital Options
+<span class="tk-key">Server URL:</span>     https://digital-options.mcp.iqoption.com
+<span class="tk-key">Transport:</span>      Streamable HTTP
+<span class="tk-key">Auth header:</span>    Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>
+
+<span class="tk-key">Name:</span>           IQ Margin CFD
+<span class="tk-key">Server URL:</span>     https://marginal-cfd.mcp.iqoption.com
+<span class="tk-key">Auth header:</span>    Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>
+
+<span class="tk-key">Name:</span>           IQ Margin Crypto
+<span class="tk-key">Server URL:</span>     https://marginal-crypto.mcp.iqoption.com
+<span class="tk-key">Auth header:</span>    Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>
+
+<span class="tk-key">Name:</span>           IQ Margin Forex
+<span class="tk-key">Server URL:</span>     https://marginal-forex.mcp.iqoption.com
+<span class="tk-key">Auth header:</span>    Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">i</div>
+<div class="pb-test-text">
+<strong>เปิดใช้งานคอนเนกเตอร์ในแชต</strong> ก่อนเริ่มการสนทนา ให้คลิกไอคอน Connectors ใต้ช่องพรอมต์แล้วเลือกตัวที่คุณต้องการ ใช้ได้กับการสมัครสมาชิก Plus / Pro / Team
+            </div>
+</div>
+</div>
+<!-- ============ CLINE ============ -->
+<div class="pb-tab" data-tab="cline">
+<div class="pb-head">
+<h3>Cline (ส่วนขยาย VS Code)</h3>
+<span class="pt-diff">ง่าย</span>
+</div>
+<div class="pb-desc">
+            เอเจนต์ AI ยอดนิยมสำหรับ VS Code การตั้งค่า MCP อยู่ในแผง Cline → MCP Servers → Edit Configuration
+          </div>
+<div class="pb-path">Cline panel → MCP Servers → Edit Configuration</div>
+<div class="code-block">
+<div class="code-head">
+<span>cline_mcp_settings.json</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>{
+  <span class="tk-key">"mcpServers"</span>: {
+    <span class="tk-key">"iq-digital-options"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> },
+      <span class="tk-key">"disabled"</span>: false
+    },
+    <span class="tk-key">"iq-margin-cfd"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> },
+      <span class="tk-key">"disabled"</span>: false
+    },
+    <span class="tk-key">"iq-margin-crypto"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> },
+      <span class="tk-key">"disabled"</span>: false
+    },
+    <span class="tk-key">"iq-margin-forex"</span>: {
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"streamable-http"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> },
+      <span class="tk-key">"disabled"</span>: false
+    }
+  }
+}</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              ใน Cline → MCP Servers คุณจะเห็นเซิร์ฟเวอร์ 4 ตัวที่มีสถานะ ● เชื่อมต่อแล้ว
+            </div>
+</div>
+</div>
+<!-- ============ CONTINUE ============ -->
+<div class="pb-tab" data-tab="continue">
+<div class="pb-head">
+<h3>Continue.dev</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            ผู้ช่วยเขียนโค้ด AI โอเพนซอร์สสำหรับ VS Code และ JetBrains คอนฟิกในรูปแบบ YAML ภายในไดเรกทอรีโปรไฟล์ Continue
+          </div>
+<div class="pb-path">Continue profile · <code>config.yaml</code></div>
+<div class="code-block">
+<div class="code-head">
+<span>config.yaml · ส่วน mcpServers</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>mcpServers:
+  - <span class="tk-key">name:</span> iq-digital-options
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://digital-options.mcp.iqoption.com
+    <span class="tk-key">requestOptions:</span>
+      <span class="tk-key">headers:</span>
+        <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  - <span class="tk-key">name:</span> iq-margin-cfd
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-cfd.mcp.iqoption.com
+    <span class="tk-key">requestOptions:</span>
+      <span class="tk-key">headers:</span>
+        <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  - <span class="tk-key">name:</span> iq-margin-crypto
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-crypto.mcp.iqoption.com
+    <span class="tk-key">requestOptions:</span>
+      <span class="tk-key">headers:</span>
+        <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  - <span class="tk-key">name:</span> iq-margin-forex
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-forex.mcp.iqoption.com
+    <span class="tk-key">requestOptions:</span>
+      <span class="tk-key">headers:</span>
+        <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              แผง Continue → MCP Servers → ควรปรากฏทั้ง 4 ตัว
+            </div>
+</div>
+</div>
+<!-- ============ ZED ============ -->
+<div class="pb-tab" data-tab="zed">
+<div class="pb-head">
+<h3>Zed</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            โปรแกรมแก้ไขที่เร็วสุดขีด MCP ผ่าน <code>context_servers</code> ในการตั้งค่า Zed (Cmd , / Ctrl ,)
+          </div>
+<div class="pb-path">Zed settings.json</div>
+<div class="code-block">
+<div class="code-head">
+<span>settings.json</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>{
+  <span class="tk-key">"context_servers"</span>: {
+    <span class="tk-key">"iq-digital-options"</span>: {
+      <span class="tk-key">"source"</span>: <span class="tk-str">"custom"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-cfd"</span>: {
+      <span class="tk-key">"source"</span>: <span class="tk-str">"custom"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-cfd.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-crypto"</span>: {
+      <span class="tk-key">"source"</span>: <span class="tk-str">"custom"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-crypto.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    },
+    <span class="tk-key">"iq-margin-forex"</span>: {
+      <span class="tk-key">"source"</span>: <span class="tk-str">"custom"</span>,
+      <span class="tk-key">"transport"</span>: <span class="tk-str">"http"</span>,
+      <span class="tk-key">"url"</span>: <span class="tk-str">"https://marginal-forex.mcp.iqoption.com"</span>,
+      <span class="tk-key">"headers"</span>: { <span class="tk-key">"Authorization"</span>: <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> }
+    }
+  }
+}</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              เปิดแผง Agent ใน Zed — เซิร์ฟเวอร์ควรปรากฏใต้ Available Tools
+            </div>
+</div>
+</div>
+<!-- ============ GOOSE ============ -->
+<div class="pb-tab" data-tab="goose">
+<div class="pb-head">
+<h3>Goose (Block)</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            เอเจนต์ AI โอเพนซอร์สโดย Block (เดิมชื่อ Square) ส่วนขยายตั้งค่าในรูปแบบ YAML
+          </div>
+<div class="pb-path">Goose config · <code>config.yaml</code></div>
+<div class="code-block">
+<div class="code-head">
+<span>config.yaml · ส่วน extensions</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>extensions:
+  iq-digital-options:
+    <span class="tk-key">type:</span> streamable_http
+    <span class="tk-key">uri:</span> https://digital-options.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+    <span class="tk-key">enabled:</span> true
+
+  iq-margin-cfd:
+    <span class="tk-key">type:</span> streamable_http
+    <span class="tk-key">uri:</span> https://marginal-cfd.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+    <span class="tk-key">enabled:</span> true
+
+  iq-margin-crypto:
+    <span class="tk-key">type:</span> streamable_http
+    <span class="tk-key">uri:</span> https://marginal-crypto.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+    <span class="tk-key">enabled:</span> true
+
+  iq-margin-forex:
+    <span class="tk-key">type:</span> streamable_http
+    <span class="tk-key">uri:</span> https://marginal-forex.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+    <span class="tk-key">enabled:</span> true</code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+<code>goose session</code> จะแสดงส่วนขยายที่โหลดเมื่อเริ่มต้น
+            </div>
+</div>
+</div>
+<!-- ============ CHERRY ============ -->
+<div class="pb-tab" data-tab="cherry">
+<div class="pb-head">
+<h3>Cherry Studio</h3>
+<span class="pt-diff">ง่าย</span>
+</div>
+<div class="pb-desc">
+            ไคลเอนต์ AI เดสก์ท็อปหลายโมเดลที่รองรับ MCP โดยตรง ผ่าน UI ทั้งหมด — ไม่ต้องใช้ JSON
+          </div>
+<div class="code-block">
+<div class="code-head">
+<span>Settings → MCP Servers → Add</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code><span class="tk-cmt"># Add 4 servers; for each one:</span>
+
+<span class="tk-key">Name:</span>            iq-digital-options  (or another)
+<span class="tk-key">Type:</span>            HTTP (Streamable)
+<span class="tk-key">URL:</span>             https://digital-options.mcp.iqoption.com
+<span class="tk-key">Headers:</span>
+  Authorization → Bearer <span class="tk-token">YOUR_TOKEN</span>
+
+<span class="tk-cmt"># Repeat for marginal-cfd, marginal-crypto, marginal-forex.
+# Enable the toggle next to each server.</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              ในแชต เลือกโมเดล → มีไอคอน Tools ทางด้านขวา → เลือกเซิร์ฟเวอร์สำหรับเซสชันของคุณ
+            </div>
+</div>
+</div>
+<!-- ============ LIBRECHAT ============ -->
+<div class="pb-tab" data-tab="librechat">
+<div class="pb-head">
+<h3>LibreChat</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            เซิร์ฟเวอร์แชตหลายโมเดลโอเพนซอร์ส (โฮสต์เอง) MCP ผ่าน librechat.yaml หลัก
+          </div>
+<div class="pb-path">librechat.yaml</div>
+<div class="code-block">
+<div class="code-head">
+<span>librechat.yaml · ส่วน mcpServers</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>mcpServers:
+  iq-digital-options:
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://digital-options.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  iq-margin-cfd:
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-cfd.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  iq-margin-crypto:
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-crypto.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span>
+
+  iq-margin-forex:
+    <span class="tk-key">type:</span> streamable-http
+    <span class="tk-key">url:</span> https://marginal-forex.mcp.iqoption.com
+    <span class="tk-key">headers:</span>
+      <span class="tk-key">Authorization:</span> <span class="tk-str">"Bearer <span class="tk-token">YOUR_TOKEN</span>"</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              รีสตาร์ตคอนเทนเนอร์: <code>docker compose restart api</code> เครื่องมือ MCP จะปรากฏใต้ Plugins
+            </div>
+</div>
+</div>
+<!-- ============ CUSTOM ============ -->
+<div class="pb-tab" data-tab="custom">
+<div class="pb-head">
+<h3>กำหนดเอง / องค์กร</h3>
+<span class="pt-diff med">ปานกลาง</span>
+</div>
+<div class="pb-desc">
+            เอเจนต์ของคุณเอง แพลตฟอร์มภายในองค์กร หรือระบบใด ๆ ที่สื่อสาร MCP ตามข้อกำหนด พารามิเตอร์สากล:
+          </div>
+<div class="code-block">
+<div class="code-head">
+<span>พารามิเตอร์ MCP สากล</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code><span class="tk-key">Transport:</span>      streamable-http (HTTP/SSE per spec)
+<span class="tk-key">Method:</span>         POST  (for invocations)
+<span class="tk-key">URL:</span>            https://&lt;market&gt;.mcp.iqoption.com
+<span class="tk-key">Header:</span>         Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>
+<span class="tk-key">Content-Type:</span>   application/json
+
+<span class="tk-cmt"># Available &lt;market&gt; values:</span>
+<span class="tk-cmt">#  · digital-options · marginal-cfd</span>
+<span class="tk-cmt">#  · marginal-crypto · marginal-forex</span></code></pre>
+</div>
+<div class="code-block">
+<div class="code-head">
+<span>ตรวจสอบความถูกต้อง · curl</span>
+<button class="copy-btn" data-copy-code="">📋 คัดลอก</button>
+</div>
+<pre><code>curl -X POST https://digital-options.mcp.iqoption.com \
+  -H <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> \
+  -H <span class="tk-str">"Content-Type: application/json"</span> \
+  -d <span class="tk-str">'{"jsonrpc":"2.0","id":1,"method":"tools/list"}'</span></code></pre>
+</div>
+<div class="pb-test">
+<div class="pb-test-ic">✓</div>
+<div class="pb-test-text">
+              หาก curl ตอบกลับเป็น JSON พร้อมรายการเครื่องมือ — แสดงว่าโทเคนและ URL ของคุณใช้งานได้ จากนั้นให้สร้างไคลเอนต์ MCP ตาม <a href="https://spec.modelcontextprotocol.io/" rel="noopener" target="_blank">spec.modelcontextprotocol.io</a>.
+            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     SAFETY
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="safety">
+<div class="container">
+<div class="section-eyebrow">06 · ความปลอดภัย</div>
+<h2 class="section-title">โทเคนของคุณ ความรับผิดชอบของคุณ มีการ์ดเรลในตัว</h2>
+<p class="section-sub">
+      MCP มอบกุญแจสู่บัญชีเทรดของคุณให้ AI ดังนั้นเรา — และคุณ — จึงเฝ้าดูขีดจำกัดร่วมกัน
+    </p>
+<div class="safety-grid">
+<div class="safety-card ok">
+<div class="safety-ic">🔐</div>
+<div>
+<h3>โทเคนอยู่ในเฮดเดอร์ ไม่ใช่ในแชต</h3>
+<p>โทเคน Bearer ถูกแนบไว้ในเฮดเดอร์ HTTP ของการเชื่อมต่อระหว่างผู้ช่วย ↔ เซิร์ฟเวอร์ AI ไม่เห็นโทเคนในเนื้อหาข้อความและไม่สามารถส่งออกไปโดยไม่ตั้งใจได้</p>
+</div>
+</div>
+<div class="safety-card warn">
+<div class="safety-ic">⚠</div>
+<div>
+<h3>อย่าแชร์ อย่าคอมมิต</h3>
+<p>โทเคน = สิทธิ์เข้าถึงบัญชีเทรดของคุณ อย่าเผยแพร่ใน git สกรีนช็อต แชต หรือ gist หากสงสัยว่าข้อมูลรั่วไหล — ให้เปิด <strong>Settings → AI integrations</strong> แล้วกด Revoke ข้างโทเคนนั้น คำขอทั้งหมดที่ใช้โทเคนนั้นจะหยุดทำงานทันที</p>
+</div>
+</div>
+<div class="safety-card info">
+<div class="safety-ic">i</div>
+<div>
+<h3>วันหมดอายุและการหมุนเวียน</h3>
+<p>คุณกำหนดวันหมดอายุตอนสร้าง หลังจากวันนั้นโทเคนจะหยุดทำงานโดยอัตโนมัติ เราแนะนำให้ใช้โทเคนแยกตามแต่ละการเชื่อมต่อ — เพื่อให้คุณเพิกถอนได้เฉพาะที่ต้องการ</p>
+</div>
+</div>
+<div class="safety-card danger">
+<div class="safety-ic">!</div>
+<div>
+<h3>เริ่มจากเล็ก ๆ</h3>
+<p>AI ทรงพลังแต่ไม่ได้สมบูรณ์แบบ มันอาจเลือกเครื่องมือ ขนาด หรือทิศทางที่ผิดได้ ก่อนจะไว้วางใจโมเดลด้วยขนาดที่ใหญ่ — ให้ทบทวนสถานการณ์ด้วยตนเองและตรวจสอบคำแนะนำของมันซ้ำสองครั้ง ความรับผิดชอบในทุกการเทรดเป็นของคุณ</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     EXAMPLE PROMPTS
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="prompts" style="padding-top:0;">
+<div class="container">
+<div class="section-eyebrow">07 · ตัวอย่างพรอมต์</div>
+<h2 class="section-title">สิ่งที่ควรถาม AI เมื่อเชื่อมต่อแล้ว</h2>
+<p class="section-sub">
+      ภาษาธรรมดา — ไม่มีคำสั่งหรือเครื่องหมายสแลช ถามเป็นภาษาอังกฤษ สเปน โปรตุเกส หรือภาษาของคุณเอง — โมเดลจะเข้าใจเองว่าต้องเรียกเซิร์ฟเวอร์ใด
+    </p>
+<div class="prompt-cats">
+<div class="prompt-cat">
+<h4>บัญชี</h4>
+<ul>
+<li>แสดงยอดเงินของฉัน</li>
+<li>ตอนนี้ฉันอยู่ในบัญชีไหน</li>
+<li>แสดงรายการบัญชี IQ Option ของฉัน</li>
+<li>ฉันมีมาร์จินอิสระเท่าไหร่</li>
+</ul>
+</div>
+<div class="prompt-cat">
+<h4>ตลาด</h4>
+<ul>
+<li>มีสินทรัพย์ใดบ้างใน Margin Crypto</li>
+<li>แสดงราคา EUR/USD ให้ฉันดู</li>
+<li>เปรียบเทียบการเคลื่อนไหวของ BTC ในชั่วโมงที่ผ่านมา</li>
+<li>สเปรดปัจจุบันของคู่ forex 5 อันดับแรกเป็นเท่าไหร่</li>
+</ul>
+</div>
+<div class="prompt-cat">
+<h4>พอร์ต</h4>
+<ul>
+<li>แสดงสถานะการลงทุนที่เปิดอยู่ของฉัน</li>
+<li>แสดงรายการคำสั่งที่รอดำเนินการของฉัน</li>
+<li>ความเสี่ยงรวมของบัญชีฉันเป็นเท่าไหร่</li>
+<li>วันนี้ฉันเทรดไปกี่ครั้ง</li>
+</ul>
+</div>
+<div class="prompt-cat">
+<h4>การเทรด</h4>
+<ul>
+<li>เปิดสถานะ long BTC ที่ 0.01 พร้อม stop loss 5%</li>
+<li>ซื้อออปชัน call EUR/USD แบบ 5 นาที</li>
+<li>ปิดสถานะ Tesla ของฉันทั้งหมด</li>
+<li>วางคำสั่ง limit buy บน SPY ที่ประมาณ 580</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     FAQ
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="faq" style="padding-top:0;">
+<div class="container">
+<div class="section-eyebrow">08 · คำถามที่พบบ่อย</div>
+<h2 class="section-title">คำถามที่พบบ่อย</h2>
+<div class="faq">
+<details class="faq-item">
+<summary>ฉันต้องติดตั้งอะไรในคอมพิวเตอร์ของฉันไหม?</summary>
+<p>ไม่ต้อง เซิร์ฟเวอร์ MCP ของเราโฮสต์โดยเรา — ไม่ต้องโคลน repo ไม่ต้องติดตั้ง Python หรือ venv เพียงแค่ใส่ URL + โทเคน Bearer ในคอนฟิกของผู้ช่วย AI ของคุณ</p>
+</details>
+<details class="faq-item">
+<summary>โทเคนเดียวใช้ได้กับเซิร์ฟเวอร์ทั้ง 4 จริงหรือ?</summary>
+<p>ใช่ สร้างโทเคน Bearer หนึ่งตัวใน <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent);" target="_blank"><code>Settings → AI integrations</code></a> แล้วใช้ในเฮดเดอร์ Authorization สำหรับทั้งสี่เอนด์พอยต์: digital-options, marginal-cfd, marginal-crypto, marginal-forex</p>
+</details>
+<details class="faq-item">
+<summary>จะเป็นอย่างไรถ้าฉันต้องการเชื่อมต่อเพียงตลาดเดียว เช่น Forex?</summary>
+<p>ลบบล็อกอื่น ๆ ออกจากคอนฟิก — เก็บไว้เฉพาะ <code>iq-margin-forex</code> AI จะเห็นเฉพาะเครื่องมือจากเซิร์ฟเวอร์นั้นและจะไม่สามารถแตะต้อง เช่น ออปชัน โดยไม่ตั้งใจได้</p>
+</details>
+<details class="faq-item">
+<summary>จริง ๆ แล้ว AI ทำอะไรได้บ้างผ่าน MCP?</summary>
+<p>เซิร์ฟเวอร์แต่ละตัวของเราเปิดเผยรายการเครื่องมือของตัวเอง — คุณสามารถดูชุดเต็มได้ทันทีหลังเชื่อมต่อโดยถามผู้ช่วยว่า: "คุณมีเครื่องมือ IQ Option อะไรบ้าง?" โดยรวมแล้วคือการอ่านข้อมูลตลาด พอร์ต และการเทรด รวมถึงเมธอดในการเปิด/ปิดสถานะ เมธอดใดที่ใช้ได้กับโทเคนเฉพาะตัวขึ้นอยู่กับขอบเขตของมัน (อ่าน + เลือกเทรดได้ตามแต่ละตลาด)</p>
+</details>
+<details class="faq-item">
+<summary>ฉันจะทำให้แน่ใจได้อย่างไรว่า AI เทรดไม่ได้?</summary>
+<p>ตอนสร้างโทเคนใน <code>Settings → AI integrations</code> เพียง <strong>อย่าติ๊ก</strong> ช่องทำเครื่องหมาย "เทรด · …" ใด ๆ ในสี่ช่องนั้น การอ่านยังคงเปิดอยู่ (ปิดไม่ได้ — AI ต้องใช้) และความพยายามใด ๆ ที่จะเรียกเครื่องมือเทรดจะตอบกลับ <code>403 Forbidden</code> นี่คือการตั้งค่าที่ปลอดภัยที่สุดสำหรับกรณีการใช้งานเชิงวิจัย</p>
+</details>
+<details class="faq-item">
+<summary>ฉันสามารถอนุญาตให้เทรดเฉพาะเครื่องมือเดียวได้ไหม?</summary>
+<p>ได้ ตัวอย่างเช่น ติ๊กเฉพาะ <code>Trade · Margin Crypto</code> — AI จะสามารถเปิด/ปิดสถานะคริปโตได้ แต่ออปชัน, CFD และ forex จะยังคงเป็นแบบอ่านอย่างเดียว มีประโยชน์เมื่อคุณกำลังทดสอบการตั้งค่า AI กับตลาดที่คุณคุ้นเคย</p>
+</details>
+<details class="faq-item">
+<summary>จะเป็นอย่างไรถ้าฉันต้องการยกเลิกสิทธิ์เทรดจากโทเคนที่มีอยู่?</summary>
+<p>เปิด <code>Settings → AI integrations</code>หาโทเคนแล้วยกเลิกการติ๊กช่องที่เกี่ยวข้อง (เช่น <code>Trade · Margin CFD</code>) สิทธิ์จะถูกยกเลิกทันที — เซิร์ฟเวอร์จะเริ่มตอบกลับ <code>403 Forbidden</code> สำหรับการเรียกเทรดในตลาดนั้น ค่าของโทเคนเองไม่เปลี่ยนแปลง จึงไม่ต้องแตะต้องคอนฟิกของผู้ช่วย</p>
+</details>
+<details class="faq-item">
+<summary>จะเป็นอย่างไรถ้าโทเคนของฉันรั่วไหล?</summary>
+<p>ไปที่ <code>Settings → AI integrations</code>หาโทเคนที่ถูกบุกรุกแล้วกด Revoke คำขอทั้งหมดที่ใช้โทเคนนั้นจะหยุดทำงานทันที สร้างโทเคนใหม่แล้วอัปเดตคอนฟิกของผู้ช่วย</p>
+</details>
+<details class="faq-item">
+<summary>ข้อจำกัดของโทเคนและเซิร์ฟเวอร์มีอะไรบ้าง?</summary>
+<p>หนึ่งบัญชีสามารถมีโทเคนที่ใช้งานได้หลายตัวพร้อมกัน (ดูได้ในรายการ Active tokens) โทเคนหนึ่งตัวใช้ได้กับเซิร์ฟเวอร์ทั้ง 4 หากต้องการแยกกุญแจตามแต่ละการเชื่อมต่อเพื่อให้เพิกถอนได้ง่ายขึ้น — ให้สร้างหลายตัวและตั้งชื่อที่มีความหมาย</p>
+</details>
+<details class="faq-item">
+<summary>ผู้ช่วยของฉันมองไม่เห็นเครื่องมือหลังตั้งค่า ต้องทำอย่างไร?</summary>
+<p>รายการตรวจสอบ: (1) รีสตาร์ตผู้ช่วยอย่างสมบูรณ์ (2) ตรวจสอบให้แน่ใจว่าคัดลอกโทเคนมาโดยไม่มีช่องว่างเกินที่ต้น/ท้าย (3) ตรวจสอบว่า URL ไม่มีเครื่องหมายสแลชต่อท้ายและตรงกับการสมัครสมาชิกของคุณ (4) ตรวจสอบให้แน่ใจว่าเฮดเดอร์ Authorization ขึ้นต้นด้วย <code>Bearer </code> พอดี (สังเกตช่องว่าง) (5) ตรวจสอบบันทึกของผู้ช่วย — โดยปกติจะเป็นข้อผิดพลาดไวยากรณ์ JSON ในคอนฟิก</p>
+</details>
+<details class="faq-item">
+<summary>ผู้ช่วยตัวไหนตั้งค่าจากศูนย์ได้ง่ายที่สุด?</summary>
+<p>หากคุณไม่ใช่นักพัฒนา — Claude Desktop หรือ Cherry Studio: ทั้งคู่มี UI ที่จัดการคอนฟิกให้คุณ หากคุณอยู่กับโค้ดเป็นประจำ — Cursor หรือ Claude Code จะรู้สึกเป็นธรรมชาติกว่า</p>
+</details>
+<details class="faq-item">
+<summary>การใช้ MCP ฟรีไหม?</summary>
+<p>ในขณะนี้ — ใช่ ฟรีสำหรับลูกค้า IQ Option ทุกคนที่มีบัญชีที่ใช้งานอยู่ คุณจ่ายเฉพาะค่าสมัครสมาชิกผู้ช่วย AI ของคุณเท่านั้น (Claude Pro / ChatGPT Plus ฯลฯ)</p>
+</details>
+</div>
+</div>
+</section>
+<!-- ════════════════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════════════════ -->
+</main>
+<footer>
+<div class="container">
+<div class="foot-brand">
+<img alt="IQ Option" class="logo-mark" height="24" src="../assets/img/logo.png" style="width:24px;height:24px;" width="24"/>
+      IQ OPTION · การเชื่อมต่อ AI
+    </div>
+<p class="foot-disclaimer">
+<strong style="color:var(--text-soft);">ข้อจำกัดความรับผิดชอบ</strong> ผู้ช่วย AI เป็นเครื่องมือของบุคคลที่สามที่เป็นอิสระ IQ Option ไม่ได้ควบคุมพฤติกรรมของพวกมันและไม่รับผิดชอบต่อการตัดสินใจที่เกิดจากผลลัพธ์ของ AI การเทรด CFD / ออปชัน / forex / คริปโต มีความเสี่ยงสูงที่จะสูญเสียเงินทุน ทุกการเทรดเป็นความรับผิดชอบของคุณเอง ก่อนเทรดด้วยเงินจริง — ให้ฝึกฝนบนบัญชีเดโม
+    </p>
+<div class="foot-bottom">
+      © 2026 IQ Option · สร้างบน Model Context Protocol
+    </div>
+</div>
+</footer>
+<!-- Toast notification -->
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

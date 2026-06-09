@@ -1,0 +1,39 @@
+/* RTL overrides — loaded only on the Arabic (ar) page.
+   Flips directional accents/positions; keeps code, URLs and config strictly LTR. */
+
+[dir="rtl"] body { direction: rtl; }
+
+/* Code, server URLs, file paths and config stay left-to-right */
+[dir="rtl"] pre,
+[dir="rtl"] code,
+[dir="rtl"] .code-block,
+[dir="rtl"] .code-head,
+[dir="rtl"] .srv-url,
+[dir="rtl"] .pb-path,
+[dir="rtl"] .mono { direction: ltr; text-align: left; }
+
+/* Left-border accents → right */
+[dir="rtl"] .srv-card { border-left: 1px solid var(--border); border-right: 3px solid var(--accent); }
+[dir="rtl"] .srv-card.green { border-right-color: var(--success-bright); }
+[dir="rtl"] .srv-card.cyan  { border-right-color: var(--cyan); }
+[dir="rtl"] .srv-card.gold  { border-right-color: var(--gold); }
+[dir="rtl"] .perm-callout.ok   { border-left: 1px solid var(--border); border-right: 3px solid var(--success-bright); }
+[dir="rtl"] .perm-callout.warn { border-left: 1px solid var(--border); border-right: 3px solid var(--accent); }
+[dir="rtl"] .perm-callout.info { border-left: 1px solid var(--border); border-right: 3px solid var(--cyan); }
+
+/* Numbered sub-step bullets */
+[dir="rtl"] .step ol li { padding-left: 0; padding-right: 28px; }
+[dir="rtl"] .step ol li::before { left: auto; right: 0; }
+
+/* Permission tag to the visual start */
+[dir="rtl"] .perm-row .perm-tag { margin-left: 0; margin-right: auto; }
+
+/* Page chrome */
+[dir="rtl"] .lang-menu { right: auto; left: 0; }
+[dir="rtl"] .scroll-progress { transform-origin: 100% 50%; }
+[dir="rtl"] .skip-link { left: auto; right: 16px; }
+[dir="rtl"] .to-top { right: auto; left: 22px; }
+[dir="rtl"] .one-token-tip,
+[dir="rtl"] .pb-test,
+[dir="rtl"] .perm-row,
+[dir="rtl"] .safety-card { text-align: right; }

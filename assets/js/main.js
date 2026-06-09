@@ -177,4 +177,27 @@
     if (!ticking) { window.requestAnimationFrame(onScroll); ticking = true; }
   }, { passive: true });
   onScroll();
+
+  /* ── Language switcher dropdown ─────────────────────────────────────── */
+  const langSwitch = $('.lang-switch');
+  if (langSwitch) {
+    const toggle = $('.lang-toggle', langSwitch);
+    const menu = $('.lang-menu', langSwitch);
+    const open = () => { menu.hidden = false; toggle.setAttribute('aria-expanded', 'true'); };
+    const close = () => { menu.hidden = true; toggle.setAttribute('aria-expanded', 'false'); };
+    toggle.addEventListener('click', e => {
+      e.stopPropagation();
+      menu.hidden ? open() : close();
+    });
+    document.addEventListener('click', e => { if (!langSwitch.contains(e.target)) close(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !menu.hidden) { close(); toggle.focus(); }
+    });
+    menu.addEventListener('keydown', e => {
+      const items = $$('a', menu);
+      const i = items.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    });
+  }
 })();

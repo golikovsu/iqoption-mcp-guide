@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,14 +10,6 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="theme-color" content="#0C1326">
 <link rel="canonical" href="https://golikovsu.github.io/iqoption-mcp-guide/">
-<link rel="alternate" hreflang="en" href="https://golikovsu.github.io/iqoption-mcp-guide/">
-<link rel="alternate" hreflang="ar-SA" href="https://golikovsu.github.io/iqoption-mcp-guide/ar/">
-<link rel="alternate" hreflang="th" href="https://golikovsu.github.io/iqoption-mcp-guide/th/">
-<link rel="alternate" hreflang="pt" href="https://golikovsu.github.io/iqoption-mcp-guide/pt/">
-<link rel="alternate" hreflang="es" href="https://golikovsu.github.io/iqoption-mcp-guide/es/">
-<link rel="alternate" hreflang="tl" href="https://golikovsu.github.io/iqoption-mcp-guide/tl/">
-<link rel="alternate" hreflang="id" href="https://golikovsu.github.io/iqoption-mcp-guide/id/">
-<link rel="alternate" hreflang="x-default" href="https://golikovsu.github.io/iqoption-mcp-guide/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -26,7 +18,7 @@
 <meta property="og:description" content="One token, four markets, any AI. Connect Claude, ChatGPT or Cursor to IQ Option via MCP in three steps.">
 <meta property="og:url" content="https://golikovsu.github.io/iqoption-mcp-guide/">
 <meta property="og:image" content="https://golikovsu.github.io/iqoption-mcp-guide/assets/img/logo.png">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -56,6 +48,7 @@
       "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#website",
       "url": "https://golikovsu.github.io/iqoption-mcp-guide/",
       "name": "IQ Option · AI Integrations",
+      "description": "Connect any AI assistant to your IQ Option account via the Model Context Protocol.",
       "inLanguage": "en",
       "publisher": {
         "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org"
@@ -82,12 +75,12 @@
       },
       "publisher": {
         "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#org"
-      }
+      },
+      "keywords": "IQ Option, MCP, Model Context Protocol, Claude, ChatGPT, Cursor, AI trading, digital options, forex, crypto, CFD"
     },
     {
       "@type": "HowTo",
       "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#howto",
-      "inLanguage": "en",
       "name": "How to connect an AI assistant to IQ Option",
       "description": "Connect any MCP-capable AI assistant to IQ Option in three steps.",
       "totalTime": "PT3M",
@@ -96,26 +89,25 @@
           "@type": "HowToStep",
           "position": 1,
           "name": "Create a token",
-          "text": "In the mobile app or on the web: Open Settings → AI integrations → Tap + Add integration Give the token a name and an expiry Tick which markets are allowed for trading (read is always on). Details — section 03 above Copy the token immediately — once you close the screen it won't be shown again"
+          "text": "In the IQ Option mobile app or web: open Settings → AI integrations, tap + Add integration, name the token and set an expiry, tick which markets may trade (read is always on), then copy the token immediately — it is shown only once."
         },
         {
           "@type": "HowToStep",
           "position": 2,
           "name": "Pick your assistant",
-          "text": "Native MCP support is available in: Claude Desktop / Claude Code Cursor / Windsurf / Zed OpenAI Codex / ChatGPT Desktop Cline / Continue / Goose / LibreChat"
+          "text": "Choose an AI client with native MCP support: Claude Desktop, Claude Code, Cursor, Windsurf, Zed, OpenAI Codex, ChatGPT Desktop, Cline, Continue.dev, Goose, Cherry Studio or LibreChat."
         },
         {
           "@type": "HowToStep",
           "position": 3,
           "name": "Paste the config",
-          "text": "Copy the snippet for your assistant. Each one needs three things: The server URL Authorization: Bearer + your token Restart your assistant"
+          "text": "Copy the ready-made snippet for your assistant. Each entry needs the server URL, an 'Authorization: Bearer <token>' header, and a restart of the assistant."
         }
       ]
     },
     {
       "@type": "FAQPage",
       "@id": "https://golikovsu.github.io/iqoption-mcp-guide/#faq",
-      "inLanguage": "en",
       "mainEntity": [
         {
           "@type": "Question",
@@ -130,7 +122,7 @@
           "name": "Does one token really work on all 4 servers?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Create a single Bearer token in and use it in the Authorization header for all four endpoints: digital-options, marginal-cfd, marginal-crypto, marginal-forex."
+            "text": "Yes. Create a single Bearer token in Settings → AI integrations and use it in the Authorization header for all four endpoints: digital-options, marginal-cfd, marginal-crypto, marginal-forex."
           }
         },
         {
@@ -138,7 +130,7 @@
           "name": "What if I only want to connect one market, e.g. Forex?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Delete the other blocks from the config — keep only . AI will see only the tools from that server and won't be able to touch, e.g., options by accident."
+            "text": "Delete the other blocks from the config — keep only iq-margin-forex. AI will see only the tools from that server and won't be able to touch, e.g., options by accident."
           }
         },
         {
@@ -154,7 +146,7 @@
           "name": "How do I make sure AI can't trade?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "When creating the token in just don't tick any of the four \"Trade · …\" checkboxes. Read stays on (it can't be turned off — AI needs it), and any attempt to call a trading tool will return . This is the safest setup for research use cases."
+            "text": "When creating the token in Settings → AI integrations just don't tick any of the four \"Trade · …\" checkboxes. Read stays on (it can't be turned off — AI needs it), and any attempt to call a trading tool will return 403 Forbidden. This is the safest setup for research use cases."
           }
         },
         {
@@ -162,7 +154,7 @@
           "name": "Can I allow trading on only one instrument?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. For example, tick only — AI will be able to open/close crypto positions, but options, CFD and forex stay read-only. Useful when you're testing the AI setup on a market you're comfortable with."
+            "text": "Yes. For example, tick only Trade · Margin Crypto — AI will be able to open/close crypto positions, but options, CFD and forex stay read-only. Useful when you're testing the AI setup on a market you're comfortable with."
           }
         },
         {
@@ -170,7 +162,7 @@
           "name": "What if I want to drop a trade permission from an existing token?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Open , find the token and uncheck the relevant box (e.g. ). The permission is removed instantly — the server will start returning on trading calls for that market. The token value itself doesn't change, so no need to touch your assistant's config."
+            "text": "Open Settings → AI integrations, find the token and uncheck the relevant box (e.g. Trade · Margin CFD). The permission is removed instantly — the server will start returning 403 Forbidden on trading calls for that market. The token value itself doesn't change, so no need to touch your assistant's config."
           }
         },
         {
@@ -178,7 +170,7 @@
           "name": "What if my token leaked?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Go to , find the compromised token and hit Revoke. All requests with it stop working instantly. Create a new one and update the assistant's config."
+            "text": "Go to Settings → AI integrations, find the compromised token and hit Revoke. All requests with it stop working instantly. Create a new one and update the assistant's config."
           }
         },
         {
@@ -194,7 +186,7 @@
           "name": "My assistant doesn't see the tools after setup. What now?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Checklist: (1) restart the assistant completely, (2) make sure the token is copied without extra whitespace at the start/end, (3) check that the URL has no trailing slash and matches your subscription, (4) make sure the Authorization header starts exactly with (note the space), (5) check the assistant's logs — usually it's a JSON syntax error in the config."
+            "text": "Checklist: (1) restart the assistant completely, (2) make sure the token is copied without extra whitespace at the start/end, (3) check that the URL has no trailing slash and matches your subscription, (4) make sure the Authorization header starts exactly with Bearer (note the space), (5) check the assistant's logs — usually it's a JSON syntax error in the config."
           }
         },
         {
@@ -223,7 +215,7 @@
 <!-- ════════════════════════════════════════════════════════════════════
      HERO
      ════════════════════════════════════════════════════════════════════ -->
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main">⟦t0001⟧</a>
 <main id="main">
 <div class="hero-shell">
 <div class="hero-bg"></div>
@@ -232,53 +224,53 @@
 <nav aria-label="Primary" class="nav">
 <div class="logo">
 <img alt="IQ Option" class="logo-mark" height="32" src="assets/img/logo.png" width="32"/>
-        IQ OPTION · AI INTEGRATIONS
+        ⟦t0002⟧
       </div>
 <div class="nav-links">
-<a href="#what">What it is</a>
-<a href="#servers">Servers</a>
-<a href="#setup">Setup</a>
-<a href="#assistants">Assistants</a>
-<a href="#safety">Safety</a>
-<a href="#faq">FAQ</a>
+<a href="#what">⟦t0003⟧</a>
+<a href="#servers">⟦t0004⟧</a>
+<a href="#setup">⟦t0005⟧</a>
+<a href="#assistants">⟦t0006⟧</a>
+<a href="#safety">⟦t0007⟧</a>
+<a href="#faq">⟦t0008⟧</a>
 </div>
-<div class="lang-switch"><button class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Language"><span aria-hidden="true">🌐</span> <span class="lang-current">English</span><span class="lang-caret" aria-hidden="true">▾</span></button><ul class="lang-menu" role="menu" hidden><li role="none"><a role="menuitem" href="./" hreflang="en" lang="en" aria-current="true">English</a></li><li role="none"><a role="menuitem" href="ar/" hreflang="ar-SA" lang="ar">العربية</a></li><li role="none"><a role="menuitem" href="th/" hreflang="th" lang="th">ไทย</a></li><li role="none"><a role="menuitem" href="pt/" hreflang="pt" lang="pt">Português</a></li><li role="none"><a role="menuitem" href="es/" hreflang="es" lang="es">Español</a></li><li role="none"><a role="menuitem" href="tl/" hreflang="tl" lang="tl">Tagalog</a></li><li role="none"><a role="menuitem" href="id/" hreflang="id" lang="id">Bahasa Indonesia</a></li></ul></div></nav>
+⟦LANG_SWITCH⟧</nav>
 <div class="hero">
 <span class="badge">
 <span class="badge-dot"></span>
-        Model Context Protocol · Live
+        ⟦t0009⟧
       </span>
 <h1 class="hero-title">
-        Connect any AI assistant<br/>
-        to your <span class="hero-grad">IQ Option</span>
+        ⟦t0010⟧<br/>
+        ⟦t0011⟧ <span class="hero-grad">⟦t0012⟧</span>
 </h1>
 <p class="hero-sub">
-        One token, four markets, any AI of your choice. Talk to Claude, ChatGPT or Cursor about your positions, markets and trades. No code, three steps.
+        ⟦t0013⟧
       </p>
 <div class="hero-cta">
 <a class="qeds-button" data-context="accent" data-prominence="primary" data-size="lg" href="#setup">
-<span class="qeds-button__label">Start in 3 steps →</span>
+<span class="qeds-button__label">⟦t0014⟧</span>
 </a>
 <a class="qeds-button" data-context="general" data-prominence="tertiary" data-size="lg" href="#assistants">
-<span class="qeds-button__label">Ready-made configs</span>
+<span class="qeds-button__label">⟦t0015⟧</span>
 </a>
 </div>
 <div class="hero-stats reveal">
 <div class="hstat">
 <div class="hstat-num">1</div>
-<div class="hstat-label">Token for everything</div>
+<div class="hstat-label">⟦t0016⟧</div>
 </div>
 <div class="hstat">
 <div class="hstat-num green">4</div>
-<div class="hstat-label">MCP servers</div>
+<div class="hstat-label">⟦t0017⟧</div>
 </div>
 <div class="hstat">
 <div class="hstat-num cyan">12+</div>
-<div class="hstat-label">AI assistants</div>
+<div class="hstat-label">⟦t0018⟧</div>
 </div>
 <div class="hstat">
-<div class="hstat-num gold">~3 min</div>
-<div class="hstat-label">To set up</div>
+<div class="hstat-num gold">⟦t0019⟧</div>
+<div class="hstat-label">⟦t0020⟧</div>
 </div>
 </div>
 </div>
@@ -289,26 +281,26 @@
      ════════════════════════════════════════════════════════════════════ -->
 <section id="what">
 <div class="container">
-<div class="section-eyebrow">01 · What is MCP</div>
-<h2 class="section-title">One protocol. Any AI talks to your account.</h2>
+<div class="section-eyebrow">⟦t0021⟧</div>
+<h2 class="section-title">⟦t0022⟧</h2>
 <p class="section-sub">
-      MCP (Model Context Protocol) is an open standard from Anthropic through which AI assistants connect to external systems. We host servers for each instrument type — you create a token and paste it into your assistant.
+      ⟦t0023⟧
     </p>
 <div class="cap-grid">
 <div class="cap-card reveal">
 <div class="cap-ic orange">⚡</div>
-<h3>Analyse markets in plain language</h3>
-<p>Ask AI about live quotes, historical candles, spreads, volumes — in your own words, across all 4 markets at once.</p>
+<h3>⟦t0024⟧</h3>
+<p>⟦t0025⟧</p>
 </div>
 <div class="cap-card reveal">
 <div class="cap-ic green">📊</div>
-<h3>See your portfolio in chat</h3>
-<p>Open positions, pending orders, trade history, total equity — all through plain conversation. No window switching.</p>
+<h3>⟦t0026⟧</h3>
+<p>⟦t0027⟧</p>
 </div>
 <div class="cap-card reveal">
 <div class="cap-ic cyan">🛡️</div>
-<h3>Token-level control</h3>
-<p>Each token is a separate integration with its own lifetime. See all active ones in Settings → AI integrations and revoke any of them with one click.</p>
+<h3>⟦t0028⟧</h3>
+<p>⟦t0029⟧</p>
 </div>
 </div>
 </div>
@@ -318,45 +310,45 @@
      ════════════════════════════════════════════════════════════════════ -->
 <section id="servers" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">02 · Available servers</div>
-<h2 class="section-title">Four markets — four MCP endpoints.</h2>
+<div class="section-eyebrow">⟦t0030⟧</div>
+<h2 class="section-title">⟦t0031⟧</h2>
 <p class="section-sub">
-      Each instrument type lives on its own server. A single token from your IQ Option settings works on all four — connect all of them or just the ones you need.
+      ⟦t0032⟧
     </p>
 <div class="servers-row">
 <div class="srv-card">
 <div class="srv-info">
-<div class="srv-name">▸ Digital Options</div>
+<div class="srv-name">⟦t0033⟧</div>
 <div class="srv-url">https://digital-options.mcp.iqoption.com</div>
 </div>
-<button class="copy-btn" data-copy="https://digital-options.mcp.iqoption.com">📋 Copy URL</button>
+<button class="copy-btn" data-copy="https://digital-options.mcp.iqoption.com">⟦t0034⟧</button>
 </div>
 <div class="srv-card green">
 <div class="srv-info">
-<div class="srv-name">▸ Margin CFD</div>
+<div class="srv-name">⟦t0035⟧</div>
 <div class="srv-url">https://marginal-cfd.mcp.iqoption.com</div>
 </div>
-<button class="copy-btn" data-copy="https://marginal-cfd.mcp.iqoption.com">📋 Copy URL</button>
+<button class="copy-btn" data-copy="https://marginal-cfd.mcp.iqoption.com">⟦t0036⟧</button>
 </div>
 <div class="srv-card cyan">
 <div class="srv-info">
-<div class="srv-name">▸ Margin Crypto</div>
+<div class="srv-name">⟦t0037⟧</div>
 <div class="srv-url">https://marginal-crypto.mcp.iqoption.com</div>
 </div>
-<button class="copy-btn" data-copy="https://marginal-crypto.mcp.iqoption.com">📋 Copy URL</button>
+<button class="copy-btn" data-copy="https://marginal-crypto.mcp.iqoption.com">⟦t0038⟧</button>
 </div>
 <div class="srv-card gold">
 <div class="srv-info">
-<div class="srv-name">▸ Margin Forex</div>
+<div class="srv-name">⟦t0039⟧</div>
 <div class="srv-url">https://marginal-forex.mcp.iqoption.com</div>
 </div>
-<button class="copy-btn" data-copy="https://marginal-forex.mcp.iqoption.com">📋 Copy URL</button>
+<button class="copy-btn" data-copy="https://marginal-forex.mcp.iqoption.com">⟦t0040⟧</button>
 </div>
 </div>
 <div class="one-token-tip">
 <div class="info-ic">i</div>
 <div>
-<strong>1 token — 4 servers.</strong> Create one Bearer token in IQ Option (<a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank">Settings → AI integrations</a>) and reuse it in all four configs. Below we provide a ready-made config that connects all markets in a single block.
+<strong>⟦t0041⟧</strong> ⟦t0042⟧<a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank">⟦t0043⟧</a>⟦t0044⟧
       </div>
 </div>
 </div>
@@ -366,10 +358,10 @@
      ════════════════════════════════════════════════════════════════════ -->
 <section id="permissions" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">03 · Token permissions</div>
-<h2 class="section-title">Read by default. Trade — opt-in, per market.</h2>
+<div class="section-eyebrow">⟦t0045⟧</div>
+<h2 class="section-title">⟦t0046⟧</h2>
 <p class="section-sub">
-      Every token has its own scope. Read access to all 4 servers is enabled automatically and cannot be turned off — AI needs it just to "see" your data. The right to <strong style="color:var(--accent);">open and close trades</strong> is granted explicitly — separately for each market, when you create the token.
+      ⟦t0047⟧ <strong style="color:var(--accent);">⟦t0048⟧</strong> ⟦t0049⟧
     </p>
 <div class="perm-shell">
 <!-- LEFT: Mockup of the token creation card -->
@@ -377,41 +369,41 @@
 <div class="perm-head">
 <div class="perm-head-ic">🔑</div>
 <div>
-<h3>New AI integration token</h3>
-<div class="perm-head-sub">Settings → AI integrations → Add</div>
+<h3>⟦t0050⟧</h3>
+<div class="perm-head-sub">⟦t0051⟧</div>
 </div>
 </div>
 <div class="perm-body">
 <!-- READ section -->
 <div class="perm-section">
-<div class="perm-section-label green">▸ Read access · always on</div>
+<div class="perm-section-label green">⟦t0052⟧</div>
 <div class="perm-row">
 <button class="qeds-checkbox" data-checked="checked" data-size="md" disabled="" type="button">
 <span class="qeds-checkbox__indicator">
 <svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
 <span class="qeds-checkbox__labels">
-<span class="qeds-checkbox__label">Read · all 4 servers</span>
-<span class="qeds-checkbox__description">Balance, quotes, history, open positions, pending orders</span>
+<span class="qeds-checkbox__label">⟦t0053⟧</span>
+<span class="qeds-checkbox__description">⟦t0054⟧</span>
 </span>
 </button>
-<span class="perm-tag always">Always</span>
+<span class="perm-tag always">⟦t0055⟧</span>
 </div>
 </div>
 <!-- TRADE section -->
 <div class="perm-section">
-<div class="perm-section-label">▸ Trade access · opt-in</div>
+<div class="perm-section-label">⟦t0056⟧</div>
 <div class="perm-row">
 <button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
 <span class="qeds-checkbox__indicator">
 <svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
 <span class="qeds-checkbox__labels">
-<span class="qeds-checkbox__label">Trade · Digital Options</span>
-<span class="qeds-checkbox__description">Open and close options</span>
+<span class="qeds-checkbox__label">⟦t0057⟧</span>
+<span class="qeds-checkbox__description">⟦t0058⟧</span>
 </span>
 </button>
-<span class="perm-tag optional">Optional</span>
+<span class="perm-tag optional">⟦t0059⟧</span>
 </div>
 <div class="perm-row">
 <button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
@@ -419,11 +411,11 @@
 <svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
 <span class="qeds-checkbox__labels">
-<span class="qeds-checkbox__label">Trade · Margin CFD</span>
-<span class="qeds-checkbox__description">Long/short on CFD instruments with leverage</span>
+<span class="qeds-checkbox__label">⟦t0060⟧</span>
+<span class="qeds-checkbox__description">⟦t0061⟧</span>
 </span>
 </button>
-<span class="perm-tag optional">Optional</span>
+<span class="perm-tag optional">⟦t0062⟧</span>
 </div>
 <div class="perm-row">
 <button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
@@ -431,11 +423,11 @@
 <svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
 <span class="qeds-checkbox__labels">
-<span class="qeds-checkbox__label">Trade · Margin Crypto</span>
-<span class="qeds-checkbox__description">BTC, ETH, altcoins with leverage</span>
+<span class="qeds-checkbox__label">⟦t0063⟧</span>
+<span class="qeds-checkbox__description">⟦t0064⟧</span>
 </span>
 </button>
-<span class="perm-tag optional">Optional</span>
+<span class="perm-tag optional">⟦t0065⟧</span>
 </div>
 <div class="perm-row">
 <button class="qeds-checkbox" data-checked="unchecked" data-size="md" type="button">
@@ -443,33 +435,33 @@
 <svg class="qeds-checkbox__icon" data-icon="check" viewbox="0 0 16 16"><path d="M3 8.5L6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
 </span>
 <span class="qeds-checkbox__labels">
-<span class="qeds-checkbox__label">Trade · Margin Forex</span>
-<span class="qeds-checkbox__description">EUR/USD, GBP/JPY and other currency pairs</span>
+<span class="qeds-checkbox__label">⟦t0066⟧</span>
+<span class="qeds-checkbox__description">⟦t0067⟧</span>
 </span>
 </button>
-<span class="perm-tag optional">Optional</span>
+<span class="perm-tag optional">⟦t0068⟧</span>
 </div>
 </div>
 <div class="perm-meta">
-<div class="perm-meta-item">⏱ Expiry: <strong>30–90 days</strong></div>
-<div class="perm-meta-item">🏷 Label: <strong>Claude · Demo</strong></div>
-<div class="perm-meta-item">📍 Scope: <strong>Account-specific</strong></div>
+<div class="perm-meta-item">⟦t0069⟧ <strong>⟦t0070⟧</strong></div>
+<div class="perm-meta-item">⟦t0071⟧ <strong>⟦t0072⟧</strong></div>
+<div class="perm-meta-item">⟦t0073⟧ <strong>⟦t0074⟧</strong></div>
 </div>
 </div>
 </div>
 <!-- RIGHT: explanatory callouts -->
 <div class="perm-aside">
 <div class="perm-callout ok">
-<h4>🟢 Read — cannot be turned off</h4>
-<p>Without read access AI is useless — it can't show your balance or prices. That's why the read scope is enabled automatically across all 4 servers. This is the safest level: AI only looks, never touches.</p>
+<h4>⟦t0075⟧</h4>
+<p>⟦t0076⟧</p>
 </div>
 <div class="perm-callout warn">
-<h4>🟠 Trade — surgical, per use case</h4>
-<p>Want AI to help trade only options? Tick <code>Trade · Digital Options</code> and nothing else. Margin CFD/Crypto/Forex stay read-only — even if AI tries, the server returns <code>403 Forbidden</code>.</p>
+<h4>⟦t0077⟧</h4>
+<p>⟦t0078⟧ <code>Trade · Digital Options</code> ⟦t0079⟧ <code>403 Forbidden</code>.</p>
 </div>
 <div class="perm-callout info">
-<h4>🔵 Scope can be changed without recreating the token</h4>
-<p>Want to drop a trade permission from a token that's already in use? Open <code>Settings → AI integrations</code>, find the token, uncheck the market — the permission is dropped instantly. The token value itself does not change, so no need to update your assistant's config.</p>
+<h4>⟦t0080⟧</h4>
+<p>⟦t0081⟧ <code>Settings → AI integrations</code>⟦t0082⟧</p>
 </div>
 </div>
 </div>
@@ -478,38 +470,38 @@
 <div class="perm-head">
 <div class="perm-head-ic" style="background: rgba(94,218,255,0.15); color: var(--cyan); border:1px solid rgba(94,218,255,0.32);">📋</div>
 <div>
-<h3>Ready-made permission sets by scenario</h3>
-<div class="perm-head-sub">Pick the one closest to your use case</div>
+<h3>⟦t0083⟧</h3>
+<div class="perm-head-sub">⟦t0084⟧</div>
 </div>
 </div>
 <div class="perm-body">
 <div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
 <div style="flex:1;">
-<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">📊 Read-only research</div>
-<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">AI helps analyse markets, read your portfolio, calculate P&amp;L — but never trades. The safest setup.</div>
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">⟦t0085⟧</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">⟦t0086⟧</div>
 </div>
-<span class="perm-tag always" style="margin-left:14px;">Read only</span>
-</div>
-<div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
-<div style="flex:1;">
-<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🎯 Options-only auto-trade</div>
-<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">Read everywhere + Trade on <strong style="color:var(--text-strong);">Digital Options</strong>. CFD/Crypto/Forex remain off-limits.</div>
-</div>
-<span class="perm-tag optional" style="margin-left:14px;">+ Options</span>
+<span class="perm-tag always" style="margin-left:14px;">⟦t0087⟧</span>
 </div>
 <div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
 <div style="flex:1;">
-<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🪙 Crypto-only swing</div>
-<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">Read everywhere + Trade on <strong style="color:var(--text-strong);">Margin Crypto</strong>. Options, CFD and forex remain untouchable for AI.</div>
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">⟦t0088⟧</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">⟦t0089⟧ <strong style="color:var(--text-strong);">⟦t0090⟧</strong>⟦t0091⟧</div>
 </div>
-<span class="perm-tag optional" style="margin-left:14px;">+ Crypto</span>
+<span class="perm-tag optional" style="margin-left:14px;">⟦t0092⟧</span>
+</div>
+<div class="perm-row" style="border-bottom:1px solid var(--border); padding:14px 0;">
+<div style="flex:1;">
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">⟦t0093⟧</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">⟦t0094⟧ <strong style="color:var(--text-strong);">⟦t0095⟧</strong>⟦t0096⟧</div>
+</div>
+<span class="perm-tag optional" style="margin-left:14px;">⟦t0097⟧</span>
 </div>
 <div class="perm-row" style="padding:14px 0 0;">
 <div style="flex:1;">
-<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">🚀 Full access</div>
-<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">Read + Trade on all 4 servers. Maximum capability — and maximum responsibility. Only when you fully trust this specific assistant.</div>
+<div style="font-weight:700; color:var(--text-strong); font-size:14.5px; margin-bottom:3px;">⟦t0098⟧</div>
+<div style="font-size:13px; color:var(--text-soft); line-height:1.5;">⟦t0099⟧</div>
 </div>
-<span class="perm-tag optional" style="margin-left:14px;">All 4</span>
+<span class="perm-tag optional" style="margin-left:14px;">⟦t0100⟧</span>
 </div>
 </div>
 </div>
@@ -520,46 +512,46 @@
      ════════════════════════════════════════════════════════════════════ -->
 <section id="setup">
 <div class="container">
-<div class="section-eyebrow">04 · How to connect</div>
-<h2 class="section-title">Three steps. No code, no terminal.</h2>
+<div class="section-eyebrow">⟦t0101⟧</div>
+<h2 class="section-title">⟦t0102⟧</h2>
 <p class="section-sub">
-      Our MCP runs over streamable-HTTP — no Python environments, no virtual venv, no repos to clone. Just a URL + Bearer token you create in one click.
+      ⟦t0103⟧
     </p>
 <div class="steps">
 <div class="step reveal">
 <div class="step-num">1</div>
-<h3>Create a token</h3>
-<p>In the mobile app or on the web:</p>
+<h3>⟦t0104⟧</h3>
+<p>⟦t0105⟧</p>
 <ol>
-<li>Open <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank"><strong>Settings → AI integrations →</strong></a></li>
-<li>Tap <strong>+ Add integration</strong></li>
-<li>Give the token a name and an expiry</li>
-<li>Tick which markets are allowed for trading (read is always on). Details — section 03 above</li>
-<li>Copy the token immediately — once you close the screen it won't be shown again</li>
+<li>⟦t0106⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank"><strong>⟦t0107⟧</strong></a></li>
+<li>⟦t0108⟧ <strong>⟦t0109⟧</strong></li>
+<li>⟦t0110⟧</li>
+<li>⟦t0111⟧</li>
+<li>⟦t0112⟧</li>
 </ol>
 <a class="qeds-button" data-context="accent" data-prominence="tertiary" data-size="sm" href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="margin-top:16px;" target="_blank">
-<span class="qeds-button__label">Open AI integrations →</span>
+<span class="qeds-button__label">⟦t0113⟧</span>
 </a>
 </div>
 <div class="step reveal">
 <div class="step-num">2</div>
-<h3>Pick your assistant</h3>
-<p>Native MCP support is available in:</p>
+<h3>⟦t0114⟧</h3>
+<p>⟦t0115⟧</p>
 <ol>
-<li>Claude Desktop / Claude Code</li>
-<li>Cursor / Windsurf / Zed</li>
-<li>OpenAI Codex / ChatGPT Desktop</li>
-<li>Cline / Continue / Goose / LibreChat</li>
+<li>⟦t0116⟧</li>
+<li>⟦t0117⟧</li>
+<li>⟦t0118⟧</li>
+<li>⟦t0119⟧</li>
 </ol>
 </div>
 <div class="step reveal">
 <div class="step-num">3</div>
-<h3>Paste the config</h3>
-<p>Copy the snippet for your assistant. Each one needs three things:</p>
+<h3>⟦t0120⟧</h3>
+<p>⟦t0121⟧</p>
 <ol>
-<li>The server <strong>URL</strong></li>
-<li><strong>Authorization: Bearer</strong> + your token</li>
-<li><strong>Restart</strong> your assistant</li>
+<li>⟦t0122⟧ <strong>⟦t0123⟧</strong></li>
+<li><strong>⟦t0124⟧</strong> ⟦t0125⟧</li>
+<li><strong>⟦t0126⟧</strong> ⟦t0127⟧</li>
 </ol>
 </div>
 </div>
@@ -570,45 +562,45 @@
      ════════════════════════════════════════════════════════════════════ -->
 <section id="assistants" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">05 · Ready-made configs</div>
-<h2 class="section-title">Pick your assistant — the config is ready.</h2>
+<div class="section-eyebrow">⟦t0128⟧</div>
+<h2 class="section-title">⟦t0129⟧</h2>
 <p class="section-sub">
-      Each snippet connects all 4 servers at once. Just replace <span style="color:var(--accent);font-weight:700">YOUR_TOKEN</span> with the token you created in step 1. If you only need one market, keep just that block and delete the rest.
+      ⟦t0130⟧ <span style="color:var(--accent);font-weight:700">⟦t0131⟧</span> ⟦t0132⟧
     </p>
 <div class="picker-shell">
 <div class="picker-tabs" id="picker-tabs">
-<button class="pt active" data-tab="claude-desktop">🧠 Claude Desktop <span class="pt-diff">Easy</span></button>
-<button class="pt" data-tab="claude-code">⌨️ Claude Code <span class="pt-diff">Easy</span></button>
-<button class="pt" data-tab="cursor">📦 Cursor <span class="pt-diff">Easy</span></button>
-<button class="pt" data-tab="windsurf">🌊 Windsurf <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="codex">🤖 OpenAI Codex <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="chatgpt">💬 ChatGPT Desktop <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="cline">🧩 Cline (VS Code) <span class="pt-diff">Easy</span></button>
-<button class="pt" data-tab="continue">↻ Continue.dev <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="zed">⚡ Zed <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="goose">🦢 Goose <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="cherry">🍒 Cherry Studio <span class="pt-diff">Easy</span></button>
-<button class="pt" data-tab="librechat">🔓 LibreChat <span class="pt-diff med">Med</span></button>
-<button class="pt" data-tab="custom">⚙️ Custom / Enterprise <span class="pt-diff med">Med</span></button>
+<button class="pt active" data-tab="claude-desktop">⟦t0133⟧ <span class="pt-diff">⟦t0134⟧</span></button>
+<button class="pt" data-tab="claude-code">⟦t0135⟧ <span class="pt-diff">⟦t0136⟧</span></button>
+<button class="pt" data-tab="cursor">⟦t0137⟧ <span class="pt-diff">⟦t0138⟧</span></button>
+<button class="pt" data-tab="windsurf">⟦t0139⟧ <span class="pt-diff med">⟦t0140⟧</span></button>
+<button class="pt" data-tab="codex">⟦t0141⟧ <span class="pt-diff med">⟦t0142⟧</span></button>
+<button class="pt" data-tab="chatgpt">⟦t0143⟧ <span class="pt-diff med">⟦t0144⟧</span></button>
+<button class="pt" data-tab="cline">⟦t0145⟧ <span class="pt-diff">⟦t0146⟧</span></button>
+<button class="pt" data-tab="continue">⟦t0147⟧ <span class="pt-diff med">⟦t0148⟧</span></button>
+<button class="pt" data-tab="zed">⟦t0149⟧ <span class="pt-diff med">⟦t0150⟧</span></button>
+<button class="pt" data-tab="goose">⟦t0151⟧ <span class="pt-diff med">⟦t0152⟧</span></button>
+<button class="pt" data-tab="cherry">⟦t0153⟧ <span class="pt-diff">⟦t0154⟧</span></button>
+<button class="pt" data-tab="librechat">⟦t0155⟧ <span class="pt-diff med">⟦t0156⟧</span></button>
+<button class="pt" data-tab="custom">⟦t0157⟧ <span class="pt-diff med">⟦t0158⟧</span></button>
 </div>
 <div class="picker-body" id="picker-body">
 <!-- ============ CLAUDE DESKTOP ============ -->
 <div class="pb-tab active" data-tab="claude-desktop">
 <div class="pb-head">
-<h3>Claude Desktop</h3>
-<span class="pt-diff">Easy</span>
+<h3>⟦t0159⟧</h3>
+<span class="pt-diff">⟦t0160⟧</span>
 </div>
 <div class="pb-desc">
-            Anthropic's desktop app for Mac and Windows. Native MCP support. Edit one JSON file, restart — done.
+            ⟦t0161⟧
           </div>
-<div class="pb-platform">▸ Mac</div>
+<div class="pb-platform">⟦t0162⟧</div>
 <div class="pb-path">~/Library/Application Support/Claude/claude_desktop_config.json</div>
-<div class="pb-platform">▸ Windows</div>
+<div class="pb-platform">⟦t0163⟧</div>
 <div class="pb-path">%APPDATA%\Claude\claude_desktop_config.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>claude_desktop_config.json</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0164⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0165⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -638,23 +630,23 @@
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-<strong>Verify the connection.</strong> Restart Claude Desktop and ask: <code>What IQ Option tools do I have available?</code> — you'll see the tools list from all four servers.
+<strong>⟦t0166⟧</strong> ⟦t0167⟧ <code>What IQ Option tools do I have available?</code> ⟦t0168⟧
             </div>
 </div>
 </div>
 <!-- ============ CLAUDE CODE ============ -->
 <div class="pb-tab" data-tab="claude-code">
 <div class="pb-head">
-<h3>Claude Code (CLI)</h3>
-<span class="pt-diff">Easy</span>
+<h3>⟦t0169⟧</h3>
+<span class="pt-diff">⟦t0170⟧</span>
 </div>
 <div class="pb-desc">
-            Anthropic's terminal-based AI. One shell command per server. No config file — everything via CLI.
+            ⟦t0171⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>Terminal · add 4 servers</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0172⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0173⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Digital Options</span>
 claude mcp add --transport http iq-digital-options \
@@ -679,27 +671,27 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-<strong>Verify.</strong> Run <code>claude mcp list</code> — you should see 4 lines with ✓ connected status.
+<strong>⟦t0174⟧</strong> ⟦t0175⟧ <code>claude mcp list</code> ⟦t0176⟧
             </div>
 </div>
 </div>
 <!-- ============ CURSOR ============ -->
 <div class="pb-tab" data-tab="cursor">
 <div class="pb-head">
-<h3>Cursor</h3>
-<span class="pt-diff">Easy</span>
+<h3>⟦t0177⟧</h3>
+<span class="pt-diff">⟦t0178⟧</span>
 </div>
 <div class="pb-desc">
-            AI-first code editor. Settings → MCP → edit <code>mcp.json</code> directly or via the UI.
+            ⟦t0179⟧ <code>mcp.json</code> ⟦t0180⟧
           </div>
-<div class="pb-platform">▸ Mac · Linux</div>
+<div class="pb-platform">⟦t0181⟧</div>
 <div class="pb-path">~/.cursor/mcp.json</div>
-<div class="pb-platform">▸ Windows</div>
+<div class="pb-platform">⟦t0182⟧</div>
 <div class="pb-path">%USERPROFILE%\.cursor\mcp.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>mcp.json</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0183⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0184⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -725,24 +717,24 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-<strong>Settings → MCP</strong> will show 4 servers with ● Green status. No restart needed — Cursor hot-reloads.
+<strong>⟦t0185⟧</strong> ⟦t0186⟧
             </div>
 </div>
 </div>
 <!-- ============ WINDSURF ============ -->
 <div class="pb-tab" data-tab="windsurf">
 <div class="pb-head">
-<h3>Windsurf (Codeium)</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0187⟧</h3>
+<span class="pt-diff med">⟦t0188⟧</span>
 </div>
 <div class="pb-desc">
-            AI editor by Codeium. Configure via UI or directly via the JSON file.
+            ⟦t0189⟧
           </div>
 <div class="pb-path">Settings → Windsurf Settings → MCP Servers → Edit configuration</div>
 <div class="code-block">
 <div class="code-head">
-<span>mcp_config.json</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0190⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0191⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -768,24 +760,24 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-<strong>Windsurf → Settings → MCP servers</strong> will show the status. If you see an error, hit Refresh.
+<strong>⟦t0192⟧</strong> ⟦t0193⟧
             </div>
 </div>
 </div>
 <!-- ============ CODEX ============ -->
 <div class="pb-tab" data-tab="codex">
 <div class="pb-head">
-<h3>OpenAI Codex CLI</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0194⟧</h3>
+<span class="pt-diff med">⟦t0195⟧</span>
 </div>
 <div class="pb-desc">
-            OpenAI's Codex CLI. Config file in TOML format inside the Codex profile directory.
+            ⟦t0196⟧
           </div>
 <div class="pb-path">Codex profile · <code>config.toml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>config.toml</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0197⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0198⟧</button>
 </div>
 <pre><code>[mcp_servers.iq-digital-options]
 url = <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>
@@ -806,23 +798,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              In the chat: <code>/mcp</code> shows the list of servers. Run <code>codex mcp status</code> to verify.
+              ⟦t0199⟧ <code>/mcp</code> ⟦t0200⟧ <code>codex mcp status</code> ⟦t0201⟧
             </div>
 </div>
 </div>
 <!-- ============ CHATGPT DESKTOP ============ -->
 <div class="pb-tab" data-tab="chatgpt">
 <div class="pb-head">
-<h3>ChatGPT Desktop</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0202⟧</h3>
+<span class="pt-diff med">⟦t0203⟧</span>
 </div>
 <div class="pb-desc">
-            OpenAI's desktop app. MCP is added via <strong>Settings → Connectors → Custom MCP Server</strong>.
+            ⟦t0204⟧ <strong>⟦t0205⟧</strong>.
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>Settings → Connectors</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0206⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0207⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Add 4 connectors, one at a time:</span>
 
@@ -846,24 +838,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">i</div>
 <div class="pb-test-text">
-<strong>Enable connectors in the chat.</strong> Before starting a conversation, click the Connectors icon under the prompt and select the ones you need. Available on Plus / Pro / Team subscriptions.
+<strong>⟦t0208⟧</strong> ⟦t0209⟧
             </div>
 </div>
 </div>
 <!-- ============ CLINE ============ -->
 <div class="pb-tab" data-tab="cline">
 <div class="pb-head">
-<h3>Cline (VS Code Extension)</h3>
-<span class="pt-diff">Easy</span>
+<h3>⟦t0210⟧</h3>
+<span class="pt-diff">⟦t0211⟧</span>
 </div>
 <div class="pb-desc">
-            Popular AI agent for VS Code. MCP settings live in the Cline panel → MCP Servers → Edit Configuration.
+            ⟦t0212⟧
           </div>
 <div class="pb-path">Cline panel → MCP Servers → Edit Configuration</div>
 <div class="code-block">
 <div class="code-head">
-<span>cline_mcp_settings.json</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0213⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0214⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -897,24 +889,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              In Cline → MCP Servers you'll see 4 servers with ● connected status.
+              ⟦t0215⟧
             </div>
 </div>
 </div>
 <!-- ============ CONTINUE ============ -->
 <div class="pb-tab" data-tab="continue">
 <div class="pb-head">
-<h3>Continue.dev</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0216⟧</h3>
+<span class="pt-diff med">⟦t0217⟧</span>
 </div>
 <div class="pb-desc">
-            Open-source AI coding assistant for VS Code and JetBrains. Config in YAML inside the Continue profile directory.
+            ⟦t0218⟧
           </div>
 <div class="pb-path">Continue profile · <code>config.yaml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>config.yaml · mcpServers section</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0219⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0220⟧</button>
 </div>
 <pre><code>mcpServers:
   - <span class="tk-key">name:</span> iq-digital-options
@@ -948,24 +940,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              Continue panel → MCP Servers → all 4 should appear.
+              ⟦t0221⟧
             </div>
 </div>
 </div>
 <!-- ============ ZED ============ -->
 <div class="pb-tab" data-tab="zed">
 <div class="pb-head">
-<h3>Zed</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0222⟧</h3>
+<span class="pt-diff med">⟦t0223⟧</span>
 </div>
 <div class="pb-desc">
-            Ultra-fast editor. MCP via <code>context_servers</code> in Zed settings (Cmd , / Ctrl ,).
+            ⟦t0224⟧ <code>context_servers</code> ⟦t0225⟧
           </div>
 <div class="pb-path">Zed settings.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>settings.json</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0226⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0227⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"context_servers"</span>: {
@@ -999,24 +991,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              Open the Agent panel in Zed — the servers should appear under Available Tools.
+              ⟦t0228⟧
             </div>
 </div>
 </div>
 <!-- ============ GOOSE ============ -->
 <div class="pb-tab" data-tab="goose">
 <div class="pb-head">
-<h3>Goose (Block)</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0229⟧</h3>
+<span class="pt-diff med">⟦t0230⟧</span>
 </div>
 <div class="pb-desc">
-            Open-source AI agent by Block (formerly Square). Extensions configured in YAML.
+            ⟦t0231⟧
           </div>
 <div class="pb-path">Goose config · <code>config.yaml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>config.yaml · extensions section</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0232⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0233⟧</button>
 </div>
 <pre><code>extensions:
   iq-digital-options:
@@ -1050,23 +1042,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-<code>goose session</code> will show the loaded extensions on start.
+<code>goose session</code> ⟦t0234⟧
             </div>
 </div>
 </div>
 <!-- ============ CHERRY ============ -->
 <div class="pb-tab" data-tab="cherry">
 <div class="pb-head">
-<h3>Cherry Studio</h3>
-<span class="pt-diff">Easy</span>
+<h3>⟦t0235⟧</h3>
+<span class="pt-diff">⟦t0236⟧</span>
 </div>
 <div class="pb-desc">
-            Multi-model desktop AI client with native MCP. Fully via UI — no JSON required.
+            ⟦t0237⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>Settings → MCP Servers → Add</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0238⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0239⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Add 4 servers; for each one:</span>
 
@@ -1082,24 +1074,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              In the chat pick a model → there's a Tools icon on the right → pick the servers for your session.
+              ⟦t0240⟧
             </div>
 </div>
 </div>
 <!-- ============ LIBRECHAT ============ -->
 <div class="pb-tab" data-tab="librechat">
 <div class="pb-head">
-<h3>LibreChat</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0241⟧</h3>
+<span class="pt-diff med">⟦t0242⟧</span>
 </div>
 <div class="pb-desc">
-            Open-source multi-model chat server (self-hosted). MCP via the main librechat.yaml.
+            ⟦t0243⟧
           </div>
 <div class="pb-path">librechat.yaml</div>
 <div class="code-block">
 <div class="code-head">
-<span>librechat.yaml · mcpServers section</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0244⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0245⟧</button>
 </div>
 <pre><code>mcpServers:
   iq-digital-options:
@@ -1129,23 +1121,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              Restart the container: <code>docker compose restart api</code>. MCP tools will appear under Plugins.
+              ⟦t0246⟧ <code>docker compose restart api</code>⟦t0247⟧
             </div>
 </div>
 </div>
 <!-- ============ CUSTOM ============ -->
 <div class="pb-tab" data-tab="custom">
 <div class="pb-head">
-<h3>Custom / Enterprise</h3>
-<span class="pt-diff med">Medium</span>
+<h3>⟦t0248⟧</h3>
+<span class="pt-diff med">⟦t0249⟧</span>
 </div>
 <div class="pb-desc">
-            Your own agent, in-house platform, or any system that speaks MCP per spec. Universal parameters:
+            ⟦t0250⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>Universal MCP parameters</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0251⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0252⟧</button>
 </div>
 <pre><code><span class="tk-key">Transport:</span>      streamable-http (HTTP/SSE per spec)
 <span class="tk-key">Method:</span>         POST  (for invocations)
@@ -1159,8 +1151,8 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 </div>
 <div class="code-block">
 <div class="code-head">
-<span>Sanity check · curl</span>
-<button class="copy-btn" data-copy-code="">📋 Copy</button>
+<span>⟦t0253⟧</span>
+<button class="copy-btn" data-copy-code="">⟦t0254⟧</button>
 </div>
 <pre><code>curl -X POST https://digital-options.mcp.iqoption.com \
   -H <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> \
@@ -1170,7 +1162,7 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic">✓</div>
 <div class="pb-test-text">
-              If curl returned JSON with a tools list — your token and URL are working. From there, implement the MCP client per <a href="https://spec.modelcontextprotocol.io/" rel="noopener" target="_blank">spec.modelcontextprotocol.io</a>.
+              ⟦t0255⟧ <a href="https://spec.modelcontextprotocol.io/" rel="noopener" target="_blank">⟦t0256⟧</a>.
             </div>
 </div>
 </div>
@@ -1183,38 +1175,38 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
      ════════════════════════════════════════════════════════════════════ -->
 <section id="safety">
 <div class="container">
-<div class="section-eyebrow">06 · Safety</div>
-<h2 class="section-title">Your token, your responsibility. Guardrails are built in.</h2>
+<div class="section-eyebrow">⟦t0257⟧</div>
+<h2 class="section-title">⟦t0258⟧</h2>
 <p class="section-sub">
-      MCP gives AI the keys to your trading account. So we — and you — watch the limits together.
+      ⟦t0259⟧
     </p>
 <div class="safety-grid">
 <div class="safety-card ok">
 <div class="safety-ic">🔐</div>
 <div>
-<h3>Token lives in headers, not in chat</h3>
-<p>The Bearer token is attached to the HTTP header on the assistant ↔ server connection. AI does not see it in the message body and cannot accidentally send it out.</p>
+<h3>⟦t0260⟧</h3>
+<p>⟦t0261⟧</p>
 </div>
 </div>
 <div class="safety-card warn">
 <div class="safety-ic">⚠</div>
 <div>
-<h3>Don't share. Don't commit.</h3>
-<p>The token = access to your trading account. Never publish in git, screenshots, chats or gists. If you suspect a leak — open <strong>Settings → AI integrations</strong> and hit Revoke next to that token. All requests using it stop working instantly.</p>
+<h3>⟦t0262⟧</h3>
+<p>⟦t0263⟧ <strong>⟦t0264⟧</strong> ⟦t0265⟧</p>
 </div>
 </div>
 <div class="safety-card info">
 <div class="safety-ic">i</div>
 <div>
-<h3>Expiry and rotation</h3>
-<p>You set the expiry at creation. After that date the token stops working automatically. We recommend keeping separate tokens per integration — that way you can revoke only what you need.</p>
+<h3>⟦t0266⟧</h3>
+<p>⟦t0267⟧</p>
 </div>
 </div>
 <div class="safety-card danger">
 <div class="safety-ic">!</div>
 <div>
-<h3>Start small</h3>
-<p>AI is powerful but not infallible. It can pick the wrong instrument, size, or direction. Before trusting the model with size — walk through scenarios manually and double-check its suggestions. The responsibility for every trade is yours.</p>
+<h3>⟦t0268⟧</h3>
+<p>⟦t0269⟧</p>
 </div>
 </div>
 </div>
@@ -1225,46 +1217,46 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
      ════════════════════════════════════════════════════════════════════ -->
 <section id="prompts" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">07 · Example prompts</div>
-<h2 class="section-title">What to ask AI once connected.</h2>
+<div class="section-eyebrow">⟦t0270⟧</div>
+<h2 class="section-title">⟦t0271⟧</h2>
 <p class="section-sub">
-      Plain language — no commands or slashes. Ask in English, Spanish, Portuguese, or your own language — the model figures out which server to call.
+      ⟦t0272⟧
     </p>
 <div class="prompt-cats">
 <div class="prompt-cat">
-<h4>Account</h4>
+<h4>⟦t0273⟧</h4>
 <ul>
-<li>Show my balance</li>
-<li>Which account am I on right now</li>
-<li>List my IQ Option accounts</li>
-<li>How much free margin do I have</li>
+<li>⟦t0274⟧</li>
+<li>⟦t0275⟧</li>
+<li>⟦t0276⟧</li>
+<li>⟦t0277⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>Markets</h4>
+<h4>⟦t0278⟧</h4>
 <ul>
-<li>Which assets are available on Margin Crypto</li>
-<li>Show me the EUR/USD quote</li>
-<li>Compare BTC movement over the last hour</li>
-<li>What are the current spreads on the top 5 forex pairs</li>
+<li>⟦t0279⟧</li>
+<li>⟦t0280⟧</li>
+<li>⟦t0281⟧</li>
+<li>⟦t0282⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>Portfolio</h4>
+<h4>⟦t0283⟧</h4>
 <ul>
-<li>Show my open positions</li>
-<li>List my pending orders</li>
-<li>What's my total account exposure</li>
-<li>How many trades did I make today</li>
+<li>⟦t0284⟧</li>
+<li>⟦t0285⟧</li>
+<li>⟦t0286⟧</li>
+<li>⟦t0287⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>Trading</h4>
+<h4>⟦t0288⟧</h4>
 <ul>
-<li>Open a long BTC at 0.01 with a 5% stop loss</li>
-<li>Buy a 5-minute EUR/USD call option</li>
-<li>Close all my Tesla positions</li>
-<li>Place a limit buy on SPY around 580</li>
+<li>⟦t0289⟧</li>
+<li>⟦t0290⟧</li>
+<li>⟦t0291⟧</li>
+<li>⟦t0292⟧</li>
 </ul>
 </div>
 </div>
@@ -1275,56 +1267,56 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
      ════════════════════════════════════════════════════════════════════ -->
 <section id="faq" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">08 · Frequently asked questions</div>
-<h2 class="section-title">FAQ</h2>
+<div class="section-eyebrow">⟦t0293⟧</div>
+<h2 class="section-title">⟦t0294⟧</h2>
 <div class="faq">
 <details class="faq-item">
-<summary>Do I need to install anything on my computer?</summary>
-<p>No. Our MCP servers are hosted by us — no repos to clone, no Python or venv to install. Just the URL + Bearer token in your AI assistant's config.</p>
+<summary>⟦t0295⟧</summary>
+<p>⟦t0296⟧</p>
 </details>
 <details class="faq-item">
-<summary>Does one token really work on all 4 servers?</summary>
-<p>Yes. Create a single Bearer token in <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent);" target="_blank"><code>Settings → AI integrations</code></a> and use it in the Authorization header for all four endpoints: digital-options, marginal-cfd, marginal-crypto, marginal-forex.</p>
+<summary>⟦t0297⟧</summary>
+<p>⟦t0298⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent);" target="_blank"><code>Settings → AI integrations</code></a> ⟦t0299⟧</p>
 </details>
 <details class="faq-item">
-<summary>What if I only want to connect one market, e.g. Forex?</summary>
-<p>Delete the other blocks from the config — keep only <code>iq-margin-forex</code>. AI will see only the tools from that server and won't be able to touch, e.g., options by accident.</p>
+<summary>⟦t0300⟧</summary>
+<p>⟦t0301⟧ <code>iq-margin-forex</code>⟦t0302⟧</p>
 </details>
 <details class="faq-item">
-<summary>What can AI actually do through MCP?</summary>
-<p>Each of our servers exposes its own tools list — you can see the full set right after connecting by asking the assistant: "What IQ Option tools do you have?". In total this is reading market data, portfolio and trades, plus methods to open/close positions. Which methods are available to a specific token is determined by its scope (read + optionally trade per market).</p>
+<summary>⟦t0303⟧</summary>
+<p>⟦t0304⟧</p>
 </details>
 <details class="faq-item">
-<summary>How do I make sure AI can't trade?</summary>
-<p>When creating the token in <code>Settings → AI integrations</code> just <strong>don't tick</strong> any of the four "Trade · …" checkboxes. Read stays on (it can't be turned off — AI needs it), and any attempt to call a trading tool will return <code>403 Forbidden</code>. This is the safest setup for research use cases.</p>
+<summary>⟦t0305⟧</summary>
+<p>⟦t0306⟧ <code>Settings → AI integrations</code> ⟦t0307⟧ <strong>⟦t0308⟧</strong> ⟦t0309⟧ <code>403 Forbidden</code>⟦t0310⟧</p>
 </details>
 <details class="faq-item">
-<summary>Can I allow trading on only one instrument?</summary>
-<p>Yes. For example, tick only <code>Trade · Margin Crypto</code> — AI will be able to open/close crypto positions, but options, CFD and forex stay read-only. Useful when you're testing the AI setup on a market you're comfortable with.</p>
+<summary>⟦t0311⟧</summary>
+<p>⟦t0312⟧ <code>Trade · Margin Crypto</code> ⟦t0313⟧</p>
 </details>
 <details class="faq-item">
-<summary>What if I want to drop a trade permission from an existing token?</summary>
-<p>Open <code>Settings → AI integrations</code>, find the token and uncheck the relevant box (e.g. <code>Trade · Margin CFD</code>). The permission is removed instantly — the server will start returning <code>403 Forbidden</code> on trading calls for that market. The token value itself doesn't change, so no need to touch your assistant's config.</p>
+<summary>⟦t0314⟧</summary>
+<p>⟦t0315⟧ <code>Settings → AI integrations</code>⟦t0316⟧ <code>Trade · Margin CFD</code>⟦t0317⟧ <code>403 Forbidden</code> ⟦t0318⟧</p>
 </details>
 <details class="faq-item">
-<summary>What if my token leaked?</summary>
-<p>Go to <code>Settings → AI integrations</code>, find the compromised token and hit Revoke. All requests with it stop working instantly. Create a new one and update the assistant's config.</p>
+<summary>⟦t0319⟧</summary>
+<p>⟦t0320⟧ <code>Settings → AI integrations</code>⟦t0321⟧</p>
 </details>
 <details class="faq-item">
-<summary>What are the limits on tokens and servers?</summary>
-<p>One account can have multiple active tokens at once (visible in the Active tokens list). One token works across all 4 servers. If you want separate keys per integration for easier revocation — create several and give them meaningful names.</p>
+<summary>⟦t0322⟧</summary>
+<p>⟦t0323⟧</p>
 </details>
 <details class="faq-item">
-<summary>My assistant doesn't see the tools after setup. What now?</summary>
-<p>Checklist: (1) restart the assistant completely, (2) make sure the token is copied without extra whitespace at the start/end, (3) check that the URL has no trailing slash and matches your subscription, (4) make sure the Authorization header starts exactly with <code>Bearer </code> (note the space), (5) check the assistant's logs — usually it's a JSON syntax error in the config.</p>
+<summary>⟦t0324⟧</summary>
+<p>⟦t0325⟧ <code>Bearer </code> ⟦t0326⟧</p>
 </details>
 <details class="faq-item">
-<summary>Which assistant is the easiest to set up from scratch?</summary>
-<p>If you're not a developer — Claude Desktop or Cherry Studio: both have a UI that handles the config for you. If you live in code — Cursor or Claude Code will feel more natural.</p>
+<summary>⟦t0327⟧</summary>
+<p>⟦t0328⟧</p>
 </details>
 <details class="faq-item">
-<summary>Is using MCP free?</summary>
-<p>At the moment — yes, free for all IQ Option clients with an active account. You only pay for your AI assistant's subscription (Claude Pro / ChatGPT Plus, etc.).</p>
+<summary>⟦t0329⟧</summary>
+<p>⟦t0330⟧</p>
 </details>
 </div>
 </div>
@@ -1337,13 +1329,13 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="container">
 <div class="foot-brand">
 <img alt="IQ Option" class="logo-mark" height="24" src="assets/img/logo.png" style="width:24px;height:24px;" width="24"/>
-      IQ OPTION · AI INTEGRATIONS
+      ⟦t0331⟧
     </div>
 <p class="foot-disclaimer">
-<strong style="color:var(--text-soft);">Disclaimer.</strong> AI assistants are independent third-party tools. IQ Option does not control their behaviour and accepts no liability for decisions made on the basis of AI output. Trading CFDs / options / forex / crypto involves a high risk of capital loss. Every trade is taken at your own responsibility. Before going live — practise on a demo account.
+<strong style="color:var(--text-soft);">⟦t0332⟧</strong> ⟦t0333⟧
     </p>
 <div class="foot-bottom">
-      © 2026 IQ Option · Built on Model Context Protocol
+      ⟦t0334⟧
     </div>
 </div>
 </footer>
