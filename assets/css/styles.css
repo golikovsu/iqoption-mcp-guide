@@ -1227,7 +1227,8 @@
   section[data-num]::before {
     content: attr(data-num);
     position: absolute;
-    top: 26px; right: 4%;
+    top: 26px;
+    right: max(24px, calc(50% - 600px + 32px));   /* align to container right edge */
     font-size: clamp(64px, 11vw, 150px);
     font-weight: 900;
     line-height: 1;
@@ -1349,12 +1350,13 @@
 
   /* Assistant picker — category group labels (visual only; AT ignores them) */
   .pt-group {
-    flex-basis: 100%;
-    margin: 10px 2px 0;
+    flex: 0 0 100%;            /* full-width row — forces a line break before each group */
+    width: 100%;
+    margin: 16px 2px 0;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-mute);
   }
-  .pt-group:first-child { margin-top: 0; }
+  .picker-tabs .pt-group:first-child { margin-top: 0; }
