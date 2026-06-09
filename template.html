@@ -239,6 +239,7 @@
 <symbol id="i-gauge" viewbox="0 0 24 24"><path d="m12 14 4-4"></path><path d="M3.34 19a10 10 0 1 1 17.32 0"></path></symbol>
 <symbol id="i-eye" viewbox="0 0 24 24"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"></path><circle cx="12" cy="12" r="3"></circle></symbol>
 <symbol id="i-rotate" viewbox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></symbol>
+<symbol id="i-menu" viewbox="0 0 24 24"><path d="M4 6h16"></path><path d="M4 12h16"></path><path d="M4 18h16"></path></symbol>
 </svg>
 <main id="main">
 <div class="hero-shell">
@@ -250,7 +251,10 @@
 <img alt="IQ Option" class="logo-mark" height="32" src="assets/img/logo.png" width="32"/>
         ⟦t0002⟧
       </div>
-<div class="nav-links">
+<button aria-controls="nav-links" aria-expanded="false" aria-label="Menu" class="nav-toggle" type="button">
+<svg aria-hidden="true" class="ic"><use href="#i-menu"></use></svg>
+</button>
+<div class="nav-links" id="nav-links">
 <a href="#what">⟦t0003⟧</a>
 <a href="#servers">⟦t0004⟧</a>
 <a href="#setup">⟦t0005⟧</a>
@@ -312,7 +316,7 @@
 <!-- ════════════════════════════════════════════════════════════════════
      WHAT IS MCP
      ════════════════════════════════════════════════════════════════════ -->
-<section id="what">
+<section data-num="01" id="what">
 <div class="container">
 <div class="section-eyebrow">⟦t0025⟧</div>
 <h2 class="section-title">⟦t0026⟧</h2>
@@ -341,7 +345,7 @@
 <!-- ════════════════════════════════════════════════════════════════════
      SERVERS
      ════════════════════════════════════════════════════════════════════ -->
-<section id="servers" style="padding-top:0;">
+<section data-num="02" id="servers" style="padding-top:0;">
 <div class="container">
 <div class="section-eyebrow">⟦t0034⟧</div>
 <h2 class="section-title">⟦t0035⟧</h2>
@@ -389,7 +393,7 @@
 <!-- ════════════════════════════════════════════════════════════════════
      PERMISSIONS · per-instrument trade opt-in
      ════════════════════════════════════════════════════════════════════ -->
-<section id="permissions" style="padding-top:0;">
+<section data-num="03" id="permissions" style="padding-top:0;">
 <div class="container">
 <div class="section-eyebrow">⟦t0049⟧</div>
 <h2 class="section-title">⟦t0050⟧</h2>
@@ -543,48 +547,54 @@
 <!-- ════════════════════════════════════════════════════════════════════
      SETUP STEPS
      ════════════════════════════════════════════════════════════════════ -->
-<section id="setup">
+<div class="cta-band">
+<a class="qeds-button" data-context="accent" data-cta="mid" data-prominence="primary" data-size="lg" href="https://iqoption.com/en/profile/ai-integration" rel="noopener" target="_blank">
+<svg aria-hidden="true" class="ic"><use href="#i-key"></use></svg>
+<span class="qeds-button__label">⟦t0105⟧</span>
+</a>
+</div>
+<section data-num="04" id="setup">
 <div class="container">
-<div class="section-eyebrow">⟦t0105⟧</div>
-<h2 class="section-title">⟦t0106⟧</h2>
+<div class="section-eyebrow">⟦t0106⟧</div>
+<h2 class="section-title">⟦t0107⟧</h2>
 <p class="section-sub">
-      ⟦t0107⟧
+      ⟦t0108⟧
     </p>
 <div class="steps">
 <div class="step reveal">
 <div class="step-num">1</div>
-<h3>⟦t0108⟧</h3>
-<p>⟦t0109⟧</p>
+<h3>⟦t0109⟧</h3>
+<p>⟦t0110⟧</p>
 <ol>
-<li>⟦t0110⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank"><strong>⟦t0111⟧</strong></a></li>
-<li>⟦t0112⟧ <strong>⟦t0113⟧</strong></li>
-<li>⟦t0114⟧</li>
+<li>⟦t0111⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent); font-weight:700; border-bottom:1px dotted var(--accent);" target="_blank"><strong>⟦t0112⟧</strong></a></li>
+<li>⟦t0113⟧ <strong>⟦t0114⟧</strong></li>
 <li>⟦t0115⟧</li>
 <li>⟦t0116⟧</li>
+<li>⟦t0117⟧</li>
 </ol>
 <a class="qeds-button" data-context="accent" data-prominence="tertiary" data-size="sm" href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="margin-top:16px;" target="_blank">
-<span class="qeds-button__label">⟦t0117⟧</span>
+<span class="qeds-button__label">⟦t0118⟧</span>
 </a>
 </div>
 <div class="step reveal">
 <div class="step-num">2</div>
-<h3>⟦t0118⟧</h3>
-<p>⟦t0119⟧</p>
+<h3>⟦t0119⟧</h3>
+<p>⟦t0120⟧</p>
 <ol>
-<li>⟦t0120⟧</li>
 <li>⟦t0121⟧</li>
 <li>⟦t0122⟧</li>
 <li>⟦t0123⟧</li>
+<li>⟦t0124⟧</li>
 </ol>
 </div>
 <div class="step reveal">
 <div class="step-num">3</div>
-<h3>⟦t0124⟧</h3>
-<p>⟦t0125⟧</p>
+<h3>⟦t0125⟧</h3>
+<p>⟦t0126⟧</p>
 <ol>
-<li>⟦t0126⟧ <strong>⟦t0127⟧</strong></li>
-<li><strong>⟦t0128⟧</strong> ⟦t0129⟧</li>
-<li><strong>⟦t0130⟧</strong> ⟦t0131⟧</li>
+<li>⟦t0127⟧ <strong>⟦t0128⟧</strong></li>
+<li><strong>⟦t0129⟧</strong> ⟦t0130⟧</li>
+<li><strong>⟦t0131⟧</strong> ⟦t0132⟧</li>
 </ol>
 </div>
 </div>
@@ -593,47 +603,53 @@
 <!-- ════════════════════════════════════════════════════════════════════
      ASSISTANT PICKER
      ════════════════════════════════════════════════════════════════════ -->
-<section id="assistants" style="padding-top:0;">
+<div class="cta-band">
+<a class="qeds-button" data-context="accent" data-cta="mid" data-prominence="primary" data-size="lg" href="https://iqoption.com/en/profile/ai-integration" rel="noopener" target="_blank">
+<svg aria-hidden="true" class="ic"><use href="#i-key"></use></svg>
+<span class="qeds-button__label">⟦t0133⟧</span>
+</a>
+</div>
+<section data-num="05" id="assistants" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">⟦t0132⟧</div>
-<h2 class="section-title">⟦t0133⟧</h2>
+<div class="section-eyebrow">⟦t0134⟧</div>
+<h2 class="section-title">⟦t0135⟧</h2>
 <p class="section-sub">
-      ⟦t0134⟧ <span style="color:var(--accent);font-weight:700">⟦t0135⟧</span> ⟦t0136⟧
+      ⟦t0136⟧ <span style="color:var(--accent);font-weight:700">⟦t0137⟧</span> ⟦t0138⟧
     </p>
 <div class="picker-shell">
 <div class="picker-tabs" id="picker-tabs">
-<button class="pt active" data-tab="claude-desktop">⟦t0137⟧ <span class="pt-diff">⟦t0138⟧</span></button>
-<button class="pt" data-tab="claude-code">⟦t0139⟧ <span class="pt-diff">⟦t0140⟧</span></button>
-<button class="pt" data-tab="cursor">⟦t0141⟧ <span class="pt-diff">⟦t0142⟧</span></button>
-<button class="pt" data-tab="windsurf">⟦t0143⟧ <span class="pt-diff med">⟦t0144⟧</span></button>
-<button class="pt" data-tab="codex">⟦t0145⟧ <span class="pt-diff med">⟦t0146⟧</span></button>
-<button class="pt" data-tab="chatgpt">⟦t0147⟧ <span class="pt-diff med">⟦t0148⟧</span></button>
-<button class="pt" data-tab="cline">⟦t0149⟧ <span class="pt-diff">⟦t0150⟧</span></button>
-<button class="pt" data-tab="continue">⟦t0151⟧ <span class="pt-diff med">⟦t0152⟧</span></button>
-<button class="pt" data-tab="zed">⟦t0153⟧ <span class="pt-diff med">⟦t0154⟧</span></button>
-<button class="pt" data-tab="goose">⟦t0155⟧ <span class="pt-diff med">⟦t0156⟧</span></button>
-<button class="pt" data-tab="cherry">⟦t0157⟧ <span class="pt-diff">⟦t0158⟧</span></button>
-<button class="pt" data-tab="librechat">⟦t0159⟧ <span class="pt-diff med">⟦t0160⟧</span></button>
-<button class="pt" data-tab="custom">⟦t0161⟧ <span class="pt-diff med">⟦t0162⟧</span></button>
+<button class="pt active" data-tab="claude-desktop">⟦t0139⟧ <span class="pt-diff">⟦t0140⟧</span></button>
+<button class="pt" data-tab="claude-code">⟦t0141⟧ <span class="pt-diff">⟦t0142⟧</span></button>
+<button class="pt" data-tab="cursor">⟦t0143⟧ <span class="pt-diff">⟦t0144⟧</span></button>
+<button class="pt" data-tab="windsurf">⟦t0145⟧ <span class="pt-diff med">⟦t0146⟧</span></button>
+<button class="pt" data-tab="codex">⟦t0147⟧ <span class="pt-diff med">⟦t0148⟧</span></button>
+<button class="pt" data-tab="chatgpt">⟦t0149⟧ <span class="pt-diff med">⟦t0150⟧</span></button>
+<button class="pt" data-tab="cline">⟦t0151⟧ <span class="pt-diff">⟦t0152⟧</span></button>
+<button class="pt" data-tab="continue">⟦t0153⟧ <span class="pt-diff med">⟦t0154⟧</span></button>
+<button class="pt" data-tab="zed">⟦t0155⟧ <span class="pt-diff med">⟦t0156⟧</span></button>
+<button class="pt" data-tab="goose">⟦t0157⟧ <span class="pt-diff med">⟦t0158⟧</span></button>
+<button class="pt" data-tab="cherry">⟦t0159⟧ <span class="pt-diff">⟦t0160⟧</span></button>
+<button class="pt" data-tab="librechat">⟦t0161⟧ <span class="pt-diff med">⟦t0162⟧</span></button>
+<button class="pt" data-tab="custom">⟦t0163⟧ <span class="pt-diff med">⟦t0164⟧</span></button>
 </div>
 <div class="picker-body" id="picker-body">
 <!-- ============ CLAUDE DESKTOP ============ -->
 <div class="pb-tab active" data-tab="claude-desktop">
 <div class="pb-head">
-<h3>⟦t0163⟧</h3>
-<span class="pt-diff">⟦t0164⟧</span>
+<h3>⟦t0165⟧</h3>
+<span class="pt-diff">⟦t0166⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0165⟧
+            ⟦t0167⟧
           </div>
-<div class="pb-platform">⟦t0166⟧</div>
+<div class="pb-platform">⟦t0168⟧</div>
 <div class="pb-path">~/Library/Application Support/Claude/claude_desktop_config.json</div>
-<div class="pb-platform">⟦t0167⟧</div>
+<div class="pb-platform">⟦t0169⟧</div>
 <div class="pb-path">%APPDATA%\Claude\claude_desktop_config.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0168⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0169⟧</button>
+<span>⟦t0170⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0171⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -663,23 +679,23 @@
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-<strong>⟦t0170⟧</strong> ⟦t0171⟧ <code>What IQ Option tools do I have available?</code> ⟦t0172⟧
+<strong>⟦t0172⟧</strong> ⟦t0173⟧ <code>What IQ Option tools do I have available?</code> ⟦t0174⟧
             </div>
 </div>
 </div>
 <!-- ============ CLAUDE CODE ============ -->
 <div class="pb-tab" data-tab="claude-code">
 <div class="pb-head">
-<h3>⟦t0173⟧</h3>
-<span class="pt-diff">⟦t0174⟧</span>
+<h3>⟦t0175⟧</h3>
+<span class="pt-diff">⟦t0176⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0175⟧
+            ⟦t0177⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0176⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0177⟧</button>
+<span>⟦t0178⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0179⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Digital Options</span>
 claude mcp add --transport http iq-digital-options \
@@ -704,27 +720,27 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-<strong>⟦t0178⟧</strong> ⟦t0179⟧ <code>claude mcp list</code> ⟦t0180⟧
+<strong>⟦t0180⟧</strong> ⟦t0181⟧ <code>claude mcp list</code> ⟦t0182⟧
             </div>
 </div>
 </div>
 <!-- ============ CURSOR ============ -->
 <div class="pb-tab" data-tab="cursor">
 <div class="pb-head">
-<h3>⟦t0181⟧</h3>
-<span class="pt-diff">⟦t0182⟧</span>
+<h3>⟦t0183⟧</h3>
+<span class="pt-diff">⟦t0184⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0183⟧ <code>mcp.json</code> ⟦t0184⟧
+            ⟦t0185⟧ <code>mcp.json</code> ⟦t0186⟧
           </div>
-<div class="pb-platform">⟦t0185⟧</div>
+<div class="pb-platform">⟦t0187⟧</div>
 <div class="pb-path">~/.cursor/mcp.json</div>
-<div class="pb-platform">⟦t0186⟧</div>
+<div class="pb-platform">⟦t0188⟧</div>
 <div class="pb-path">%USERPROFILE%\.cursor\mcp.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0187⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0188⟧</button>
+<span>⟦t0189⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0190⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -750,24 +766,24 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-<strong>⟦t0189⟧</strong> ⟦t0190⟧
+<strong>⟦t0191⟧</strong> ⟦t0192⟧
             </div>
 </div>
 </div>
 <!-- ============ WINDSURF ============ -->
 <div class="pb-tab" data-tab="windsurf">
 <div class="pb-head">
-<h3>⟦t0191⟧</h3>
-<span class="pt-diff med">⟦t0192⟧</span>
+<h3>⟦t0193⟧</h3>
+<span class="pt-diff med">⟦t0194⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0193⟧
+            ⟦t0195⟧
           </div>
 <div class="pb-path">Settings → Windsurf Settings → MCP Servers → Edit configuration</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0194⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0195⟧</button>
+<span>⟦t0196⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0197⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -793,24 +809,24 @@ claude mcp add --transport http iq-margin-forex \
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-<strong>⟦t0196⟧</strong> ⟦t0197⟧
+<strong>⟦t0198⟧</strong> ⟦t0199⟧
             </div>
 </div>
 </div>
 <!-- ============ CODEX ============ -->
 <div class="pb-tab" data-tab="codex">
 <div class="pb-head">
-<h3>⟦t0198⟧</h3>
-<span class="pt-diff med">⟦t0199⟧</span>
+<h3>⟦t0200⟧</h3>
+<span class="pt-diff med">⟦t0201⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0200⟧
+            ⟦t0202⟧
           </div>
 <div class="pb-path">Codex profile · <code>config.toml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0201⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0202⟧</button>
+<span>⟦t0203⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0204⟧</button>
 </div>
 <pre><code>[mcp_servers.iq-digital-options]
 url = <span class="tk-str">"https://digital-options.mcp.iqoption.com"</span>
@@ -831,23 +847,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0203⟧ <code>/mcp</code> ⟦t0204⟧ <code>codex mcp status</code> ⟦t0205⟧
+              ⟦t0205⟧ <code>/mcp</code> ⟦t0206⟧ <code>codex mcp status</code> ⟦t0207⟧
             </div>
 </div>
 </div>
 <!-- ============ CHATGPT DESKTOP ============ -->
 <div class="pb-tab" data-tab="chatgpt">
 <div class="pb-head">
-<h3>⟦t0206⟧</h3>
-<span class="pt-diff med">⟦t0207⟧</span>
+<h3>⟦t0208⟧</h3>
+<span class="pt-diff med">⟦t0209⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0208⟧ <strong>⟦t0209⟧</strong>.
+            ⟦t0210⟧ <strong>⟦t0211⟧</strong>.
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0210⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0211⟧</button>
+<span>⟦t0212⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0213⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Add 4 connectors, one at a time:</span>
 
@@ -871,24 +887,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-info"></use></svg></div>
 <div class="pb-test-text">
-<strong>⟦t0212⟧</strong> ⟦t0213⟧
+<strong>⟦t0214⟧</strong> ⟦t0215⟧
             </div>
 </div>
 </div>
 <!-- ============ CLINE ============ -->
 <div class="pb-tab" data-tab="cline">
 <div class="pb-head">
-<h3>⟦t0214⟧</h3>
-<span class="pt-diff">⟦t0215⟧</span>
+<h3>⟦t0216⟧</h3>
+<span class="pt-diff">⟦t0217⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0216⟧
+            ⟦t0218⟧
           </div>
 <div class="pb-path">Cline panel → MCP Servers → Edit Configuration</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0217⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0218⟧</button>
+<span>⟦t0219⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0220⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"mcpServers"</span>: {
@@ -922,24 +938,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0219⟧
+              ⟦t0221⟧
             </div>
 </div>
 </div>
 <!-- ============ CONTINUE ============ -->
 <div class="pb-tab" data-tab="continue">
 <div class="pb-head">
-<h3>⟦t0220⟧</h3>
-<span class="pt-diff med">⟦t0221⟧</span>
+<h3>⟦t0222⟧</h3>
+<span class="pt-diff med">⟦t0223⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0222⟧
+            ⟦t0224⟧
           </div>
 <div class="pb-path">Continue profile · <code>config.yaml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0223⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0224⟧</button>
+<span>⟦t0225⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0226⟧</button>
 </div>
 <pre><code>mcpServers:
   - <span class="tk-key">name:</span> iq-digital-options
@@ -973,24 +989,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0225⟧
+              ⟦t0227⟧
             </div>
 </div>
 </div>
 <!-- ============ ZED ============ -->
 <div class="pb-tab" data-tab="zed">
 <div class="pb-head">
-<h3>⟦t0226⟧</h3>
-<span class="pt-diff med">⟦t0227⟧</span>
+<h3>⟦t0228⟧</h3>
+<span class="pt-diff med">⟦t0229⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0228⟧ <code>context_servers</code> ⟦t0229⟧
+            ⟦t0230⟧ <code>context_servers</code> ⟦t0231⟧
           </div>
 <div class="pb-path">Zed settings.json</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0230⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0231⟧</button>
+<span>⟦t0232⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0233⟧</button>
 </div>
 <pre><code>{
   <span class="tk-key">"context_servers"</span>: {
@@ -1024,24 +1040,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0232⟧
+              ⟦t0234⟧
             </div>
 </div>
 </div>
 <!-- ============ GOOSE ============ -->
 <div class="pb-tab" data-tab="goose">
 <div class="pb-head">
-<h3>⟦t0233⟧</h3>
-<span class="pt-diff med">⟦t0234⟧</span>
+<h3>⟦t0235⟧</h3>
+<span class="pt-diff med">⟦t0236⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0235⟧
+            ⟦t0237⟧
           </div>
 <div class="pb-path">Goose config · <code>config.yaml</code></div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0236⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0237⟧</button>
+<span>⟦t0238⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0239⟧</button>
 </div>
 <pre><code>extensions:
   iq-digital-options:
@@ -1075,23 +1091,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-<code>goose session</code> ⟦t0238⟧
+<code>goose session</code> ⟦t0240⟧
             </div>
 </div>
 </div>
 <!-- ============ CHERRY ============ -->
 <div class="pb-tab" data-tab="cherry">
 <div class="pb-head">
-<h3>⟦t0239⟧</h3>
-<span class="pt-diff">⟦t0240⟧</span>
+<h3>⟦t0241⟧</h3>
+<span class="pt-diff">⟦t0242⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0241⟧
+            ⟦t0243⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0242⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0243⟧</button>
+<span>⟦t0244⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0245⟧</button>
 </div>
 <pre><code><span class="tk-cmt"># Add 4 servers; for each one:</span>
 
@@ -1107,24 +1123,24 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0244⟧
+              ⟦t0246⟧
             </div>
 </div>
 </div>
 <!-- ============ LIBRECHAT ============ -->
 <div class="pb-tab" data-tab="librechat">
 <div class="pb-head">
-<h3>⟦t0245⟧</h3>
-<span class="pt-diff med">⟦t0246⟧</span>
+<h3>⟦t0247⟧</h3>
+<span class="pt-diff med">⟦t0248⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0247⟧
+            ⟦t0249⟧
           </div>
 <div class="pb-path">librechat.yaml</div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0248⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0249⟧</button>
+<span>⟦t0250⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0251⟧</button>
 </div>
 <pre><code>mcpServers:
   iq-digital-options:
@@ -1154,23 +1170,23 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0250⟧ <code>docker compose restart api</code>⟦t0251⟧
+              ⟦t0252⟧ <code>docker compose restart api</code>⟦t0253⟧
             </div>
 </div>
 </div>
 <!-- ============ CUSTOM ============ -->
 <div class="pb-tab" data-tab="custom">
 <div class="pb-head">
-<h3>⟦t0252⟧</h3>
-<span class="pt-diff med">⟦t0253⟧</span>
+<h3>⟦t0254⟧</h3>
+<span class="pt-diff med">⟦t0255⟧</span>
 </div>
 <div class="pb-desc">
-            ⟦t0254⟧
+            ⟦t0256⟧
           </div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0255⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0256⟧</button>
+<span>⟦t0257⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0258⟧</button>
 </div>
 <pre><code><span class="tk-key">Transport:</span>      streamable-http (HTTP/SSE per spec)
 <span class="tk-key">Method:</span>         POST  (for invocations)
@@ -1184,8 +1200,8 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 </div>
 <div class="code-block">
 <div class="code-head">
-<span>⟦t0257⟧</span>
-<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0258⟧</button>
+<span>⟦t0259⟧</span>
+<button class="copy-btn" data-copy-code=""><svg aria-hidden="true" class="ic"><use href="#i-clipboard"></use></svg> ⟦t0260⟧</button>
 </div>
 <pre><code>curl -X POST https://digital-options.mcp.iqoption.com \
   -H <span class="tk-str">"Authorization: Bearer <span class="tk-token">YOUR_TOKEN</span>"</span> \
@@ -1195,7 +1211,7 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="pb-test">
 <div class="pb-test-ic"><svg aria-hidden="true" class="ic"><use href="#i-check"></use></svg></div>
 <div class="pb-test-text">
-              ⟦t0259⟧ <a href="https://spec.modelcontextprotocol.io/" rel="noopener" target="_blank">⟦t0260⟧</a>.
+              ⟦t0261⟧ <a href="https://spec.modelcontextprotocol.io/" rel="noopener" target="_blank">⟦t0262⟧</a>.
             </div>
 </div>
 </div>
@@ -1206,40 +1222,40 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <!-- ════════════════════════════════════════════════════════════════════
      SAFETY
      ════════════════════════════════════════════════════════════════════ -->
-<section id="safety">
+<section data-num="06" id="safety">
 <div class="container">
-<div class="section-eyebrow">⟦t0261⟧</div>
-<h2 class="section-title">⟦t0262⟧</h2>
+<div class="section-eyebrow">⟦t0263⟧</div>
+<h2 class="section-title">⟦t0264⟧</h2>
 <p class="section-sub">
-      ⟦t0263⟧
+      ⟦t0265⟧
     </p>
 <div class="safety-grid">
 <div class="safety-card ok">
 <div class="safety-ic"><svg aria-hidden="true" class="ic"><use href="#i-lock"></use></svg></div>
 <div>
-<h3>⟦t0264⟧</h3>
-<p>⟦t0265⟧</p>
+<h3>⟦t0266⟧</h3>
+<p>⟦t0267⟧</p>
 </div>
 </div>
 <div class="safety-card warn">
 <div class="safety-ic"><svg aria-hidden="true" class="ic"><use href="#i-alert"></use></svg></div>
 <div>
-<h3>⟦t0266⟧</h3>
-<p>⟦t0267⟧ <strong>⟦t0268⟧</strong> ⟦t0269⟧</p>
+<h3>⟦t0268⟧</h3>
+<p>⟦t0269⟧ <strong>⟦t0270⟧</strong> ⟦t0271⟧</p>
 </div>
 </div>
 <div class="safety-card info">
 <div class="safety-ic"><svg aria-hidden="true" class="ic"><use href="#i-refresh"></use></svg></div>
 <div>
-<h3>⟦t0270⟧</h3>
-<p>⟦t0271⟧</p>
+<h3>⟦t0272⟧</h3>
+<p>⟦t0273⟧</p>
 </div>
 </div>
 <div class="safety-card danger">
 <div class="safety-ic"><svg aria-hidden="true" class="ic"><use href="#i-gauge"></use></svg></div>
 <div>
-<h3>⟦t0272⟧</h3>
-<p>⟦t0273⟧</p>
+<h3>⟦t0274⟧</h3>
+<p>⟦t0275⟧</p>
 </div>
 </div>
 </div>
@@ -1248,48 +1264,48 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <!-- ════════════════════════════════════════════════════════════════════
      EXAMPLE PROMPTS
      ════════════════════════════════════════════════════════════════════ -->
-<section id="prompts" style="padding-top:0;">
+<section data-num="07" id="prompts" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">⟦t0274⟧</div>
-<h2 class="section-title">⟦t0275⟧</h2>
+<div class="section-eyebrow">⟦t0276⟧</div>
+<h2 class="section-title">⟦t0277⟧</h2>
 <p class="section-sub">
-      ⟦t0276⟧
+      ⟦t0278⟧
     </p>
 <div class="prompt-cats">
 <div class="prompt-cat">
-<h4>⟦t0277⟧</h4>
+<h4>⟦t0279⟧</h4>
 <ul>
-<li>⟦t0278⟧</li>
-<li>⟦t0279⟧</li>
 <li>⟦t0280⟧</li>
 <li>⟦t0281⟧</li>
+<li>⟦t0282⟧</li>
+<li>⟦t0283⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>⟦t0282⟧</h4>
+<h4>⟦t0284⟧</h4>
 <ul>
-<li>⟦t0283⟧</li>
-<li>⟦t0284⟧</li>
 <li>⟦t0285⟧</li>
 <li>⟦t0286⟧</li>
+<li>⟦t0287⟧</li>
+<li>⟦t0288⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>⟦t0287⟧</h4>
+<h4>⟦t0289⟧</h4>
 <ul>
-<li>⟦t0288⟧</li>
-<li>⟦t0289⟧</li>
 <li>⟦t0290⟧</li>
 <li>⟦t0291⟧</li>
+<li>⟦t0292⟧</li>
+<li>⟦t0293⟧</li>
 </ul>
 </div>
 <div class="prompt-cat">
-<h4>⟦t0292⟧</h4>
+<h4>⟦t0294⟧</h4>
 <ul>
-<li>⟦t0293⟧</li>
-<li>⟦t0294⟧</li>
 <li>⟦t0295⟧</li>
 <li>⟦t0296⟧</li>
+<li>⟦t0297⟧</li>
+<li>⟦t0298⟧</li>
 </ul>
 </div>
 </div>
@@ -1298,58 +1314,58 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <!-- ════════════════════════════════════════════════════════════════════
      FAQ
      ════════════════════════════════════════════════════════════════════ -->
-<section id="faq" style="padding-top:0;">
+<section data-num="08" id="faq" style="padding-top:0;">
 <div class="container">
-<div class="section-eyebrow">⟦t0297⟧</div>
-<h2 class="section-title">⟦t0298⟧</h2>
+<div class="section-eyebrow">⟦t0299⟧</div>
+<h2 class="section-title">⟦t0300⟧</h2>
 <div class="faq">
 <details class="faq-item">
-<summary>⟦t0299⟧</summary>
-<p>⟦t0300⟧</p>
-</details>
-<details class="faq-item">
 <summary>⟦t0301⟧</summary>
-<p>⟦t0302⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent);" target="_blank"><code>Settings → AI integrations</code></a> ⟦t0303⟧</p>
+<p>⟦t0302⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0304⟧</summary>
-<p>⟦t0305⟧ <code>iq-margin-forex</code>⟦t0306⟧</p>
+<summary>⟦t0303⟧</summary>
+<p>⟦t0304⟧ <a href="https://iqoption.com/en/profile/ai-integration" rel="noopener" style="color:var(--accent);" target="_blank"><code>Settings → AI integrations</code></a> ⟦t0305⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0307⟧</summary>
-<p>⟦t0308⟧</p>
+<summary>⟦t0306⟧</summary>
+<p>⟦t0307⟧ <code>iq-margin-forex</code>⟦t0308⟧</p>
 </details>
 <details class="faq-item">
 <summary>⟦t0309⟧</summary>
-<p>⟦t0310⟧ <code>Settings → AI integrations</code> ⟦t0311⟧ <strong>⟦t0312⟧</strong> ⟦t0313⟧ <code>403 Forbidden</code>⟦t0314⟧</p>
+<p>⟦t0310⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0315⟧</summary>
-<p>⟦t0316⟧ <code>Trade · Margin Crypto</code> ⟦t0317⟧</p>
+<summary>⟦t0311⟧</summary>
+<p>⟦t0312⟧ <code>Settings → AI integrations</code> ⟦t0313⟧ <strong>⟦t0314⟧</strong> ⟦t0315⟧ <code>403 Forbidden</code>⟦t0316⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0318⟧</summary>
-<p>⟦t0319⟧ <code>Settings → AI integrations</code>⟦t0320⟧ <code>Trade · Margin CFD</code>⟦t0321⟧ <code>403 Forbidden</code> ⟦t0322⟧</p>
+<summary>⟦t0317⟧</summary>
+<p>⟦t0318⟧ <code>Trade · Margin Crypto</code> ⟦t0319⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0323⟧</summary>
-<p>⟦t0324⟧ <code>Settings → AI integrations</code>⟦t0325⟧</p>
+<summary>⟦t0320⟧</summary>
+<p>⟦t0321⟧ <code>Settings → AI integrations</code>⟦t0322⟧ <code>Trade · Margin CFD</code>⟦t0323⟧ <code>403 Forbidden</code> ⟦t0324⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0326⟧</summary>
-<p>⟦t0327⟧</p>
+<summary>⟦t0325⟧</summary>
+<p>⟦t0326⟧ <code>Settings → AI integrations</code>⟦t0327⟧</p>
 </details>
 <details class="faq-item">
 <summary>⟦t0328⟧</summary>
-<p>⟦t0329⟧ <code>Bearer </code> ⟦t0330⟧</p>
+<p>⟦t0329⟧</p>
 </details>
 <details class="faq-item">
-<summary>⟦t0331⟧</summary>
-<p>⟦t0332⟧</p>
+<summary>⟦t0330⟧</summary>
+<p>⟦t0331⟧ <code>Bearer </code> ⟦t0332⟧</p>
 </details>
 <details class="faq-item">
 <summary>⟦t0333⟧</summary>
 <p>⟦t0334⟧</p>
+</details>
+<details class="faq-item">
+<summary>⟦t0335⟧</summary>
+<p>⟦t0336⟧</p>
 </details>
 </div>
 </div>
@@ -1362,13 +1378,13 @@ headers = { Authorization = <span class="tk-str">"Bearer <span class="tk-token">
 <div class="container">
 <div class="foot-brand">
 <img alt="IQ Option" class="logo-mark" height="24" src="assets/img/logo.png" style="width:24px;height:24px;" width="24"/>
-      ⟦t0335⟧
+      ⟦t0337⟧
     </div>
 <p class="foot-disclaimer">
-<strong style="color:var(--text-soft);">⟦t0336⟧</strong> ⟦t0337⟧
+<strong style="color:var(--text-soft);">⟦t0338⟧</strong> ⟦t0339⟧
     </p>
 <div class="foot-bottom">
-      ⟦t0338⟧
+      ⟦t0340⟧
     </div>
 </div>
 </footer>

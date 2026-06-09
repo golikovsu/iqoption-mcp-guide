@@ -269,6 +269,7 @@ def generate():
                               '<link rel="stylesheet" href="' + prefix + 'assets/css/styles.css">\n'
                               '<link rel="stylesheet" href="' + prefix + 'assets/css/rtl.css">', 1)
 
+        doc = doc.replace("viewbox=", "viewBox=")   # SVG is case-sensitive; the HTML parser lowercased it
         out = (ROOT / path / "index.html") if path else (ROOT / "index.html")
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(doc, encoding="utf-8")

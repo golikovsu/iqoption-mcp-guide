@@ -194,4 +194,20 @@
       if (e.key === 'Escape' && !menu.hidden) { close(); toggle.focus(); }
     });
   }
+
+  /* ── Mobile nav (hamburger → dropdown of section anchors) ───────────── */
+  const nav = $('.nav');
+  const navToggle = $('.nav-toggle');
+  const navLinks = $('#nav-links');
+  if (nav && navToggle) {
+    const closeNav = () => { nav.classList.remove('nav-open'); navToggle.setAttribute('aria-expanded', 'false'); };
+    navToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = nav.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navLinks?.addEventListener('click', e => { if (e.target.closest('a')) closeNav(); });
+    document.addEventListener('click', e => { if (!nav.contains(e.target)) closeNav(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+  }
 })();
