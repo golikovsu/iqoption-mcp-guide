@@ -81,6 +81,35 @@ python3 build_i18n.py generate   # → per-language pages + sitemap.xml
 > Production URLs (canonical, Open Graph, `robots.txt`, `sitemap.xml`, `llms.txt`) are already set
 > to `golikovsu.github.io/iqoption-mcp-guide`. If you fork or rename, update those references.
 
+## Analytics
+
+Visit + on-site event analytics live in [`assets/js/analytics.js`](assets/js/analytics.js).
+It is **privacy-first and cookieless** (Plausible) — no consent banner required — respects
+Do-Not-Track / Global Privacy Control, and is fully decoupled from the rest of the JS.
+
+**Enable it:** open `assets/js/analytics.js` and set `CONFIG.plausibleDomain` to the domain you
+added in your Plausible dashboard (for GitHub Pages, usually `golikovsu.github.io`). Until it is
+set, analytics is **off** — no external script loads and events are only recorded in-memory to
+`window.__analytics` (handy for debugging in the console).
+
+**Tracked events** (each with useful properties):
+
+| Event | When | Properties |
+|-------|------|-----------|
+| *(pageview)* | every page load | path encodes language (`/ar/`, `/th/`, …) |
+| `Select Assistant` | assistant tab clicked | `assistant` |
+| `Copy: Config` | a config snippet copied | `assistant` |
+| `Copy: Server URL` | a server URL copied | `server` |
+| `CTA: Click` | hero / step CTA clicked | `cta`, `lang` |
+| `Switch Language` | language switcher used | `from`, `to` |
+| `FAQ: Open` | an FAQ item expanded | `q` |
+| `Outbound Link: Click` | external link clicked | `url` |
+| `Scroll Depth` | 25 / 50 / 75 / 100 % reached | `percent` |
+
+**Swap provider:** set `CONFIG.provider` to `'ga4'` (add `ga4Id` — note: GA4 uses cookies and needs a
+consent banner in the EU/KSA) or `'umami'` (add `umami.src` + `umami.websiteId`). The event layer is
+provider-agnostic — only the one `send()` shim changes.
+
 ## Credits
 
 - Design system: [QEDS](https://gnezdilovdenis.github.io/qeds/) by Denis Gnezdilov.
