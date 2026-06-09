@@ -84,13 +84,13 @@ python3 build_i18n.py generate   # → per-language pages + sitemap.xml
 ## Analytics
 
 Visit + on-site event analytics live in [`assets/js/analytics.js`](assets/js/analytics.js).
-It is **privacy-first and cookieless** (Plausible) — no consent banner required — respects
-Do-Not-Track / Global Privacy Control, and is fully decoupled from the rest of the JS.
+It is **privacy-first and cookieless** (Plausible) — no consent banner required — and is fully
+decoupled from the rest of the JS.
 
-**Enable it:** open `assets/js/analytics.js` and set `CONFIG.plausibleDomain` to the domain you
-added in your Plausible dashboard (for GitHub Pages, usually `golikovsu.github.io`). Until it is
-set, analytics is **off** — no external script loads and events are only recorded in-memory to
-`window.__analytics` (handy for debugging in the console).
+**Status: live.** It uses a Plausible site-specific script (`CONFIG.plausibleScript`). To point at
+a different Plausible site, swap that URL; to turn analytics off, set `CONFIG.provider = 'none'`.
+Set `CONFIG.respectDNT = true` to skip tracking for visitors with Do-Not-Track / Global Privacy
+Control enabled. Every event is also mirrored to `window.__analytics` for in-console debugging.
 
 **Tracked events** (each with useful properties):
 

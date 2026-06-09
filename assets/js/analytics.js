@@ -5,22 +5,19 @@
  * provider can be swapped in ONE place. Fully decoupled from main.js and
  * safe to remove (delete this file + its <script> tag).
  *
- * ┌─ SET THIS ──────────────────────────────────────────────────────────┐
- * │  Put the exact domain you added in your Plausible dashboard.         │
- * │  For GitHub Pages that is usually  'golikovsu.github.io'             │
- * │  (or your custom domain once you map one).                           │
- * └──────────────────────────────────────────────────────────────────────┘
+ * Configured with the Plausible "pa-*" site script (the site is identified by
+ * the script URL itself). To point at a different Plausible site, swap the URL
+ * in CONFIG.plausibleScript. To turn analytics off, set CONFIG.provider = 'none'.
  */
 (() => {
   'use strict';
 
   const CONFIG = {
     provider: 'plausible',          // 'plausible' | 'ga4' | 'umami' | 'none'
-    plausibleDomain: '',            // ← e.g. 'golikovsu.github.io'  (empty = analytics off)
-    plausibleSrc: 'https://plausible.io/js/script.js',
+    plausibleScript: 'https://plausible.io/js/pa-xMQR3EgsY6R-w0NrpihxY.js',  // site-specific Plausible script
     // ga4Id: 'G-XXXXXXXXXX',
     // umami: { src: 'https://cloud.umami.is/script.js', websiteId: '' },
-    respectDNT: true,               // honor Do-Not-Track / Global Privacy Control
+    respectDNT: false,              // set true to skip tracking when Do-Not-Track / GPC is on
     debug: false,                   // console.debug every event
   };
 
@@ -49,17 +46,17 @@
       return false;
     }
     if (CONFIG.provider === 'plausible') {
-      if (!CONFIG.plausibleDomain) {
-        console.info('[analytics] Plausible domain not set — events are recorded to window.__analytics only. ' +
-                     'Set CONFIG.plausibleDomain in assets/js/analytics.js to go live.');
+      if (!CONFIG.plausibleScript) {
+        console.info('[analytics] Plausible script not set — events recorded to window.__analytics only.');
         return false;
       }
       const s = document.createElement('script');
-      s.defer = true;
-      s.setAttribute('data-domain', CONFIG.plausibleDomain);
-      s.src = CONFIG.plausibleSrc;
+      s.async = true;
+      s.src = CONFIG.plausibleScript;
       document.head.appendChild(s);
       window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };
+      window.plausible.init = window.plausible.init || function (i) { window.plausible.o = i || {}; };
+      window.plausible.init();   // auto-tracks the pageview (one per page load, MPA)
       send = (name, props) => window.plausible(name, props ? { props } : undefined);
       return true;
     }
