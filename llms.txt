@@ -1,0 +1,29 @@
+# IQ Option · AI Integrations (MCP)
+
+> Connect any MCP-capable AI assistant — Claude, ChatGPT, Cursor and 12+ others — to your IQ Option account using a single Bearer token across four market servers. Read access is always on; trading is strictly opt-in, per market. The servers are hosted by IQ Option, so there is nothing to install locally.
+
+## Key facts
+
+- **MCP (Model Context Protocol)** is an open standard from Anthropic that lets AI assistants connect to external systems.
+- **No local install.** IQ Option hosts the servers. You only add a URL and an `Authorization: Bearer <token>` header to your assistant's config.
+- **One token, four endpoints:**
+  - Digital Options — `https://digital-options.mcp.iqoption.com`
+  - Margin CFD — `https://marginal-cfd.mcp.iqoption.com`
+  - Margin Crypto — `https://marginal-crypto.mcp.iqoption.com`
+  - Margin Forex — `https://marginal-forex.mcp.iqoption.com`
+- **Permissions:** Read is always on (balance, quotes, history, open positions, pending orders). Trade is opt-in per market; trading calls on a token without that scope return `403 Forbidden`.
+- **Setup (~3 minutes):** create a token at *Settings → AI integrations*, pick an assistant, paste the ready-made config, restart the assistant.
+- **Cost:** free for IQ Option clients with an active account. You only pay for your AI assistant's own subscription.
+
+## Supported assistants (ready-made configs)
+
+Claude Desktop, Claude Code (CLI), Cursor, Windsurf, OpenAI Codex CLI, ChatGPT Desktop, Cline (VS Code), Continue.dev, Zed, Goose, Cherry Studio, LibreChat, Custom / Enterprise.
+
+## Docs
+
+- [Integration guide](https://golikovsu.github.io/iqoption-mcp-guide/): full setup, permissions matrix, safety, FAQ, and ready-made configs for all 13 assistants.
+- [Full content as markdown](https://golikovsu.github.io/iqoption-mcp-guide/llms-full.txt): the entire guide as plain text, optimized for LLM ingestion.
+
+## Disclaimer
+
+AI assistants are independent third-party tools. Trading CFDs, options, forex and crypto involves a high risk of capital loss. Every trade is taken at the user's own responsibility.

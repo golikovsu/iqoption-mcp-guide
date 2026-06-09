@@ -1,0 +1,207 @@
+# IQ Option · AI Integrations — Connect any AI assistant via MCP
+
+> Connect any AI assistant to your IQ Option account. One token, four markets, any AI of your
+> choice. Talk to Claude, ChatGPT or Cursor about your positions, markets and trades. No code,
+> three steps.
+
+At a glance:
+- 1 token for everything
+- 4 MCP servers
+- 12+ AI assistants supported
+- ~3 minutes to set up
+
+---
+
+## 01 · What is MCP
+
+MCP (Model Context Protocol) is an open standard from Anthropic through which AI assistants
+connect to external systems. IQ Option hosts a server for each instrument type — you create a
+token and paste it into your assistant.
+
+What it enables:
+- **Analyse markets in plain language** — ask AI about live quotes, historical candles, spreads
+  and volumes, in your own words, across all four markets at once.
+- **See your portfolio in chat** — balance, open positions, pending orders and trade history,
+  surfaced directly in the assistant.
+- **Token-level control** — read access is always available; trading is enabled per market, only
+  when you explicitly opt in.
+
+---
+
+## 02 · Available servers — four markets, four MCP endpoints
+
+Each instrument type lives on its own server. A single token from your IQ Option settings works
+on all four — connect all of them or just the ones you need.
+
+| Market          | MCP endpoint                                  |
+|-----------------|-----------------------------------------------|
+| Digital Options | https://digital-options.mcp.iqoption.com      |
+| Margin CFD      | https://marginal-cfd.mcp.iqoption.com         |
+| Margin Crypto   | https://marginal-crypto.mcp.iqoption.com      |
+| Margin Forex    | https://marginal-forex.mcp.iqoption.com       |
+
+**1 token — 4 servers.** Create one Bearer token in IQ Option (Settings → AI integrations) and
+reuse it across all four configs.
+
+---
+
+## 03 · Token permissions — read by default, trade opt-in per market
+
+Create a token at **Settings → AI integrations → Add**.
+
+- **Read access · always on** (all four servers): balance, quotes, history, open positions,
+  pending orders. This cannot be turned off — the AI needs it to be useful.
+- **Trade access · opt-in**, ticked per market: Digital Options, Margin CFD, Margin Crypto,
+  Margin Forex. Any trading call made with a token that lacks the relevant scope returns
+  `403 Forbidden`.
+
+Ready-made permission presets by scenario:
+- **Research-only** — no trade scopes ticked. Safest; AI can read everything but cannot place a trade.
+- **Single-market trading** — tick exactly one market (e.g. Margin Crypto); the rest stay read-only.
+- **Full access** — all trade scopes ticked (use with caution).
+
+---
+
+## 04 · How to connect — three steps, no code, no terminal
+
+1. **Create a token.** In the mobile app or web: open *Settings → AI integrations*, tap
+   *+ Add integration*, give the token a name and an expiry, tick which markets are allowed to
+   trade (read is always on), then copy the token immediately — once you close the screen it is
+   not shown again.
+2. **Pick your assistant.** Native MCP support is available in Claude Desktop / Claude Code,
+   Cursor / Windsurf / Zed, OpenAI Codex / ChatGPT Desktop, Cline / Continue / Goose / LibreChat.
+3. **Paste the config.** Copy the snippet for your assistant. Each entry needs three things: the
+   server URL, an `Authorization: Bearer <token>` header, and a restart of the assistant.
+
+---
+
+## 05 · Ready-made configs
+
+Configs are provided for: Claude Desktop, Claude Code (CLI), Cursor, Windsurf (Codeium),
+OpenAI Codex CLI, ChatGPT Desktop, Cline (VS Code Extension), Continue.dev, Zed, Goose (Block),
+Cherry Studio, LibreChat, and Custom / Enterprise.
+
+Canonical config (all four markets in one block — Claude Desktop format):
+
+    {
+      "mcpServers": {
+        "iq-digital-options": {
+          "transport": "streamable-http",
+          "url": "https://digital-options.mcp.iqoption.com",
+          "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+        },
+        "iq-margin-cfd": {
+          "transport": "streamable-http",
+          "url": "https://marginal-cfd.mcp.iqoption.com",
+          "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+        },
+        "iq-margin-crypto": {
+          "transport": "streamable-http",
+          "url": "https://marginal-crypto.mcp.iqoption.com",
+          "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+        },
+        "iq-margin-forex": {
+          "transport": "streamable-http",
+          "url": "https://marginal-forex.mcp.iqoption.com",
+          "headers": { "Authorization": "Bearer YOUR_TOKEN" }
+        }
+      }
+    }
+
+Config file locations (Claude Desktop):
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+
+To verify the connection: restart the assistant and ask "What IQ Option tools do I have available?"
+— you should see the tools from all connected servers.
+
+---
+
+## 06 · Safety
+
+- **Token lives in headers, not in chat.** The Bearer token is attached to the HTTP header on the
+  assistant ↔ server connection. The AI does not see it in the message body and cannot accidentally
+  send it out.
+- **Don't share. Don't commit.** The token equals access to your trading account. Never publish it
+  in git, screenshots, chats or gists. If you suspect a leak, open *Settings → AI integrations* and
+  hit Revoke — all requests using it stop instantly.
+- **Expiry and rotation.** You set the expiry at creation; after that date the token stops working
+  automatically. Keep separate tokens per integration so you can revoke only what you need.
+- **Start small.** AI is powerful but not infallible — it can pick the wrong instrument, size or
+  direction. Walk through scenarios manually and double-check suggestions before trusting size.
+  Responsibility for every trade is yours.
+
+---
+
+## 07 · Example prompts
+
+Plain language — no commands or slashes. Ask in English, Spanish, Portuguese or your own language;
+the model figures out which server to call.
+
+- **Account:** "Show my balance" · "Which account am I on right now" · "List my IQ Option accounts"
+  · "How much free margin do I have"
+- **Markets:** "Which assets are available on Margin Crypto" · "Show me the EUR/USD quote" ·
+  "Compare BTC movement over the last hour" · "What are the current spreads on the top 5 forex pairs"
+- **Portfolio:** "Show my open positions" · "List my pending orders" · "What's my total account
+  exposure" · "How many trades did I make today"
+- **Trading:** "Open a long BTC at 0.01 with a 5% stop loss" · "Buy a 5-minute EUR/USD call option"
+  · "Close all my Tesla positions" · "Place a limit buy on SPY around 580"
+
+---
+
+## 08 · FAQ
+
+**Do I need to install anything on my computer?**
+No. The MCP servers are hosted by IQ Option — no repos to clone, no Python or venv to install. Just
+the URL + Bearer token in your AI assistant's config.
+
+**Does one token really work on all 4 servers?**
+Yes. Create a single Bearer token in Settings → AI integrations and use it in the Authorization
+header for all four endpoints.
+
+**What if I only want to connect one market, e.g. Forex?**
+Delete the other blocks from the config — keep only `iq-margin-forex`. AI will see only that
+server's tools.
+
+**What can AI actually do through MCP?**
+Each server exposes its own tools list (ask "What IQ Option tools do you have?"). In total: reading
+market data, portfolio and trades, plus methods to open/close positions — gated by the token's scope.
+
+**How do I make sure AI can't trade?**
+When creating the token, don't tick any "Trade · …" checkbox. Read stays on; trading calls return
+`403 Forbidden`. Safest for research.
+
+**Can I allow trading on only one instrument?**
+Yes — tick only one market (e.g. Trade · Margin Crypto); the others stay read-only.
+
+**What if I want to drop a trade permission from an existing token?**
+Open Settings → AI integrations, find the token and uncheck the box. The permission is removed
+instantly; the token value doesn't change, so no need to edit your assistant's config.
+
+**What if my token leaked?**
+Revoke it in Settings → AI integrations. All requests with it stop instantly. Create a new one and
+update the config.
+
+**What are the limits on tokens and servers?**
+One account can hold multiple active tokens; one token works across all four servers. Create several
+named tokens if you want per-integration revocation.
+
+**My assistant doesn't see the tools after setup. What now?**
+Restart the assistant; ensure the token has no stray whitespace; check the URL has no trailing
+slash; ensure the header starts exactly with `Bearer ` (with the space); check the assistant's logs
+for JSON syntax errors.
+
+**Which assistant is the easiest to set up from scratch?**
+Non-developers: Claude Desktop or Cherry Studio (UI handles the config). Developers: Cursor or
+Claude Code.
+
+**Is using MCP free?**
+Yes, free for IQ Option clients with an active account. You only pay for your AI assistant's
+subscription.
+
+---
+
+Disclaimer: AI assistants are independent third-party tools. IQ Option does not control their
+behaviour and accepts no liability for decisions made on the basis of AI output. Trading CFDs,
+options, forex and crypto involves a high risk of capital loss. Practise on a demo account before
+going live.

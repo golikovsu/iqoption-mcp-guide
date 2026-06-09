@@ -1,0 +1,38 @@
+/* QEDS-aligned design tokens — IQ Option AI Integrations */
+:root {
+    --bg-app: #0C1326;
+    --bg-surface: #162033;
+    --bg-elevated: #1A2545;
+    --bg-code: #0A0F1E;
+    --border: #222F47;
+    --border-strong: #2E3D5C;
+
+    --accent: #FF8A00;
+    --accent-soft: #FFB000;
+    --accent-bright: #FFA947;
+
+    --success: #00B370;
+    --success-bright: #00E68B;
+    --cyan: #5EDAFF;
+    --purple: #A78BFA;
+    --gold: #FFD166;
+    --warning: #FFB000;
+    --danger: #EF454A;
+    --danger-bright: #FF6B70;
+
+    --text-strong: #F4F8FA;
+    --text-base: #D5DDE2;
+    --text-soft: #B8C5CC;
+    --text-mute: #7A8993;
+    --text-fade: #71808C;   /* WCAG AA: 4.55:1 on --bg-app */
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+    --radius-pill: 999px;
+
+    /* Focus ring — high-contrast cyan, distinct from the orange accent */
+    --ring: #5EDAFF;
+    --ring-shadow: 0 0 0 3px rgba(94, 218, 255, 0.35);
+  }
