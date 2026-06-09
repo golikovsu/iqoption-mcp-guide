@@ -47,4 +47,4 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://golikovsu.github.io/iqoption-mcp-guide/sitemap.xml
+Sitemap: https://iqoptionmcp.com/sitemap.xml

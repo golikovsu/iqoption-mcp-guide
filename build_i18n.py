@@ -14,7 +14,7 @@ ROOT = pathlib.Path(__file__).parent
 SRC  = ROOT / "index.html"
 TPL  = ROOT / "template.html"
 I18N = ROOT / "i18n"
-BASE = "https://golikovsu.github.io/iqoption-mcp-guide"
+BASE = "https://iqoptionmcp.com"
 
 # code, dir, autonym, hreflang, sub-path ('' = site root)
 LANGS = [

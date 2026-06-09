@@ -5,7 +5,7 @@ A single-page guide that walks IQ Option users through connecting any
 ChatGPT, Cursor and 12+ others — to their trading account. One Bearer token, four market servers,
 ready-made configs, permissions matrix, safety notes and an FAQ.
 
-**Live site:** https://golikovsu.github.io/iqoption-mcp-guide/
+**Live site:** https://iqoptionmcp.com/
 
 ---
 
@@ -72,14 +72,19 @@ python3 build_i18n.py extract    # English index.html → template.html + i18n/e
 python3 build_i18n.py generate   # → per-language pages + sitemap.xml
 ```
 
-## Deploy (GitHub Pages)
+## Deploy
 
-1. Push this folder to a GitHub repository named `iqoption-mcp-guide`.
-2. In **Settings → Pages**, set the source to the `main` branch, root (`/`).
-3. The site goes live at https://golikovsu.github.io/iqoption-mcp-guide/.
+**Production:** [Vercel](https://vercel.com), connected to this GitHub repo and served at
+**https://iqoptionmcp.com/** (apex; DNS on Vercel). Every push to `main` triggers an automatic
+redeploy. No build step — the static files are served as-is.
 
-> Production URLs (canonical, Open Graph, `robots.txt`, `sitemap.xml`, `llms.txt`) are already set
-> to `golikovsu.github.io/iqoption-mcp-guide`. If you fork or rename, update those references.
+**Mirror (optional):** GitHub Pages can also serve the repo at
+`https://golikovsu.github.io/iqoption-mcp-guide/` (branch `main`, root, `.nojekyll`). All absolute
+URLs (canonical, Open Graph, `hreflang`, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt`) point to
+the canonical `https://iqoptionmcp.com`, so the mirror is canonicalized to the custom domain.
+
+> If you fork, rename, or change the domain, update `BASE` in `build_i18n.py` and run
+> `python3 build_i18n.py generate` to regenerate every page with the new URLs.
 
 ## Analytics
 
