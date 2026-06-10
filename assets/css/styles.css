@@ -1548,3 +1548,132 @@
     .chat-typing { display: none !important; }
     .copy-btn.copied { animation: none !important; }
   }
+
+  /* ════════════════════════════════════════════════════════════════════
+     WOW LAYER · signature animated blocks (Emil framework)
+     Each has a purpose: explanation (flow diagram, steps), state
+     (token pulse), or rare-view delight (icon draw, hero glow/sheen).
+     ════════════════════════════════════════════════════════════════════ */
+
+  /* ── "1 token → 4 servers" flow diagram (explanation) ─────────────── */
+  .token-flow { max-width: 600px; margin: 4px auto 36px; }
+  .token-flow svg { width: 100%; height: auto; overflow: visible; display: block; }
+  /* Base = final visible state; the .is-inview animation plays FROM hidden
+     with 'backwards' fill (holds hidden through stagger, reverts to visible
+     after) → the diagram also renders fully without JS. */
+  .flow-line { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .flow-line.c1 { stroke: var(--accent); }
+  .flow-line.c2 { stroke: var(--success-bright); }
+  .flow-line.c3 { stroke: var(--cyan); }
+  .flow-line.c4 { stroke: var(--gold); }
+  .token-flow.is-inview .flow-line { animation: flowDraw 0.8s var(--ease-out) backwards; }
+  .token-flow.is-inview .flow-line.c1 { animation-delay: 0.15s; }
+  .token-flow.is-inview .flow-line.c2 { animation-delay: 0.30s; }
+  .token-flow.is-inview .flow-line.c3 { animation-delay: 0.45s; }
+  .token-flow.is-inview .flow-line.c4 { animation-delay: 0.60s; }
+  @keyframes flowDraw { from { stroke-dashoffset: 1; } }
+
+  .flow-hub { transform-box: fill-box; transform-origin: center; }
+  .flow-hub rect { fill: rgba(255,138,0,0.10); stroke: rgba(255,138,0,0.45); stroke-width: 1.5; }
+  .flow-hub .hub-key { width: 40px; height: 40px; color: var(--accent); stroke: var(--accent); }
+  .token-flow.is-inview .flow-hub { animation: nodePop 0.5s var(--ease-spring) backwards; }
+
+  .flow-node { transform-box: fill-box; transform-origin: center; }
+  .flow-node circle { stroke-width: 2.5; }
+  .flow-node.c1 circle { fill: rgba(255,138,0,0.20); stroke: var(--accent); }
+  .flow-node.c2 circle { fill: rgba(0,230,139,0.20); stroke: var(--success-bright); }
+  .flow-node.c3 circle { fill: rgba(94,218,255,0.20); stroke: var(--cyan); }
+  .flow-node.c4 circle { fill: rgba(255,209,102,0.20); stroke: var(--gold); }
+  .token-flow.is-inview .flow-node.c1 { animation: nodePop 0.5s var(--ease-spring) 0.55s backwards; }
+  .token-flow.is-inview .flow-node.c2 { animation: nodePop 0.5s var(--ease-spring) 0.70s backwards; }
+  .token-flow.is-inview .flow-node.c3 { animation: nodePop 0.5s var(--ease-spring) 0.85s backwards; }
+  .token-flow.is-inview .flow-node.c4 { animation: nodePop 0.5s var(--ease-spring) 1.00s backwards; }
+  @keyframes nodePop { from { opacity: 0; transform: scale(0.4); } }
+
+  /* ── Icons draw themselves on reveal (delight) ────────────────────── */
+  .cap-card.in .cap-ic .ic,
+  .safety-grid.is-inview .safety-ic .ic { animation: iconDraw 0.9s var(--ease-out) backwards; }
+  .cap-grid .cap-card:nth-child(2).in .cap-ic .ic { animation-delay: 0.10s; }
+  .cap-grid .cap-card:nth-child(3).in .cap-ic .ic { animation-delay: 0.20s; }
+  .safety-grid.is-inview .safety-card:nth-child(2) .safety-ic .ic { animation-delay: 0.10s; }
+  .safety-grid.is-inview .safety-card:nth-child(3) .safety-ic .ic { animation-delay: 0.20s; }
+  .safety-grid.is-inview .safety-card:nth-child(4) .safety-ic .ic { animation-delay: 0.30s; }
+  @keyframes iconDraw {
+    from { stroke-dasharray: 100; stroke-dashoffset: 100; }
+    to   { stroke-dasharray: 100; stroke-dashoffset: 0; }
+  }
+
+  /* ── Setup steps: numbers pop in sequence + gap connectors (explain) ─ */
+  .steps.is-inview .step-num { animation: numPop 0.55s var(--ease-spring); }
+  .steps.is-inview .step:nth-child(2) .step-num { animation-delay: 0.18s; }
+  .steps.is-inview .step:nth-child(3) .step-num { animation-delay: 0.36s; }
+  @keyframes numPop {
+    0%   { transform: scale(0.5); box-shadow: 0 0 0 0 rgba(255,138,0,0.6); }
+    60%  { box-shadow: 0 8px 30px -4px rgba(255,138,0,0.85); }
+    100% { transform: scale(1); }
+  }
+  .steps .step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 53px; right: -19px;
+    width: 18px; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), rgba(255,138,0,0.15));
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 2;
+  }
+  .steps.is-inview .step:nth-child(1)::after { animation: railDraw 0.4s var(--ease-out) 0.30s forwards; }
+  .steps.is-inview .step:nth-child(2)::after { animation: railDraw 0.4s var(--ease-out) 0.48s forwards; }
+  @keyframes railDraw { to { transform: scaleX(1); } }
+  @media (max-width: 880px) { .steps .step:not(:last-child)::after { display: none; } }
+
+  /* ── YOUR_TOKEN pulse — draws the eye to "replace this" (state) ────── */
+  .picker-shell.is-inview .pb-tab.active .tk-token { animation: tokenPulse 1.8s var(--ease-in-out) 0.4s 2; }
+  @keyframes tokenPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,138,0,0); background: rgba(255,138,0,0.13); }
+    50%      { box-shadow: 0 0 0 4px rgba(255,138,0,0.22); background: rgba(255,138,0,0.34); }
+  }
+
+  /* ── Pointer-reactive hero glow (decorative; spring-followed in JS) ── */
+  .hero-cursor-glow {
+    position: absolute;
+    top: 0; left: 0;
+    width: 460px; height: 460px;
+    margin: -230px 0 0 -230px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,138,0,0.16) 0%, rgba(255,138,0,0) 62%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-out);
+    will-change: transform;
+  }
+  .hero-shell:hover .hero-cursor-glow { opacity: 1; }
+
+  /* ── Hero headline: one-time light sweep on entrance (delight) ─────── */
+  .hero-title .hero-grad { animation: sheen 1.5s var(--ease-out) 0.7s 1; }
+  @keyframes sheen {
+    0% {
+      background-image: linear-gradient(100deg, #FF8A00 0%, #FFB000 28%, #FFF3D6 46%, #FFD166 60%, #FFB000 100%);
+      background-size: 260% 100%;
+      background-position: 120% 0;
+    }
+    100% {
+      background-image: linear-gradient(100deg, #FF8A00 0%, #FFB000 28%, #FFF3D6 46%, #FFD166 60%, #FFB000 100%);
+      background-size: 260% 100%;
+      background-position: -40% 0;
+    }
+  }
+
+  /* ── Reduced motion: land everything in its final, legible state ──── */
+  @media (prefers-reduced-motion: reduce) {
+    .flow-line { stroke-dashoffset: 0 !important; animation: none !important; }
+    .flow-hub, .flow-node { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .cap-card .cap-ic .ic, .safety-card .safety-ic .ic { animation: none !important; stroke-dasharray: 0 !important; }
+    .steps .step-num { animation: none !important; transform: none !important; }
+    .steps .step:not(:last-child)::after { animation: none !important; transform: scaleX(1); }
+    .tk-token { animation: none !important; }
+    .hero-cursor-glow { display: none !important; }
+    .hero-title .hero-grad { animation: none !important; }
+  }

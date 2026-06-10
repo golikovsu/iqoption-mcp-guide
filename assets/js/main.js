@@ -279,4 +279,48 @@
     }, { threshold: 0.5 });
     sio.observe(statsBlock);
   }
+
+  /* ── Normalize sprite icon path lengths so stroke-draw is proportional *
+   * (pathLength=100 → dashoffset 100→0 draws any icon over the full run). */
+  $$('symbol').forEach(sym =>
+    sym.querySelectorAll('path, line, polyline, polygon, circle, rect, ellipse')
+      .forEach(el => el.setAttribute('pathLength', '100')));
+
+  /* ── Generic "play once when it scrolls in" → adds .is-inview ───────── */
+  const inviewEls = $$('.token-flow, .steps, .picker-shell, .safety-grid');
+  if (inviewEls.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      inviewEls.forEach(el => el.classList.add('is-inview'));
+    } else {
+      const vio = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('is-inview'); vio.unobserve(e.target); }
+        });
+      }, { threshold: 0.25 });
+      inviewEls.forEach(el => vio.observe(el));
+    }
+  }
+
+  /* ── Pointer-reactive hero glow (spring-followed; pointer devices only) */
+  const heroShell = $('.hero-shell');
+  if (heroShell && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const glow = document.createElement('div');
+    glow.className = 'hero-cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    heroShell.appendChild(glow);
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0, primed = false;
+    const loop = () => {
+      cx += (tx - cx) * 0.09;            // ease toward the cursor → spring-like trail
+      cy += (ty - cy) * 0.09;
+      glow.style.transform = `translate(${cx}px, ${cy}px)`;
+      raf = (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) ? requestAnimationFrame(loop) : 0;
+    };
+    heroShell.addEventListener('pointermove', e => {
+      const r = heroShell.getBoundingClientRect();
+      tx = e.clientX - r.left;
+      ty = e.clientY - r.top;
+      if (!primed) { cx = tx; cy = ty; primed = true; }   // no jump on first move
+      if (!raf) raf = requestAnimationFrame(loop);
+    }, { passive: true });
+  }
 })();
