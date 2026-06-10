@@ -1,4 +1,15 @@
 /* QEDS-aligned design tokens — IQ Option AI Integrations */
+
+/* Metric-matched fallback so async-loaded Inter swaps in with no layout shift */
+@font-face {
+    font-family: 'Inter Fallback';
+    src: local('Arial'), local('Roboto'), local('Helvetica Neue');
+    ascent-override: 90.49%;
+    descent-override: 22.56%;
+    line-gap-override: 0.00%;
+    size-adjust: 107.40%;
+}
+
 :root {
     --bg-app: #0C1326;
     --bg-surface: #162033;
